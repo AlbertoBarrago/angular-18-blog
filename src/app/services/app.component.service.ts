@@ -13,6 +13,7 @@ export class AppService {
   url = {
     getAll: environment.apiUrl + '/api/getAll',
     getOne: environment.apiUrl + '/api/getOne',
+    delete: environment.apiUrl + '/api/delete',
   };
 
   constructor() {
@@ -43,6 +44,17 @@ export class AppService {
     return this.http.get<Article>(`${this.url.getOne}/${articleId}`).subscribe({
       next: (data: Article) => {
         this.article.set(data);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.handleError(error);
+      },
+    });
+  }
+
+  deleteArticle(_id: string) {
+    this.http.delete(`${this.url.delete}/${_id}`).subscribe({
+      next: () => {
+        this.getAllArticles();
       },
       error: (error: HttpErrorResponse) => {
         this.handleError(error);

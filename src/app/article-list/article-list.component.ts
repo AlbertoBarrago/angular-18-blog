@@ -46,22 +46,17 @@ export class ArticleListComponent {
       width: '250px',
       data: {
         title: 'Confirm Deletion',
-        message: 'Are you sure you want to delete this article?',
+        message: `Are you sure you want to delete this article?`,
       },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Check if user confirmed deletion (result is truthy)
-        console.log('The dialog was closed with confirmation');
         console.log('Delete article with id: ', _id);
+        this.appService.deleteArticle(_id);
       } else {
         console.log('The dialog was closed without confirmation');
       }
     });
-  }
-
-  confirmDeleteArticle(_id: string) {
-    console.log('Delete article with id: ', _id);
   }
 }
