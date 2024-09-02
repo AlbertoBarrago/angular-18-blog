@@ -6,8 +6,22 @@
           <mat-card-header>
             <mat-card-title>{{ item.title }}</mat-card-title>
           </mat-card-header>
-          <mat-card-actions>
-            <button (click)="openArticle(item._id)" mat-button>Open</button>
+          <mat-card-actions class="flex justify-between">
+            <div class="justify-start">
+              <button (click)="openArticle(item._id)" mat-button>
+                <mat-icon class="mat-icon" fontIcon="visibility"></mat-icon>
+                Open
+              </button>
+            </div>
+            <div class=" justify-end">
+              <button class="mat-mdc-button edit" (click)="editArticle(item._id)" mat-button>
+                <mat-icon class="mat-icon color_green" fontIcon="edit"></mat-icon> Edit
+              </button>
+              <button class="mat-mdc-button delete" (click)="confirmDeleteArticle(item._id)" mat-button>
+                <mat-icon class="mat-icon color_red" fontIcon="delete"></mat-icon>
+                Delete
+              </button>
+            </div>
           </mat-card-actions>
         </mat-card>
       </div>
