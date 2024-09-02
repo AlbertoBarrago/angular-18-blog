@@ -9,14 +9,13 @@ import { Article } from './app.types';
 
 describe('ArticleService', () => {
   let homeService: AppService;
-  let httpMock: HttpTestingController;
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()],
     });
 
     homeService = TestBed.inject(AppService);
-    httpMock = TestBed.inject(HttpTestingController);
+    TestBed.inject(HttpTestingController);
     TestBed.inject(HttpTestingController);
   });
 
