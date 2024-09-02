@@ -1,9 +1,17 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { NgIf } from '@angular/common';
 import { Article } from '../app.types';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatButton } from '@angular/material/button';
+import { Router } from '@angular/router';
+import { AppService } from '../services/app.component.service';
 
 @Component({
   selector: 'app-article-view',
@@ -21,14 +29,25 @@ import { MatButton } from '@angular/material/button';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ArticleViewComponent {
-  article = signal<Article>({
-    title: 'Article Title',
-    description: 'Article Description',
-    url: 'https://example.com/article',
-    imageUrl: 'https://example.com/article.jpg',
-    summary: 'This is an example article.',
-    publishedAt: '2023-08-15T10:00:00Z',
-    updatedAt: '2023-08-15T10:00:00Z',
-    featured: true,
-  });
+  appService = inject(AppService);
+  article = this.appService.article;
+  router = inject(Router);
+
+  constructor() {
+    const articleId =
+      this.router.getCurrentNavigation()?.extras.state?.['articleId'];
+    if (articleId) {
+      this.getArticleById(articleId);
+    }
+  }
+
+  getArticleById(articleId: string) {
+    this.appService.getArticleById(articleId);
+  }
+
+  backToArticleView() {
+    this.router.navigate(['/']).then(r => {
+      console.log('Navigation successful:', r);
+    });
+  }
 }

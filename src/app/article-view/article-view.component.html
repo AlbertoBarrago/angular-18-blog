@@ -1,15 +1,17 @@
 <div class="article-view-container">
-  <div class="grid grid-rows-1 grid-cols-1 float-start">
-    <button mat-button>Back To view</button>
+  <div class="flex">
+    <button class="float-start" mat-button (click)="backToArticleView()">Back To view</button>
+  </div>
 
-    <mat-card *ngIf="article">
+  <div class="grid grid-rows-1 grid-cols-1">
+
+    <mat-card *ngIf="article()?.title" class="article-view-card">
       <mat-card-header>
-        <mat-card-title>{{ article().title }} </mat-card-title>
-        <mat-card-subtitle>{{ article().description }}</mat-card-subtitle>
+        <mat-card-title>{{ article()!.title }}</mat-card-title>
       </mat-card-header>
 
       <mat-card-content>
-        <p>{{ article().description }}</p>
+        <p>{{ article()!.content }}</p>
       </mat-card-content>
     </mat-card>
   </div>

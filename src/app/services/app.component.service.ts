@@ -8,9 +8,11 @@ import { Subscription } from 'rxjs';
 export class AppService {
   http = inject(HttpClient);
   articles = signal<Article[]>([]);
+  article = signal<Article | null>(null);
 
   url = {
     getAll: environment.apiUrl + '/api/getAll',
+    getOne: environment.apiUrl + '/api/getOne',
   };
 
   constructor() {
@@ -25,6 +27,23 @@ export class AppService {
     return this.http.get<Article[]>(this.url.getAll).subscribe({
       next: (data: Article[]) => {
         this.articles.set(data);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.handleError(error);
+      },
+    });
+  }
+
+  /**
+   * Get article by id
+   * @param articleId
+   * @return The subscription object for the HTTP GET request
+   */
+  getArticleById(articleId: string) {
+    debugger;
+    return this.http.get<Article>(`${this.url.getOne}/${articleId}`).subscribe({
+      next: (data: Article) => {
+        this.article.set(data);
       },
       error: (error: HttpErrorResponse) => {
         this.handleError(error);

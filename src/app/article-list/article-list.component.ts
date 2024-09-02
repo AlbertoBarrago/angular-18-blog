@@ -15,13 +15,16 @@ import { Router } from '@angular/router';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ArticleListComponent {
-  homeService = inject(AppService);
+  appService = inject(AppService);
   router = inject(Router);
-  articles = this.homeService.articles;
+  articles = this.appService.articles;
 
-  openArticle(article: Article) {
-    this.router.navigate(['/article-view'], { state: { article } }).then(r => {
-      console.log('Navigation successful:', r);
-    });
+  openArticle(articleId: string) {
+    console.log(articleId);
+    this.router
+      .navigate(['/article-view'], { state: { articleId: articleId } })
+      .then(r => {
+        console.log('Navigation successful:', r);
+      });
   }
 }
