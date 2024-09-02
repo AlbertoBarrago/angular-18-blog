@@ -1,12 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { Article } from './app.types';
+import { environment } from '../../environments/environment';
+import { Article } from '../app.types';
 import { Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
-  http = inject(HttpClient)
+  http = inject(HttpClient);
   articles = signal<Article[]>([]);
 
   url = {
@@ -23,8 +23,7 @@ export class AppService {
    */
   getAllArticles(): Subscription {
     return this.http.get<Article[]>(this.url.getAll).subscribe({
-      next: (data:Article[]) => {
-        console.log(data)
+      next: (data: Article[]) => {
         this.articles.set(data);
       },
       error: (error: HttpErrorResponse) => {

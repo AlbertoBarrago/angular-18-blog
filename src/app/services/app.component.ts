@@ -8,8 +8,8 @@ import { MatIcon } from '@angular/material/icon';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, JsonPipe, MatToolbar, MatIcon],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  templateUrl: '../app.component.html',
+  styleUrl: '../app.component.scss',
 })
 export class AppComponent {
   title = 'angular-18-blog';

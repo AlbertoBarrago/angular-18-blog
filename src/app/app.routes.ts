@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { BlogListComponent } from './blog-list/blog-list.component';
+import { ArticleListComponent } from './article-list/article-list.component';
 
 export const routes: Routes = [
-  { path: 'blog-list', component: BlogListComponent },
-  { path: '',   redirectTo: '/blog-list', pathMatch: 'full' }
+  { path: 'article-list', component: ArticleListComponent },
+  { path: '', redirectTo: '/article-list', pathMatch: 'full' },
 ];
