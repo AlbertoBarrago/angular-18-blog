@@ -69,15 +69,15 @@ describe('ArticleService', () => {
     it('should set articles when data is returned successfully', () => {
       const testData: Article[] = [
         {
+          _id: '1',
           title: 'Mock Title',
-          description: 'Mock Description',
+          author: 'Mock Author',
+          content: 'Mock Content',
+          shortContent: 'Mock Short Content',
           url: 'https://example.com',
           imageUrl: 'https://example.com/image.jpg',
-          newsSite: 'Mock News Site',
-          summary: 'Mock Summary',
           publishedAt: '2022-01-01',
           updatedAt: '2022-01-02',
-          featured: true,
         },
       ];
       spyOn(homeService, 'getAllArticles');

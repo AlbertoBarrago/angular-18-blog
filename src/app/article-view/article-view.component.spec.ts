@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ArticleViewComponent } from './article-view.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('ArticleViewComponent', () => {
   let component: ArticleViewComponent;
@@ -8,10 +10,10 @@ describe('ArticleViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArticleViewComponent]
-    })
-    .compileComponents();
-    
+      imports: [ArticleViewComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ArticleViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
