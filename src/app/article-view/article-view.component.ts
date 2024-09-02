@@ -1,17 +1,11 @@
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  inject,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { NgIf } from '@angular/common';
-import { Article } from '../app.types';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { AppService } from '../services/app.component.service';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-article-view',
@@ -23,6 +17,7 @@ import { AppService } from '../services/app.component.service';
     MatCardContent,
     MatRadioButton,
     MatButton,
+    MatIcon,
   ],
   templateUrl: './article-view.component.html',
   styleUrl: './article-view.component.scss',

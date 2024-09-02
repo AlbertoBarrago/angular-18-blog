@@ -40,7 +40,6 @@ export class AppService {
    * @return The subscription object for the HTTP GET request
    */
   getArticleById(articleId: string) {
-    debugger;
     return this.http.get<Article>(`${this.url.getOne}/${articleId}`).subscribe({
       next: (data: Article) => {
         this.article.set(data);

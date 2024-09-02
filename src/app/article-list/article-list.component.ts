@@ -3,7 +3,6 @@ import { AppService } from '../services/app.component.service';
 import { JsonPipe } from '@angular/common';
 import { MatCard, MatCardActions, MatCardHeader } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { Article } from '../app.types';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +19,6 @@ export class ArticleListComponent {
   articles = this.appService.articles;
 
   openArticle(articleId: string) {
-    console.log(articleId);
     this.router
       .navigate(['/article-view'], { state: { articleId: articleId } })
       .then(r => {
