@@ -19,10 +19,6 @@ mongoose.connection.on('error', error => {
   console.log(error);
 });
 
-// database.once('connected', () => {
-//   console.log('Database Connected');
-// });
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
