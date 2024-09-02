@@ -1,4 +1,4 @@
-type Article = {
+interface Article {
   title: string;
   description: string;
   url: string;
@@ -8,6 +8,6 @@ type Article = {
   publishedAt: string;
   updatedAt: string;
   featured: boolean;
-};
+}
 
 export { Article };

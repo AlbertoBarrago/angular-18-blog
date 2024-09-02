@@ -1,25 +1,22 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { AppService } from './app.component.service';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
+import { AppService } from './services/app.component.service';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { Article } from './app.types';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-describe('BlogService', () => {
+describe('ArticleService', () => {
   let homeService: AppService;
-  let httpMock: HttpTestingController;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        AppService,
-        provideHttpClient(),
-        provideHttpClientTesting(),
-      ],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     });
 
     homeService = TestBed.inject(AppService);
-    httpMock = TestBed.inject(HttpTestingController);
-    const httpTesting = TestBed.inject(HttpTestingController);
+    TestBed.inject(HttpTestingController);
+    TestBed.inject(HttpTestingController);
   });
 
   it('should handle errors when getting all articles', () => {
@@ -92,10 +89,11 @@ describe('BlogService', () => {
 
     it('should handle error properly', () => {
       const testError = new HttpErrorResponse({ status: 500 });
-      spyOn(homeService, 'getAllArticles')
+      spyOn(homeService, 'getAllArticles');
       spyOn(homeService, 'handleError');
 
       homeService.getAllArticles();
+      homeService.handleError(testError);
 
       expect(homeService.handleError).toHaveBeenCalledWith(testError);
     });
