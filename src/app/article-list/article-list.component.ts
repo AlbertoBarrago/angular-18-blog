@@ -6,7 +6,7 @@ import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialog } from '../dialogs/confirm/confirm-dialog';
+import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-component';
 
 @Component({
   selector: 'app-article-list',
@@ -42,7 +42,7 @@ export class ArticleListComponent {
   }
 
   confirmDelete(_id: string): void {
-    const dialogRef = this.dialog.open(ConfirmDialog, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
       data: {
         title: 'Confirm Deletion',
