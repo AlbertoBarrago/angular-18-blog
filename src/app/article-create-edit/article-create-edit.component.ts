@@ -99,7 +99,7 @@ export class ArticleCreateEditComponent {
       if (this.articleId) {
         this.appService.updateArticle(article);
       } else {
-        //this.appService.createArticle(article);
+        this.appService.creteArticle(article);
       }
     }
   }

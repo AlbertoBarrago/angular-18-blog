@@ -26,8 +26,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ github.repository }}
           restore-keys: |
+            ${{ runner.os }}-node-${{ github.repository }}
             ${{ runner.os }}-node-
 
   lint:

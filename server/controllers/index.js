@@ -18,12 +18,26 @@ async function getOne(req, res, paramID) {
   }
 }
 
+function assignRandomUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    let r = (Math.random() * 16) | 0,
+      v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 async function create(req, res) {
   try {
     const data = new Articles({
+      _id: assignRandomUUID(),
       title: req.body.title,
       content: req.body.content,
+      shortContent: req.body.shortContent,
+      author: req.body.author,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     });
+    console.log(data);
     await data.save();
     res.json(data);
   } catch (err) {
