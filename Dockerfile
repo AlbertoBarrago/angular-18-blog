@@ -1,4 +1,4 @@
-FROM node:18-alpine as build
+FROM node:18.19.0 as build
 
 WORKDIR /app
 
@@ -6,15 +6,14 @@ COPY package*.json ./
 
 RUN npm install
 
+RUN npm install -g @angular/cli
+
 COPY . .
 
-RUN npm run build
+RUN ng build
 
-FROM nginx:1.17.9-alpine as runtime
+FROM nginx:latest
 
-COPY --from=build /app/nginx.conf /etc/nginx/conf.d/
-COPY --from=build /app/dist/ /var/www
+COPY --from=build app/dist/angular-18-blog/browser /usr/share/nginx/html
 
-EXPOSE 4200
-
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80
