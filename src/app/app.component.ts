@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { JsonPipe, NgClass, NgIf } from '@angular/common';
+import { DatePipe, JsonPipe, NgClass, NgIf } from '@angular/common';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, JsonPipe, MatToolbar, MatIcon, NgClass, NgIf],
+  imports: [
+    RouterOutlet,
+    JsonPipe,
+    MatToolbar,
+    MatIcon,
+    NgClass,
+    NgIf,
+    DatePipe,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -38,4 +46,7 @@ export class AppComponent {
     }
     console.log(body);
   }
+
+  currentDate: Date = new Date();
+  currentDateString: string = this.currentDate.toDateString();
 }
