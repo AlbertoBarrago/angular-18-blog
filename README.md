@@ -40,3 +40,6 @@ Run `docker build -t my_angular_app:latest .` and then
 ## License
 
 This project is licensed under the MIT License 
+
+## Hint 
+You can use this project as a template for your own Angular projects or for prepare a technical interview.
