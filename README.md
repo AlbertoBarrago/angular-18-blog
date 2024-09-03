@@ -1,4 +1,4 @@
-# Angular Crud exercise 
+# Angular Crud exercise (0.1.0)
 ##### Made with last version of Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version **18.0.1.**
