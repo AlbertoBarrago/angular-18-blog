@@ -3,7 +3,6 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   effect,
   inject,
-  OnInit,
   WritableSignal,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -34,8 +33,7 @@ export class ArticleCreateEditComponent {
   appService = inject(GlobalService);
   article!: WritableSignal<Article | null>;
   router = inject(Router);
-  isEdit: boolean = false;
-  articleId: string | undefined;
+  articleId!: string;
   articleForm = new FormGroup({
     _id: new FormControl(),
     author: new FormControl(),
@@ -49,11 +47,11 @@ export class ArticleCreateEditComponent {
   constructor() {
     this.articleId =
       this.router.getCurrentNavigation()?.extras.state?.['articleId'];
-    this.isEdit = !!this.articleId;
 
     if (this.articleId) {
       this.appService.getArticleById(this.articleId);
       effect(() => {
+        //effect to update the form when the article changes
         const article = this.appService.article();
         if (article) {
           this.initForm(article);
