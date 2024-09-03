@@ -1,13 +1,11 @@
 interface Article {
+  _id: string;
+  author: string;
   title: string;
-  description: string;
-  url: string;
-  imageUrl: string;
-  newsSite: string;
-  summary: string;
-  publishedAt: string;
+  content: string;
+  shortContent: string;
+  createdAt: string;
   updatedAt: string;
-  featured: boolean;
 }
 
 export { Article };

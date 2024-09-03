@@ -1,20 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArticleViewComponent } from './article-view.component';
+import { ArticleCreateEditComponent } from './article-create-edit.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('ArticleViewComponent', () => {
-  let component: ArticleViewComponent;
-  let fixture: ComponentFixture<ArticleViewComponent>;
+describe('ArticleCreateEditComponent', () => {
+  let component: ArticleCreateEditComponent;
+  let fixture: ComponentFixture<ArticleCreateEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArticleViewComponent],
+      imports: [ArticleCreateEditComponent, BrowserAnimationsModule],
       providers: [provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ArticleViewComponent);
+    fixture = TestBed.createComponent(ArticleCreateEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

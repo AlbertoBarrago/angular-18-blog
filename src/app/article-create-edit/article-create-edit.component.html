@@ -1,0 +1,49 @@
+<div class="article-create-edit-container">
+  <div class="flex mb-5">
+    <button class="float-start" mat-button (click)="utilService.backToArticleView()">
+      <mat-icon fontIcon="arrow_back"></mat-icon>
+      Back
+    </button>
+  </div>
+  <div class="grid grid-rows-1 grid-cols-1 gap-2">
+    <div>
+      <mat-icon class="relative top-1.5" fontIcon="access_time"></mat-icon> {{articleForm.controls.publishedAt.value | date: 'medium' }}
+    </div>
+    <form [formGroup]="articleForm">
+      <div class="grid grid-cols-2 gap-2">
+        <mat-form-field class="w-full">
+          <mat-label>Author</mat-label>
+          <input matInput type="text" formControlName="author" />
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Title</mat-label>
+          <input matInput type="text" formControlName="title" />
+        </mat-form-field>
+      </div>
+      <div class="grid grid-cols-1">
+        <mat-form-field class="w-full">
+          <mat-label>Content</mat-label>
+          <textarea matInput rows="5" formControlName="content"></textarea>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Short Content</mat-label>
+          <textarea matInput rows="2" formControlName="shortContent"></textarea>
+        </mat-form-field>
+      </div>
+    </form>
+    <div class="flex justify-end">
+      <button *ngIf="isEdit" class="mr-2" mat-raised-button color="primary" (click)="saveArticle()">
+        Save
+        <mat-icon>save</mat-icon>
+      </button>
+      <button *ngIf="isEdit" mat-raised-button color="warn" (click)="utilService.confirmDelete(articleForm.controls._id.value)">
+        Delete
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button *ngIf="!isEdit" class="mr-2" mat-raised-button color="primary" (click)="saveArticle()">
+        Create
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

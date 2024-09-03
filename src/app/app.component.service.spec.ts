@@ -3,18 +3,18 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { AppService } from './services/app.component.service';
+import { HttpService } from './services/http.service';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { Article } from './app.types';
 
 describe('ArticleService', () => {
-  let homeService: AppService;
+  let homeService: HttpService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()],
     });
 
-    homeService = TestBed.inject(AppService);
+    homeService = TestBed.inject(HttpService);
     TestBed.inject(HttpTestingController);
     TestBed.inject(HttpTestingController);
   });
@@ -69,15 +69,13 @@ describe('ArticleService', () => {
     it('should set articles when data is returned successfully', () => {
       const testData: Article[] = [
         {
+          _id: '1',
           title: 'Mock Title',
-          description: 'Mock Description',
-          url: 'https://example.com',
-          imageUrl: 'https://example.com/image.jpg',
-          newsSite: 'Mock News Site',
-          summary: 'Mock Summary',
-          publishedAt: '2022-01-01',
+          author: 'Mock Author',
+          content: 'Mock Content',
+          shortContent: 'Mock Short Content',
+          createdAt: '2022-01-01',
           updatedAt: '2022-01-02',
-          featured: true,
         },
       ];
       spyOn(homeService, 'getAllArticles');

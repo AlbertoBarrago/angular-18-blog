@@ -36,8 +36,13 @@ async function update(req, res, paramID) {
     const data = await Articles.findByIdAndUpdate(
       paramID,
       {
+        _id: req.body._id,
         title: req.body.title,
         content: req.body.content,
+        shortContent: req.body.shortContent,
+        author: req.body.author,
+        createdAt: req.body.createdAt,
+        updatedAt: Date.now(),
       },
       {
         new: true,

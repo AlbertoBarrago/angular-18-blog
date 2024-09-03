@@ -1,23 +1,57 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { AppService } from '../services/app.component.service';
-import { JsonPipe } from '@angular/common';
-import { MatCard, MatCardActions, MatCardHeader } from '@angular/material/card';
+import { HttpService } from '../services/http.service';
+import { JsonPipe, NgClass, NgOptimizedImage } from '@angular/common';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+} from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { Article } from '../app.types';
+import { Router } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-article-list',
   standalone: true,
-  imports: [JsonPipe, MatCard, MatCardHeader, MatCardActions, MatButton],
+  imports: [
+    JsonPipe,
+    MatCard,
+    MatCardHeader,
+    MatCardActions,
+    MatButton,
+    MatIcon,
+    NgClass,
+    NgOptimizedImage,
+    MatCardContent,
+  ],
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ArticleListComponent {
-  homeService = inject(AppService);
-  articles = this.homeService.articles;
+  appService = inject(HttpService);
+  utilService = inject(UtilService);
+  router = inject(Router);
+  articles = this.appService.articles;
+  readonly dialog = inject(MatDialog);
+  emptyListImagePath = './assets/images/empty_list.png';
 
-  openArticle(article: Article) {
-    console.log(article);
+  openArticle(articleId: string) {
+    this.router
+      .navigate(['/article-view'], { state: { articleId: articleId } })
+      .then(() => {
+        //console.log('Navigation successful:');
+      });
+  }
+
+  editArticle(articleId: string) {
+    this.router
+      .navigate(['/article-create-edit'], { state: { articleId: articleId } })
+      .then(() => {
+        //console.log('Navigation successful:');
+      });
   }
 }
