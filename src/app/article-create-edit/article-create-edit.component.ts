@@ -1,13 +1,15 @@
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
+  effect,
   inject,
+  OnInit,
   WritableSignal,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Article } from '../app.types';
 import { Router } from '@angular/router';
-import { AppService } from '../services/app.component.service';
+import { GlobalService } from '../services/global.service';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -29,9 +31,11 @@ import { MatIcon } from '@angular/material/icon';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ArticleCreateEditComponent {
-  appService = inject(AppService);
-  article = this.appService.article;
+  appService = inject(GlobalService);
+  article!: WritableSignal<Article | null>;
   router = inject(Router);
+  isEdit: boolean = false;
+  articleId: string | undefined;
   articleForm = new FormGroup({
     _id: new FormControl(),
     author: new FormControl(),
@@ -43,30 +47,33 @@ export class ArticleCreateEditComponent {
   });
 
   constructor() {
-    const articleId =
+    this.articleId =
       this.router.getCurrentNavigation()?.extras.state?.['articleId'];
-    if (!articleId) {
-      console.log('edit mode off:', articleId);
-    }
-    if (articleId) {
-      console.log('edit mode on:', articleId);
-      this.appService.getArticleById(articleId);
-      this.initForm(this.article);
+    this.isEdit = !!this.articleId;
+
+    if (this.articleId) {
+      this.appService.getArticleById(this.articleId);
+      effect(() => {
+        const article = this.appService.article();
+        if (article) {
+          this.initForm(article);
+        }
+      });
     }
   }
 
-  initForm(article: WritableSignal<Article | null>) {
-    if (!article()) {
+  initForm(article: Article) {
+    if (!article) {
       return;
     }
     this.articleForm.setValue({
-      _id: article()?._id,
-      author: article()?.author,
-      title: article()?.title,
-      content: article()?.content,
-      shortContent: article()?.shortContent,
-      publishedAt: article()?.createdAt,
-      updatedAt: article()?.updatedAt,
+      _id: article?._id,
+      author: article?.author,
+      title: article?.title,
+      content: article?.content,
+      shortContent: article?.shortContent,
+      publishedAt: article?.createdAt,
+      updatedAt: article?.updatedAt,
     });
 
     console.log('articleForm', this.articleForm.value);

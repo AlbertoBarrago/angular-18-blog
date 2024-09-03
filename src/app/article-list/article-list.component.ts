@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { AppService } from '../services/app.component.service';
+import { GlobalService } from '../services/global.service';
 import { JsonPipe, NgClass, NgOptimizedImage } from '@angular/common';
 import { MatCard, MatCardActions, MatCardHeader } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
@@ -26,7 +26,7 @@ import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-compon
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ArticleListComponent {
-  appService = inject(AppService);
+  appService = inject(GlobalService);
   router = inject(Router);
   articles = this.appService.articles;
   readonly dialog = inject(MatDialog);

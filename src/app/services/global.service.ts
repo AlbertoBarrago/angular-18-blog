@@ -6,11 +6,11 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
-export class AppService {
+export class GlobalService {
   http = inject(HttpClient);
+  router = inject(Router);
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
-  router = inject(Router);
 
   url = {
     getAll: environment.apiUrl + '/api/getAll',
@@ -40,12 +40,15 @@ export class AppService {
   /**
    * Get article by id
    * @param articleId
-   * @return The subscription object for the HTTP GET request
+   * @return The Article object
    */
   getArticleById(articleId: string) {
     return this.http.get<Article>(`${this.url.getOne}/${articleId}`).subscribe({
       next: (data: Article) => {
         this.article.set(data);
+        return {
+          success: true,
+        };
       },
       error: (error: HttpErrorResponse) => {
         this.handleError(error);
@@ -53,6 +56,11 @@ export class AppService {
     });
   }
 
+  /**
+   * Delete article by id
+   * @param _id
+   * @return The subscription object for the HTTP DELETE request
+   */
   deleteArticle(_id: string) {
     this.http.delete(`${this.url.delete}/${_id}`).subscribe({
       next: () => {
