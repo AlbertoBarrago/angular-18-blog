@@ -19,7 +19,7 @@ import { MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { UtilService } from '../services/util.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-article-create-edit',
@@ -32,6 +32,7 @@ import { DatePipe } from '@angular/common';
     MatIcon,
     MatButton,
     DatePipe,
+    NgIf,
   ],
   templateUrl: './article-create-edit.component.html',
   styleUrl: './article-create-edit.component.scss',
@@ -58,10 +59,12 @@ export class ArticleCreateEditComponent {
     publishedAt: new FormControl(),
     updatedAt: new FormControl(),
   });
+  isEdit = false;
 
   constructor() {
     this.articleId =
       this.router.getCurrentNavigation()?.extras.state?.['articleId'];
+    this.isEdit = !!this.articleId;
 
     if (this.articleId) {
       this.appService.getArticleById(this.articleId);

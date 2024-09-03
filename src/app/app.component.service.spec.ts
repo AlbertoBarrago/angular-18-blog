@@ -74,8 +74,6 @@ describe('ArticleService', () => {
           author: 'Mock Author',
           content: 'Mock Content',
           shortContent: 'Mock Short Content',
-          url: 'https://example.com',
-          imageUrl: 'https://example.com/image.jpg',
           createdAt: '2022-01-01',
           updatedAt: '2022-01-02',
         },

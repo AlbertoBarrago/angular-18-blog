@@ -32,13 +32,17 @@
       </div>
     </form>
     <div class="flex justify-end">
-      <button class="mr-2" mat-raised-button color="primary" (click)="saveArticle()">
+      <button *ngIf="isEdit" class="mr-2" mat-raised-button color="primary" (click)="saveArticle()">
         Save
         <mat-icon>save</mat-icon>
       </button>
-      <button mat-raised-button color="warn" (click)="utilService.confirmDelete(articleForm.controls._id.value)">
+      <button *ngIf="isEdit" mat-raised-button color="warn" (click)="utilService.confirmDelete(articleForm.controls._id.value)">
         Delete
         <mat-icon>delete</mat-icon>
+      </button>
+      <button *ngIf="!isEdit" class="mr-2" mat-raised-button color="primary" (click)="saveArticle()">
+        Create
+        <mat-icon>save</mat-icon>
       </button>
     </div>
   </div>

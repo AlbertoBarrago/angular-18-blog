@@ -11,7 +11,6 @@ import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-component';
 import { UtilService } from '../services/util.service';
 
 @Component({
