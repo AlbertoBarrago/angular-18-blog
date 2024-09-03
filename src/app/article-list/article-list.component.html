@@ -4,8 +4,11 @@
       <div>
         <mat-card>
           <mat-card-header>
-            <mat-card-title>{{ item.title }}</mat-card-title>
+            <mat-card-title class="font-bold">{{ item.title }}</mat-card-title>
           </mat-card-header>
+          <mat-card-content>
+            <p>{{ item.content.trimEnd().slice(0, 107) + "..." }}</p>
+          </mat-card-content>
           <mat-card-actions class="flex justify-between">
             <div class="justify-start">
               <button (click)="openArticle(item._id)" mat-button>

@@ -1,7 +1,12 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { GlobalService } from '../services/global.service';
 import { JsonPipe, NgClass, NgOptimizedImage } from '@angular/common';
-import { MatCard, MatCardActions, MatCardHeader } from '@angular/material/card';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+} from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
@@ -20,6 +25,7 @@ import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-compon
     MatIcon,
     NgClass,
     NgOptimizedImage,
+    MatCardContent,
   ],
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.scss',
