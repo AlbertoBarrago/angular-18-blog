@@ -13,11 +13,10 @@
 $theme: mat.define-theme((
   color: (
     theme-type: dark,
-    primary: mat.$violet-palette,
+    primary: mat.$chartreuse-palette,
   ),
   typography: (
-    brand-family: 'Comic Sans',
-    bold-weight: 900
+    brand-family: 'Orbitron, sans-serif',
   ),
   density: (
     scale: -1

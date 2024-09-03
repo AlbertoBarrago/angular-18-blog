@@ -100,8 +100,8 @@ export class AppService {
    * Navigates back to the article view.
    */
   backToArticleView() {
-    this.router.navigate(['/']).then(r => {
-      console.log('Navigation successful:', r);
+    this.router.navigate(['/']).then(() => {
+      //console.log('Navigation successful:', r);
     });
   }
 }
