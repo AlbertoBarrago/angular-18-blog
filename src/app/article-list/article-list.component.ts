@@ -54,4 +54,10 @@ export class ArticleListComponent {
         //console.log('Navigation successful:');
       });
   }
+
+  openArticleCreate() {
+    this.router.navigate(['/article-create-edit']).then(() => {
+      //console.log('Navigation successful:');
+    });
+  }
 }

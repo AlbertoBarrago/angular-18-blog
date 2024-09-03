@@ -5,44 +5,45 @@
       Back
     </button>
   </div>
+  <div class="flex flex-col mb-5">
+    <h2 class="text-2xl">{{ !isEdit ? 'Create' : 'Edit' }}</h2>
+    <p>Compile each input before send article to server</p>
+  </div>
   <div class="grid grid-rows-1 grid-cols-1 gap-2">
-    <div>
+    <div *ngIf="isEdit">
       <mat-icon class="relative top-1.5" fontIcon="access_time"></mat-icon> {{articleForm.controls.publishedAt.value | date: 'medium' }}
     </div>
     <form [formGroup]="articleForm">
       <div class="grid grid-cols-2 gap-2">
         <mat-form-field class="w-full">
           <mat-label>Author</mat-label>
-          <input matInput type="text" formControlName="author" />
+          <input matInput type="text" formControlName="author" placeholder="Author" />
         </mat-form-field>
         <mat-form-field class="w-full">
           <mat-label>Title</mat-label>
-          <input matInput type="text" formControlName="title" />
+          <input matInput type="text" formControlName="title" placeholder="Title" />
         </mat-form-field>
       </div>
       <div class="grid grid-cols-1">
         <mat-form-field class="w-full">
           <mat-label>Content</mat-label>
-          <textarea matInput rows="5" formControlName="content"></textarea>
+          <textarea matInput rows="5" formControlName="content" placeholder="Content"></textarea>
         </mat-form-field>
         <mat-form-field class="w-full">
           <mat-label>Short Content</mat-label>
-          <textarea matInput rows="2" formControlName="shortContent"></textarea>
+          <textarea matInput rows="2" formControlName="shortContent" placeholder="Short Content"></textarea>
         </mat-form-field>
       </div>
     </form>
     <div class="flex justify-end">
-      <button *ngIf="isEdit" class="mr-2" mat-raised-button color="primary" (click)="saveArticle()">
-        Save
+      <button [disabled]="!articleForm.valid" class="mr-2" mat-raised-button color="primary" (click)="saveArticle()">
+        <span *ngIf="isEdit">Save</span>
+        <span *ngIf="!isEdit">Create</span>
         <mat-icon>save</mat-icon>
       </button>
       <button *ngIf="isEdit" mat-raised-button color="warn" (click)="utilService.confirmDelete(articleForm.controls._id.value)">
         Delete
         <mat-icon>delete</mat-icon>
-      </button>
-      <button *ngIf="!isEdit" class="mr-2" mat-raised-button color="primary" (click)="saveArticle()">
-        Create
-        <mat-icon>save</mat-icon>
       </button>
     </div>
   </div>

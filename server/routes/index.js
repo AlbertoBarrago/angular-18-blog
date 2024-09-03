@@ -4,7 +4,7 @@ const Controller = require('../controllers');
 const router = express.Router();
 
 //Post Method
-router.post('/post', async (req, res) => {
+router.post('/create', async (req, res) => {
   await Controller.create(req, res);
 });
 

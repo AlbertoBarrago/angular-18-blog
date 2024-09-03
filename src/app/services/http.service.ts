@@ -21,6 +21,7 @@ export class HttpService {
     getOne: environment.apiUrl + '/api/getOne',
     delete: environment.apiUrl + '/api/delete',
     update: environment.apiUrl + '/api/update',
+    create: environment.apiUrl + '/api/create',
   };
 
   constructor() {
@@ -134,5 +135,23 @@ export class HttpService {
    */
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
+  }
+
+  /**
+   * Creates a new article
+   * @param article
+   * @return The subscription object for the HTTP POST request
+   */
+  creteArticle(article: Article) {
+    this.http.post<Article>(`${this.url.create}`, article).subscribe({
+      next: () => {
+        this.getAllArticles();
+        this.openSnackBar('Article created successfully', 'Close');
+        this.router.navigate(['/']).then(() => null);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.handleError(error);
+      },
+    });
   }
 }
