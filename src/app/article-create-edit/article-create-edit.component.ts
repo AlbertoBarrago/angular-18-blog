@@ -46,9 +46,15 @@ export class ArticleCreateEditComponent {
   articleForm = new FormGroup({
     _id: new FormControl(),
     author: new FormControl('', Validators.required),
-    title: new FormControl('', Validators.required),
-    content: new FormControl('', Validators.required),
-    shortContent: new FormControl('', Validators.required),
+    title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    content: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+    ]),
+    shortContent: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(100),
+    ]),
     publishedAt: new FormControl(),
     updatedAt: new FormControl(),
   });
@@ -86,11 +92,9 @@ export class ArticleCreateEditComponent {
 
   saveArticle() {
     if (this.articleForm.valid) {
-      this.articleForm.controls.updatedAt.setValue(new Date());
-
-      const article = this.articleForm.value;
+      const article = this.articleForm.value as Article;
       if (this.articleId) {
-        //this.appService.updateArticle(article);
+        this.appService.updateArticle(article);
       } else {
         //this.appService.createArticle(article);
       }

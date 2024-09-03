@@ -7,6 +7,8 @@ const dataSchema = new mongoose.Schema(
     author: String,
     shortContent: String,
     content: String,
+    createdAt: Date,
+    updatedAt: Date,
   },
   {
     timestamps: true,

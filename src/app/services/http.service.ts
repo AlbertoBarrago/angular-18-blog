@@ -5,6 +5,7 @@ import { Article } from '../app.types';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
@@ -13,11 +14,13 @@ export class HttpService {
   readonly dialog = inject(MatDialog);
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
+  private _snackBar = inject(MatSnackBar);
 
   url = {
     getAll: environment.apiUrl + '/api/getAll',
     getOne: environment.apiUrl + '/api/getOne',
     delete: environment.apiUrl + '/api/delete',
+    update: environment.apiUrl + '/api/update',
   };
 
   constructor() {
@@ -75,6 +78,24 @@ export class HttpService {
   }
 
   /**
+   * Update article by id
+   * @param article
+   */
+  updateArticle(article: Article) {
+    this.http
+      .patch<Article>(`${this.url.update}/${article._id}`, article)
+      .subscribe({
+        next: () => {
+          this.getAllArticles();
+          this.openSnackBar('Article updated successfully', 'Close');
+        },
+        error: (error: HttpErrorResponse) => {
+          this.handleError(error);
+        },
+      });
+  }
+
+  /**
    * Handles the error by converting the error status to a human-readable message.
    * @param {any} error - The error object to handle.
    * @returns {Error} The constructed Error object.
@@ -104,5 +125,14 @@ export class HttpService {
         message = error.message;
     }
     return new Error(message, error.error);
+  }
+
+  /**
+   * Opens a snackbar with the specified message and action.
+   * @param message
+   * @param action
+   */
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 }

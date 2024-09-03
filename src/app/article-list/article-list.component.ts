@@ -49,7 +49,6 @@ export class ArticleListComponent {
   }
 
   editArticle(articleId: string) {
-    console.log('Edit article with id: ', articleId);
     this.router
       .navigate(['/article-create-edit'], { state: { articleId: articleId } })
       .then(() => {

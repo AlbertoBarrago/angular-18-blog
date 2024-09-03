@@ -4,8 +4,6 @@ interface Article {
   title: string;
   content: string;
   shortContent: string;
-  url: string;
-  imageUrl: string;
   createdAt: string;
   updatedAt: string;
 }
