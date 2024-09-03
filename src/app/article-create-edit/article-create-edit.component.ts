@@ -2,7 +2,6 @@ import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   inject,
-  OnInit,
   WritableSignal,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
