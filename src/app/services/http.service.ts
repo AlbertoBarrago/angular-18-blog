@@ -4,11 +4,13 @@ import { environment } from '../../environments/environment';
 import { Article } from '../app.types';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({ providedIn: 'root' })
-export class GlobalService {
+export class HttpService {
   http = inject(HttpClient);
   router = inject(Router);
+  readonly dialog = inject(MatDialog);
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
 
@@ -102,14 +104,5 @@ export class GlobalService {
         message = error.message;
     }
     return new Error(message, error.error);
-  }
-
-  /**
-   * Navigates back to the article view.
-   */
-  backToArticleView() {
-    this.router.navigate(['/']).then(() => {
-      //console.log('Navigation successful:', r);
-    });
   }
 }

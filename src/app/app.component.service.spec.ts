@@ -3,18 +3,18 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { GlobalService } from './services/global.service';
+import { HttpService } from './services/http.service';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { Article } from './app.types';
 
 describe('ArticleService', () => {
-  let homeService: GlobalService;
+  let homeService: HttpService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()],
     });
 
-    homeService = TestBed.inject(GlobalService);
+    homeService = TestBed.inject(HttpService);
     TestBed.inject(HttpTestingController);
     TestBed.inject(HttpTestingController);
   });

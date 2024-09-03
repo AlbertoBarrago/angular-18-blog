@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { GlobalService } from '../services/global.service';
+import { HttpService } from '../services/http.service';
 import { JsonPipe, NgClass, NgOptimizedImage } from '@angular/common';
 import {
   MatCard,
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-component';
+import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-article-list',
@@ -32,7 +33,8 @@ import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-compon
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ArticleListComponent {
-  appService = inject(GlobalService);
+  appService = inject(HttpService);
+  utilService = inject(UtilService);
   router = inject(Router);
   articles = this.appService.articles;
   readonly dialog = inject(MatDialog);
@@ -53,24 +55,5 @@ export class ArticleListComponent {
       .then(() => {
         //console.log('Navigation successful:');
       });
-  }
-
-  confirmDelete(_id: string): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '250px',
-      data: {
-        title: 'Confirm Deletion',
-        message: `Are you sure you want to delete this article?`,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Delete article with id: ', _id);
-        this.appService.deleteArticle(_id);
-      } else {
-        console.log('The dialog was closed without confirmation');
-      }
-    });
   }
 }
