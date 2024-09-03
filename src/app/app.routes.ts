@@ -10,5 +10,12 @@ export const routes: Routes = [
         m => m.ArticleViewComponent
       ),
   },
+  {
+    path: 'article-create-edit',
+    loadComponent: () =>
+      import('./article-create-edit/article-create-edit.component').then(
+        m => m.ArticleCreateEditComponent
+      ),
+  },
   { path: '', redirectTo: '/article-list', pathMatch: 'full' },
 ];

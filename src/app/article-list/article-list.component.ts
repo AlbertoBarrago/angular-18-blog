@@ -32,13 +32,18 @@ export class ArticleListComponent {
   openArticle(articleId: string) {
     this.router
       .navigate(['/article-view'], { state: { articleId: articleId } })
-      .then(r => {
-        console.log('Navigation successful:', r);
+      .then(() => {
+        //console.log('Navigation successful:');
       });
   }
 
-  editArticle(_id: string) {
-    console.log('Edit article with id: ', _id);
+  editArticle(articleId: string) {
+    console.log('Edit article with id: ', articleId);
+    this.router
+      .navigate(['/article-create-edit'], { state: { articleId: articleId } })
+      .then(() => {
+        //console.log('Navigation successful:');
+      });
   }
 
   confirmDelete(_id: string): void {

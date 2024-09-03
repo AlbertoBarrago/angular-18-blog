@@ -1,0 +1,18 @@
+<div class="article-create-edit-container">
+  <div class="flex mb-5">
+    <button class="float-start" mat-button (click)="appService.backToArticleView()"><mat-icon fontIcon="arrow_back"></mat-icon> Back</button>
+  </div>
+  <div class="grid grid-rows-1 grid-cols-3 gap-2">
+    <form [formGroup]="articleForm">
+      <mat-form-field>
+        <mat-label>Author</mat-label>
+        <input matInput type="text" formControlName="author" />
+        @if (articleForm.controls.author.value) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="articleForm.controls.author.setValue(null)">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    </form>
+  </div>
+</div>

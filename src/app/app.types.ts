@@ -6,7 +6,7 @@ interface Article {
   shortContent: string;
   url: string;
   imageUrl: string;
-  publishedAt: string;
+  createdAt: string;
   updatedAt: string;
 }
 

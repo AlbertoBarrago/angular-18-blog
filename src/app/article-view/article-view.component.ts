@@ -1,11 +1,21 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  OnInit,
+  WritableSignal,
+} from '@angular/core';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
-import { NgIf } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { AppService } from '../services/app.component.service';
 import { MatIcon } from '@angular/material/icon';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Article } from '../app.types';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-article-view',
@@ -18,6 +28,10 @@ import { MatIcon } from '@angular/material/icon';
     MatRadioButton,
     MatButton,
     MatIcon,
+    ReactiveFormsModule,
+    MatFormField,
+    MatInput,
+    DatePipe,
   ],
   templateUrl: './article-view.component.html',
   styleUrl: './article-view.component.scss',
@@ -32,17 +46,7 @@ export class ArticleViewComponent {
     const articleId =
       this.router.getCurrentNavigation()?.extras.state?.['articleId'];
     if (articleId) {
-      this.getArticleById(articleId);
+      this.appService.getArticleById(articleId);
     }
-  }
-
-  getArticleById(articleId: string) {
-    this.appService.getArticleById(articleId);
-  }
-
-  backToArticleView() {
-    this.router.navigate(['/']).then(r => {
-      console.log('Navigation successful:', r);
-    });
   }
 }

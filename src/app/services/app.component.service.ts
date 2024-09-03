@@ -3,12 +3,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Article } from '../app.types';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
   http = inject(HttpClient);
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
+  router = inject(Router);
 
   url = {
     getAll: environment.apiUrl + '/api/getAll',
@@ -92,5 +94,14 @@ export class AppService {
         message = error.message;
     }
     return new Error(message, error.error);
+  }
+
+  /**
+   * Navigates back to the article view.
+   */
+  backToArticleView() {
+    this.router.navigate(['/']).then(r => {
+      console.log('Navigation successful:', r);
+    });
   }
 }
