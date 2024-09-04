@@ -6,9 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint",
-    "test:prod": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox",
     "server:start": "nodemon server/index.js"
   },
   "private": true,
@@ -23,11 +22,13 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "enviroment": "^1.0.0",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "karma-junit-reporter": "^2.0.1",
     "karma-sonarqube-reporter": "^1.4.0",
     "mongodb": "^6.5.0",
@@ -35,6 +36,7 @@
     "nodemon": "^3.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "uuid": "^10.0.0",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {

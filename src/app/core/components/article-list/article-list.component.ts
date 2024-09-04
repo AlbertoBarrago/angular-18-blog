@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { HttpService } from '../services/http.service';
+import { HttpService } from '../../services/http.service';
 import { JsonPipe, NgClass, NgOptimizedImage } from '@angular/common';
 import {
   MatCard,
@@ -11,7 +11,7 @@ import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { UtilService } from '../services/util.service';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-article-list',

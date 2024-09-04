@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Article } from '../app.types';
+import { environment } from '../../../environments/environment';
+import { Article } from '../../app.types';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -133,7 +133,7 @@ export class HttpService {
    * @param message
    * @param action
    */
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action = 'Close') {
     this._snackBar.open(message, action);
   }
 

@@ -1,0 +1,33 @@
+<div class="login-container">
+  <div class="flex justify-center items-center h-[70vh]">
+    <mat-card>
+      <mat-card-header class="flex flex-col items-center w-full text-center mb-4">
+          <mat-card-title class="mb-3 text-4xl">Login</mat-card-title>
+          <mat-card-subtitle>Please login to continue</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+          <mat-form-field appearance="outline" class="w-full mb-2">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" name="username" ngModel required>
+            <mat-hint *ngIf="loginForm.submitted && !loginForm?.controls?.['username']?.valid">
+              Please enter a valid username.
+            </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" name="password" type="password" ngModel required>
+            <mat-hint *ngIf="loginForm.submitted && !loginForm?.controls?.['password']?.valid">
+              Password is required.
+            </mat-hint>
+          </mat-form-field>
+
+          <button class="float-end" mat-raised-button color="primary" type="submit">Login</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

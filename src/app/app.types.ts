@@ -8,4 +8,21 @@ interface Article {
   updatedAt: string;
 }
 
-export { Article };
+interface User {
+  _id: string;
+  username: string;
+  email: string;
+  role: string;
+  password: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface UserLoggedIn {
+  username: string;
+  password: string;
+  token: string;
+  user: User;
+}
+
+export { Article, User, UserLoggedIn };
