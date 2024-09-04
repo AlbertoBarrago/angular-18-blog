@@ -1,9 +1,50 @@
-@import "../node_modules/tailwindcss/base.css";
-@import "../node_modules/tailwindcss/components.css";
-@import "../node_modules/tailwindcss/utilities.css";
+@use '@angular/material' as mat;
 
-body {
-  margin: 0;
-  font-family: Roboto, "Orbitron", sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@include mat.core();
+
+$lightTheme: mat.define-theme((
+  color: (
+    theme-type: light,
+    use-system-variables: true
+  ),
+  typography: (
+    brand-family: 'Orbitron',
+    bold-weight: 900
+  ),
+  density: (
+    scale: -1
+  )
+));
+
+$darkTheme: mat.define-theme((
+  color: (
+    theme-type: dark,
+  ),
+  typography: (
+    brand-family: 'Orbitron',
+    bold-weight: 900
+  ),
+  density: (
+    scale: -1
+  )
+));
+
+
+
+// Light Theme Styles
+html {
+  @include mat.core-theme($lightTheme);
+  @include mat.button-theme($lightTheme);
 }
+
+// Dark Theme Styles
+html.dark {
+  @include mat.core-theme($darkTheme);
+  @include mat.button-theme($darkTheme);
+}
+
+
 

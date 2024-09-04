@@ -1,7 +1,10 @@
-<mat-toolbar color="tertiary">
+<mat-toolbar class="dark:bg-dark-background">
   <mat-icon fontIcon="info" class="hover:cursor-crosshair text-dark-border-color mr-2"
             matTooltip="Crud app for testing new feature about angular 18"></mat-icon>
   <p class="mr-3">{{ title }}</p>
+  <button mat-icon-button (click)="toggleTheme()">
+    <mat-icon>{{ isDarkMode ? 'wb_sunny' : 'nights_stay' }}</mat-icon>
+  </button>
   <span class="flex flex-1"></span>
   <span *ngIf="loginService.isLoggedIn()" class="flex">
     <p class="relative top-[-2px] text-header-color">Hi, {{ loginService.getUserData().username }}</p>
