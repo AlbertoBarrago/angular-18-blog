@@ -5,10 +5,12 @@ import { UserLoggedIn } from '../../interfaces/app.interfaces';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from './snackbar.service';
+import { HttpService } from './http.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   readonly http = inject(HttpClient);
+  readonly httpService = inject(HttpService);
   readonly router = inject(Router);
   readonly dialog = inject(MatDialog);
   readonly snackBarService = inject(SnackbarService);
@@ -37,7 +39,7 @@ export class AuthService {
           this.snackBarService.openSnackBarWithTimer('Login successful');
         },
         error: (error: HttpErrorResponse) => {
-          //this.httpService.handleError(error);
+          this.httpService.handleError(error);
         },
       });
   }
