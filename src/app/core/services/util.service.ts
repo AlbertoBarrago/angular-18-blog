@@ -54,7 +54,6 @@ export class UtilService {
   userDialogInfo(): void {
     const data = this.authService.getUserData();
     this.dialog.open(UserDialogComponent, {
-      width: '250px',
       data,
     });
   }
