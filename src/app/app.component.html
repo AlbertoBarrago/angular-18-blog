@@ -1,9 +1,10 @@
 <mat-toolbar color="tertiary">
   <mat-icon fontIcon="info" class="hover:cursor-crosshair text-dark-border-color mr-2"
             matTooltip="Crud app for testing new feature about angular 18"></mat-icon>
-  <span class="mr-3">Smurt Blog</span>
+  <p class="mr-3">Smurt Blog</p>
   <span class="spacer"></span>
-  <span *ngIf="loginService.isLoggedIn()">Hi, {{ loginService.getUserData().username }}
+  <span *ngIf="loginService.isLoggedIn()" class="flex">
+    <p class="relative top-[-2px] text-header-color">Hi, {{ loginService.getUserData().username }}</p>
     <mat-icon (click)="utilService.userDialogInfo()"
               class="icon hover:cursor-pointer ml-2 mr-4 text-header-color" aria-hidden="false"
               aria-label="User verified icon" fontIcon="account_circle"></mat-icon>
