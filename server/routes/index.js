@@ -1,6 +1,6 @@
 const express = require('express');
 const Controller = require('../controllers');
-const { verifyToken } = require('../middleware'); // Import your middleware
+const { verifyToken } = require('../middleware/middleware'); // Import your middleware
 
 const router = express.Router();
 

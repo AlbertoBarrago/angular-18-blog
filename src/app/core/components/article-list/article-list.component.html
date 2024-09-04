@@ -10,10 +10,10 @@
       <div>
         <mat-card>
           <mat-card-header>
-            <mat-card-title class="font-bold">{{ item.title }}</mat-card-title>
+            <mat-card-title class="font-bold text-dark-background dark:text-light-text-tertiary">{{ item.title }}</mat-card-title>
           </mat-card-header>
-          <mat-card-content>
-            <p>{{ item.content.trimEnd().slice(0, 107) + "..." }}</p>
+          <mat-card-content class="text-dark-background dark:text-light-secondary mt-3">
+            <p>{{ item.content.trimEnd().slice(0, 108) + "..." }}</p>
           </mat-card-content>
           <mat-card-actions class="flex justify-between">
             <div class="justify-start">

@@ -1,37 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HeaderComponent } from './core/layout/header/header.component';
+import { FooterComponent } from './core/layout/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
-import { DatePipe, JsonPipe, NgClass, NgIf } from '@angular/common';
-import { MatToolbar } from '@angular/material/toolbar';
-import { MatIcon } from '@angular/material/icon';
-import { AuthService } from './core/services/auth.service';
-import { MatTooltip } from '@angular/material/tooltip';
-import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
-import { UtilService } from './core/services/util.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    JsonPipe,
-    MatToolbar,
-    MatIcon,
-    NgClass,
-    NgIf,
-    DatePipe,
-    MatTooltip,
-    MatMenu,
-    MatMenuItem,
-    MatMenuTrigger,
-  ],
+  imports: [HeaderComponent, FooterComponent, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppComponent {
-  title = 'sMuRt-Blog';
-  loginService = inject(AuthService);
-  utilService = inject(UtilService);
-
-  currentDate: Date = new Date();
-  currentDateString: string = this.currentDate.toDateString();
-}
+export class AppComponent {}

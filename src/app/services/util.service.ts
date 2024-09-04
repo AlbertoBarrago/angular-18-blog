@@ -1,10 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Article } from '../../interfaces/app.interfaces';
+import { Article } from '../interfaces/app.interfaces';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-component';
+import { ConfirmDialogComponent } from '../core/dialogs/confirm/confirm-dialog-component';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpService } from './http.service';
-import { UserDialogComponent } from '../dialogs/user/user-dialog-component';
+import { UserDialogComponent } from '../core/dialogs/user/user-dialog-component';
 import { AuthService } from './auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -54,7 +54,6 @@ export class UtilService {
   userDialogInfo(): void {
     const data = this.authService.getUserData();
     this.dialog.open(UserDialogComponent, {
-      width: '250px',
       data,
     });
   }
