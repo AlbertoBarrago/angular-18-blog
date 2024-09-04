@@ -3,9 +3,9 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { HttpService } from './core/services/http.service';
+import { HttpService } from '../services/http.service';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
-import { Article } from './interfaces/app.interfaces';
+import { Article } from '../interfaces/app.interfaces';
 
 describe('ArticleService', () => {
   let homeService: HttpService;
