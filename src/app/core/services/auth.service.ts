@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { User, UserLoggedIn } from '../../app.types';
+import { UserLoggedIn } from '../../app.types';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpService } from './http.service';
