@@ -1,19 +1,27 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Article } from '../app.types';
+import { environment } from '../../../environments/environment';
+import { Article } from '../../app.types';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
-export class AppService {
+export class HttpService {
   http = inject(HttpClient);
+  router = inject(Router);
+  readonly dialog = inject(MatDialog);
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
+  private _snackBar = inject(MatSnackBar);
 
   url = {
     getAll: environment.apiUrl + '/api/getAll',
     getOne: environment.apiUrl + '/api/getOne',
     delete: environment.apiUrl + '/api/delete',
+    update: environment.apiUrl + '/api/update',
+    create: environment.apiUrl + '/api/create',
   };
 
   constructor() {
@@ -38,12 +46,15 @@ export class AppService {
   /**
    * Get article by id
    * @param articleId
-   * @return The subscription object for the HTTP GET request
+   * @return The Article object
    */
   getArticleById(articleId: string) {
     return this.http.get<Article>(`${this.url.getOne}/${articleId}`).subscribe({
       next: (data: Article) => {
         this.article.set(data);
+        return {
+          success: true,
+        };
       },
       error: (error: HttpErrorResponse) => {
         this.handleError(error);
@@ -51,6 +62,11 @@ export class AppService {
     });
   }
 
+  /**
+   * Delete article by id
+   * @param _id
+   * @return The subscription object for the HTTP DELETE request
+   */
   deleteArticle(_id: string) {
     this.http.delete(`${this.url.delete}/${_id}`).subscribe({
       next: () => {
@@ -60,6 +76,24 @@ export class AppService {
         this.handleError(error);
       },
     });
+  }
+
+  /**
+   * Update article by id
+   * @param article
+   */
+  updateArticle(article: Article) {
+    this.http
+      .patch<Article>(`${this.url.update}/${article._id}`, article)
+      .subscribe({
+        next: () => {
+          this.getAllArticles();
+          this.openSnackBar('Article updated successfully', 'Close');
+        },
+        error: (error: HttpErrorResponse) => {
+          this.handleError(error);
+        },
+      });
   }
 
   /**
@@ -92,5 +126,32 @@ export class AppService {
         message = error.message;
     }
     return new Error(message, error.error);
+  }
+
+  /**
+   * Opens a snackbar with the specified message and action.
+   * @param message
+   * @param action
+   */
+  openSnackBar(message: string, action: string = 'Close') {
+    this._snackBar.open(message, action);
+  }
+
+  /**
+   * Creates a new article
+   * @param article
+   * @return The subscription object for the HTTP POST request
+   */
+  creteArticle(article: Article) {
+    this.http.post<Article>(`${this.url.create}`, article).subscribe({
+      next: () => {
+        this.getAllArticles();
+        this.openSnackBar('Article created successfully', 'Close');
+        this.router.navigate(['/']).then(() => null);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.handleError(error);
+      },
+    });
   }
 }

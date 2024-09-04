@@ -50,6 +50,7 @@ router.post('/login', async (req, res) => {
   await Controller.login(req, res);
 });
 
+//TODO: Remove me after implement login and logout in FE
 router.get('/verifyToken', verifyToken, async (req, res) => {
   await Controller.protectedRoute(req, res);
 });

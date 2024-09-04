@@ -146,8 +146,13 @@ async function login(req, res) {
       const token = jwt.sign({ id: user._id, role: user.role }, SECRET_KEY, {
         expiresIn: 86400, // 24 hours
       });
-
-      res.status(200).send({ auth: true, token });
+      const userLogged = {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      };
+      res.status(200).send({ auth: true, token, user: userLogged });
     });
   } catch (err) {
     console.error(err);
