@@ -1,10 +1,9 @@
 <div class="article-list-container">
   <div class="flex flex-1 mb-4 justify-end">
-    <button mat-raised-button (click)="openArticleCreate()">
+    <button class="animate-pulse" mat-raised-button (click)="openArticleCreate()">
       Add Article
       <mat-icon fontIcon="add"></mat-icon>
     </button>
-
   </div>
   <div class="grid" [ngClass]="articles().length ? 'grid-cols-3 gap-3' : 'grid-cols-1'">
     @for (item of articles(); track item.title) {
