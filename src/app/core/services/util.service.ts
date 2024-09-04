@@ -19,7 +19,7 @@ export class UtilService {
    * Navigates back to the article view.
    */
   backToArticleView() {
-    this.router.navigate(['/']).then(() => {
+    this.router.navigate(['/article-list']).then(() => {
       //console.log('Navigation successful:', r);
     });
   }

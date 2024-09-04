@@ -97,6 +97,33 @@ export class HttpService {
   }
 
   /**
+   * Opens a snackbar with the specified message and action.
+   * @param message
+   * @param action
+   */
+  openSnackBar(message: string, action = 'Close') {
+    this._snackBar.open(message, action);
+  }
+
+  /**
+   * Creates a new article
+   * @param article
+   * @return The subscription object for the HTTP POST request
+   */
+  creteArticle(article: Article) {
+    this.http.post<Article>(`${this.url.create}`, article).subscribe({
+      next: () => {
+        this.getAllArticles();
+        this.openSnackBar('Article created successfully', 'Close');
+        this.router.navigate(['/']).then(() => null);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.handleError(error);
+      },
+    });
+  }
+
+  /**
    * Handles the error by converting the error status to a human-readable message.
    * @param {any} error - The error object to handle.
    * @returns {Error} The constructed Error object.
@@ -126,32 +153,5 @@ export class HttpService {
         message = error.message;
     }
     return new Error(message, error.error);
-  }
-
-  /**
-   * Opens a snackbar with the specified message and action.
-   * @param message
-   * @param action
-   */
-  openSnackBar(message: string, action = 'Close') {
-    this._snackBar.open(message, action);
-  }
-
-  /**
-   * Creates a new article
-   * @param article
-   * @return The subscription object for the HTTP POST request
-   */
-  creteArticle(article: Article) {
-    this.http.post<Article>(`${this.url.create}`, article).subscribe({
-      next: () => {
-        this.getAllArticles();
-        this.openSnackBar('Article created successfully', 'Close');
-        this.router.navigate(['/']).then(() => null);
-      },
-      error: (error: HttpErrorResponse) => {
-        this.handleError(error);
-      },
-    });
   }
 }

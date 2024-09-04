@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ArticleListComponent } from './core/components/article-list/article-list.component';
 import { RoleGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -11,14 +10,17 @@ export const routes: Routes = [
   {
     path: 'article-list',
     canActivate: [RoleGuard],
-    loadComponent: () => ArticleListComponent,
+    loadComponent: () =>
+      import('./core/components/article-list/article-list.component').then(
+        m => m.ArticleListComponent
+      ),
   },
   {
-    path: 'article-view',
+    path: 'article',
     canActivate: [RoleGuard],
     loadComponent: () =>
-      import('./core/components/article-view/article-view.component').then(
-        m => m.ArticleViewComponent
+      import('./core/components/article/article.component').then(
+        m => m.ArticleComponent
       ),
   },
   {
