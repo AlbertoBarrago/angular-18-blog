@@ -30,7 +30,8 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## TODO
 
-- [ ] Add a better UI
+- [ ] Add filter for user articles 
+- [ ] Add pagination for articles
 - [ ] Add test for the app
 - [ ] Improve user session and model management
 - [ ] Add a better error handling
