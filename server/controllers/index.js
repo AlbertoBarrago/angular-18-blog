@@ -1,5 +1,13 @@
-const Articles = require('../models');
+require('dotenv').config();
+const { v4: uuidv4 } = require('uuid');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const { Articles, Users } = require('../models');
 
+// Generate a random secret key
+const SECRET_KEY = process.env.SECRET_KEY;
+
+//ARTICLES CONTROLLER
 async function getAll(req, res) {
   try {
     const data = await Articles.find({});
@@ -18,18 +26,10 @@ async function getOne(req, res, paramID) {
   }
 }
 
-function assignRandomUUID() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    let r = (Math.random() * 16) | 0,
-      v = c === 'x' ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
-
 async function create(req, res) {
   try {
     const data = new Articles({
-      _id: assignRandomUUID(),
+      _id: uuidv4(),
       title: req.body.title,
       content: req.body.content,
       shortContent: req.body.shortContent,
@@ -37,7 +37,6 @@ async function create(req, res) {
       createdAt: Date.now(),
       updatedAt: Date.now(),
     });
-    console.log(data);
     await data.save();
     res.json(data);
   } catch (err) {
@@ -78,10 +77,98 @@ async function remove(req, res, paramID) {
   }
 }
 
+//USERS CONTROLLER
+async function getAllUsers(req, res) {
+  try {
+    const data = await Users.find({});
+    res.json(data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+}
+
+async function getOneUser(req, res, paramID) {
+  try {
+    const data = await Users.findById(paramID);
+    res.json(data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+}
+
+async function byCryptPass(password) {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  return String(hash);
+}
+
+async function createUser(req, res) {
+  try {
+    const hashedPassword = await byCryptPass(req.body.password);
+    const user = new Users({
+      _id: uuidv4(),
+      username: req.body.username,
+      password: hashedPassword,
+      email: req.body.email,
+      role: req.body.role,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    });
+    const savedUser = await user.save();
+    res.json(savedUser);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+}
+
+async function logout(req, res) {
+  res.status(200).send(
+    {
+      auth: false,
+      token: null,
+    },
+    'Logged out successfully'
+  );
+}
+
+async function login(req, res) {
+  const { username, password } = req.body;
+  try {
+    const user = await Users.findOne({ username: username });
+    if (!user) {
+      res.status(404).send('User not found');
+    }
+    bcrypt.compare(password, user.password, (err, isMatch) => {
+      if (err) return res.status(500).send('Error while comparing passwords.');
+      if (!isMatch) return res.status(401).send('Invalid password');
+
+      // Generate JWT
+      const token = jwt.sign({ id: user._id, role: user.role }, SECRET_KEY, {
+        expiresIn: 86400, // 24 hours
+      });
+
+      res.status(200).send({ auth: true, token });
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+}
+
+async function protectedRoute(req, res) {
+  res.status(200).send('You are authorized to access this route');
+}
+
 module.exports = {
   getAll,
   getOne,
   create,
   update,
   remove,
+  createUser,
+  getAllUsers,
+  getOneUser,
+  login,
+  logout,
+  protectedRoute,
 };

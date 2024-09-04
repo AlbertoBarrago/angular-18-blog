@@ -20,7 +20,7 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'angular-18-blog';
+  title = 'sMuRt-Blog';
   isDarkMode!: boolean;
 
   constructor() {

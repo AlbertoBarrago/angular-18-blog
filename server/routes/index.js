@@ -1,5 +1,6 @@
 const express = require('express');
 const Controller = require('../controllers');
+const { verifyToken } = require('../middleware'); // Import your middleware
 
 const router = express.Router();
 
@@ -26,6 +27,31 @@ router.patch('/update/:id', async (req, res) => {
 //Delete by ID Method
 router.delete('/delete/:id', async (req, res) => {
   await Controller.remove(req, res, req.params.id);
+});
+
+//USERS CONTROLLER
+router.post('/createUser', async (req, res) => {
+  await Controller.createUser(req, res);
+});
+
+router.get('/getAllUsers', async (req, res) => {
+  await Controller.getAllUsers(req, res);
+});
+
+router.get('/getOneUser/:id', async (req, res) => {
+  await Controller.getOneUser(req, res, req.params.id);
+});
+
+router.get('/logout', async (req, res) => {
+  await Controller.logout(req, res);
+});
+
+router.post('/login', async (req, res) => {
+  await Controller.login(req, res);
+});
+
+router.get('/verifyToken', verifyToken, async (req, res) => {
+  await Controller.protectedRoute(req, res);
 });
 
 module.exports = router;
