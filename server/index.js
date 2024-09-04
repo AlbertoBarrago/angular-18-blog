@@ -14,7 +14,7 @@ mongoose
   .connect(mongoString, {
     dbName: dbName,
   })
-  .then(r => console.log(r.now()));
+  .then(r => null);
 mongoose.connection.on('error', error => {
   console.log(error);
 });

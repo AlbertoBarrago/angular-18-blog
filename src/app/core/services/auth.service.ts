@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { User, UserLoggedIn } from '../../app.types';
+import { UserLoggedIn } from '../../interfaces/app.interfaces';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { SnackbarService } from './snackbar.service';
 import { HttpService } from './http.service';
 
 @Injectable({ providedIn: 'root' })
@@ -12,6 +13,7 @@ export class AuthService {
   readonly httpService = inject(HttpService);
   readonly router = inject(Router);
   readonly dialog = inject(MatDialog);
+  readonly snackBarService = inject(SnackbarService);
 
   url = {
     fetchUsers: environment.apiUrl + '/api/fetchUsers',
@@ -34,7 +36,7 @@ export class AuthService {
           localStorage.setItem('token', resp.token);
           localStorage.setItem('user', JSON.stringify(resp.user));
           this.router.navigate(['/article-list']).then(() => null);
-          this.httpService.openSnackBar('Login successful');
+          this.snackBarService.openSnackBarWithTimer('Login successful');
         },
         error: (error: HttpErrorResponse) => {
           this.httpService.handleError(error);
@@ -49,7 +51,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn() {

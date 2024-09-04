@@ -41,7 +41,7 @@ export class ArticleListComponent {
 
   openArticle(articleId: string) {
     this.router
-      .navigate(['/article-view'], { state: { articleId: articleId } })
+      .navigate(['/article'], { state: { articleId: articleId } })
       .then(() => {
         //console.log('Navigation successful:');
       });

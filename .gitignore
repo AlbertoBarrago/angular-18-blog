@@ -20,6 +20,8 @@ yarn.lock
 *.launch
 .settings/
 *.sublime-workspace
+package-lock.json
+
 
 # Visual Studio Code
 .vscode/*
@@ -45,4 +47,5 @@ Thumbs.db
 # Artifacts
 artifacts
 
+# Env
 .env

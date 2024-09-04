@@ -12,7 +12,7 @@ import { MatInput } from '@angular/material/input';
 import { UtilService } from '../../services/util.service';
 
 @Component({
-  selector: 'app-article-view',
+  selector: 'app-article',
   standalone: true,
   imports: [
     MatCard,
@@ -27,11 +27,11 @@ import { UtilService } from '../../services/util.service';
     MatInput,
     DatePipe,
   ],
-  templateUrl: './article-view.component.html',
-  styleUrl: './article-view.component.scss',
+  templateUrl: './article.component.html',
+  styleUrl: './article.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ArticleViewComponent {
+export class ArticleComponent {
   appService = inject(HttpService);
   utilService = inject(UtilService);
   article = this.appService.article;

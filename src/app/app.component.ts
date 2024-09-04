@@ -6,6 +6,7 @@ import { MatIcon } from '@angular/material/icon';
 import { AuthService } from './core/services/auth.service';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { UtilService } from './core/services/util.service';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 export class AppComponent {
   title = 'sMuRt-Blog';
   loginService = inject(AuthService);
+  utilService = inject(UtilService);
 
   currentDate: Date = new Date();
   currentDateString: string = this.currentDate.toDateString();

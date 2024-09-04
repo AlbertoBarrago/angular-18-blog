@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint",
-    "server:start": "nodemon server/index.js"
+    "server:start": "nodemon server/index.js",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +48,7 @@
     "angular-eslint": "18.3.0",
     "autoprefixer": "^10.4.19",
     "eslint": "^9.9.0",
+    "husky": "^9.1.5",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

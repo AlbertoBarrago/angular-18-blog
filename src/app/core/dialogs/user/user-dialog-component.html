@@ -1,0 +1,22 @@
+<h2 mat-dialog-title class="text-2xl font-bold mb-4">User Profile</h2>
+<mat-dialog-content class="flex flex-col space-y-3">
+  <div class="flex items-center">
+    <span class="font-semibold w-24">Username:</span>
+    <span>{{data!.username}}</span>
+  </div>
+  <div class="flex items-center">
+    <span class="font-semibold w-24">Email:</span>
+    <span>{{ data!.email }}</span>
+  </div>
+  <div class="flex items-center">
+    <span class="font-semibold w-24">Role:</span>
+    <span class="capitalize">{{ data!.role }}</span>
+  </div>
+  <div class="flex items-center">
+    <span class="font-semibold w-24">Created At:</span>
+    <span>{{ data!.createdAt | date: 'medium' }}</span>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-end mt-4">
+  <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
+</mat-dialog-actions>
