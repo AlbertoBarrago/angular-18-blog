@@ -38,12 +38,18 @@ $darkTheme: mat.define-theme((
 html {
   @include mat.core-theme($lightTheme);
   @include mat.button-theme($lightTheme);
+  @include mat.card-theme($lightTheme);
+  @include mat.input-theme($lightTheme);
+  @include mat.dialog-theme($lightTheme);
 }
 
 // Dark Theme Styles
 html.dark {
   @include mat.core-theme($darkTheme);
   @include mat.button-theme($darkTheme);
+  @include mat.card-theme($darkTheme);
+  @include mat.input-theme($darkTheme);
+  @include mat.dialog-theme($darkTheme);
 }
 
 
