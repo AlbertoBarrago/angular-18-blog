@@ -11,7 +11,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { User } from '../../../interfaces/app.interfaces';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -26,6 +26,7 @@ import { User } from '../../../interfaces/app.interfaces';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    DatePipe,
   ],
 })
 export class UserDialogComponent {
@@ -36,6 +37,8 @@ export class UserDialogComponent {
     public data: {
       username: string;
       role: string;
+      email: string;
+      createdAt: string;
     }
   ) {
     console.log('data', data);

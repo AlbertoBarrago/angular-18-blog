@@ -151,6 +151,7 @@ async function login(req, res) {
         username: user.username,
         email: user.email,
         role: user.role,
+        createdAt: user.createdAt,
       };
       res.status(200).send({ auth: true, token, user: userLogged });
     });
