@@ -133,7 +133,7 @@ export class HttpService {
    * @param message
    * @param action
    */
-  openSnackBar(message: string, action: string = 'Close') {
+  openSnackBar(message: string, action = 'Close') {
     this._snackBar.open(message, action);
   }
 

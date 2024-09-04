@@ -6,9 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint",
-    "test:prod": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox",
     "server:start": "nodemon server/index.js"
   },
   "private": true,

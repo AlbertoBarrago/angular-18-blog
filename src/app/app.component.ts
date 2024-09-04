@@ -30,8 +30,6 @@ export class AppComponent {
   title = 'sMuRt-Blog';
   loginService = inject(AuthService);
 
-  constructor() {}
-
   currentDate: Date = new Date();
   currentDateString: string = this.currentDate.toDateString();
 }

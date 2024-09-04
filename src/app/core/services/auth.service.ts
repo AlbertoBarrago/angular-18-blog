@@ -1,7 +1,7 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { User } from '../../app.types';
+import { User, UserLoggedIn } from '../../app.types';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpService } from './http.service';
@@ -23,14 +23,14 @@ export class AuthService {
    * Login and get token from server and set user logged in signal
    * @param credential
    */
-  login(credential: Partial<User>) {
+  login(credential: UserLoggedIn) {
     this.http
-      .post<User>(`${this.url.login}`, {
+      .post<UserLoggedIn>(`${this.url.login}`, {
         username: credential.username,
         password: credential.password,
       })
       .subscribe({
-        next: (resp: any) => {
+        next: (resp: UserLoggedIn) => {
           localStorage.setItem('token', resp.token);
           localStorage.setItem('user', JSON.stringify(resp.user));
           this.router.navigate(['/article-list']).then(() => null);

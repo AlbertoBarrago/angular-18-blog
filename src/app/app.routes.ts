@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { ArticleListComponent } from './core/components/article-list/article-list.component';
-import { LoginComponent } from './core/auth/login/login.component';
 import { RoleGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [

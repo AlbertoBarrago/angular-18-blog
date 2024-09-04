@@ -18,4 +18,11 @@ interface User {
   updatedAt: string;
 }
 
-export { Article, User };
+interface UserLoggedIn {
+  username: string;
+  password: string;
+  token: string;
+  user: User;
+}
+
+export { Article, User, UserLoggedIn };
