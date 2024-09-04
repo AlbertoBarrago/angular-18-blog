@@ -6,14 +6,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpService } from './http.service';
 import { UserDialogComponent } from '../dialogs/user/user-dialog-component';
 import { AuthService } from './auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class UtilService {
   router = inject(Router);
-  globalService = inject(HttpService);
+  httpService = inject(HttpService);
   authService = inject(AuthService);
   readonly dialog = inject(MatDialog);
   article = signal<Article | null>(null);
+  _snackBar = inject(MatSnackBar);
 
   /**
    * Navigates back to the article view.
@@ -39,8 +41,7 @@ export class UtilService {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Delete article with id: ', _id);
-        this.globalService.deleteArticle(_id);
+        this.httpService.deleteArticle(_id);
       } else {
         console.log('The dialog was closed without confirmation');
       }
@@ -55,6 +56,19 @@ export class UtilService {
     this.dialog.open(UserDialogComponent, {
       width: '250px',
       data,
+    });
+  }
+
+  /**
+   * Opens a snackbar with a message and duration set to 3000ms
+   * @param message
+   */
+  openSnackBarWithTimer(message: string) {
+    const snackBarRef = this._snackBar.open(message, 'Close', {
+      duration: 3000, // Duration in milliseconds
+    });
+    snackBarRef.afterDismissed().subscribe(() => {
+      console.log('Snackbar dismissed');
     });
   }
 }

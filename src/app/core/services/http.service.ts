@@ -5,16 +5,16 @@ import { Article } from '../../interfaces/app.interfaces';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
   http = inject(HttpClient);
   router = inject(Router);
+  snackBarService = inject(SnackbarService);
   readonly dialog = inject(MatDialog);
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
-  private _snackBar = inject(MatSnackBar);
 
   url = {
     getAll: environment.apiUrl + '/api/getAll',
@@ -88,23 +88,15 @@ export class HttpService {
       .subscribe({
         next: () => {
           this.getAllArticles();
-          this.openSnackBar('Article updated successfully', 'Close');
+          this.snackBarService.openSnackBarWithTimer(
+            'Article updated successfully'
+          );
         },
         error: (error: HttpErrorResponse) => {
           this.handleError(error);
         },
       });
   }
-
-  /**
-   * Opens a snackbar with the specified message and action.
-   * @param message
-   * @param action
-   */
-  openSnackBar(message: string, action = 'Close') {
-    this._snackBar.open(message, action);
-  }
-
   /**
    * Creates a new article
    * @param article
@@ -114,7 +106,9 @@ export class HttpService {
     this.http.post<Article>(`${this.url.create}`, article).subscribe({
       next: () => {
         this.getAllArticles();
-        this.openSnackBar('Article created successfully', 'Close');
+        this.snackBarService.openSnackBarWithTimer(
+          'Article created successfully'
+        );
         this.router.navigate(['/']).then(() => null);
       },
       error: (error: HttpErrorResponse) => {
