@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { HttpService } from './core/services/http.service';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
-import { Article } from './app.types';
+import { Article } from './interfaces/app.interfaces';
 
 describe('ArticleService', () => {
   let homeService: HttpService;
