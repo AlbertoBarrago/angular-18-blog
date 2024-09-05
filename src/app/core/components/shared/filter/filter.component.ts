@@ -1,19 +1,32 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatInput } from '@angular/material/input';
 import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  Subject,
-  takeUntil,
-} from 'rxjs';
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import {
+  MatFormField,
+  MatInput,
+  MatInputModule,
+} from '@angular/material/input';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [MatInput],
+  imports: [
+    CommonModule,
+    MatInput,
+    MatFormField,
+    MatInputModule,
+    MatFormFieldModule,
+  ],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FilterComponent {
   @Input() placeholder = '';
@@ -36,12 +49,7 @@ export class FilterComponent {
    */
   private setupSearch(): void {
     this.searchTerms
-      .pipe(
-        takeUntil(this.destroy$),
-        debounceTime(300),
-        distinctUntilChanged(),
-        filter(term => term.length >= 3)
-      )
+      .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
       .subscribe(searchTerm => {
         console.log('Searching for:', searchTerm);
         this.event.emit(searchTerm);

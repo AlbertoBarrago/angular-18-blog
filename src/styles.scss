@@ -30,6 +30,8 @@ $darkTheme: mat.define-theme((
   )
 ));
 
+.mdc-notched-outline__notch { border-right: none; }
+
 html {
   @include mat.core-theme($lightTheme);
   @include mat.button-theme($lightTheme);
