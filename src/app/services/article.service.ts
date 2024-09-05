@@ -91,7 +91,6 @@ export class ArticleService {
    * @return The subscription object for the HTTP GET request
    */
   filterArticles(searchTerm: FilterArticles) {
-    debugger;
     return this.http
       .post<Article[]>(`${this.url.filter}`, { q: searchTerm.q })
       .subscribe({
