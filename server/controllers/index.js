@@ -81,15 +81,15 @@ async function filterArticleByQuery(req, res) {
   try {
     const data = await Articles.find({
       $or: [
-        { title: { $regex: String(req.body.title), $options: 'i' } },
-        { content: { $regex: String(req.body.content), $options: 'i' } },
+        { title: { $regex: String(req.body.q), $options: 'i' } },
+        { content: { $regex: String(req.body.q), $options: 'i' } },
         {
           shortContent: {
-            $regex: String(req.body.shortContent),
+            $regex: String(req.body.q),
             $options: 'i',
           },
         },
-        { author: { $regex: String(req.body.author), $options: 'i' } },
+        { author: { $regex: String(req.body.q), $options: 'i' } },
       ],
     });
     res.json(data);

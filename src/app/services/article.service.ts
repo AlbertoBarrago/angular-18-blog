@@ -31,7 +31,7 @@ export class ArticleService {
 
   constructor() {
     this.filterArticles({
-      author: this.authService.getUser().username,
+      q: this.authService.getUser().username,
     });
   }
 
@@ -91,21 +91,17 @@ export class ArticleService {
    * @return The subscription object for the HTTP GET request
    */
   filterArticles(searchTerm: FilterArticles) {
-    const filter = {
-      title: searchTerm.title ? searchTerm.title : null,
-      content: searchTerm.content ? searchTerm.content : null,
-      shortContent: searchTerm.shortContent ? searchTerm.shortContent : null,
-      author: searchTerm.author ? searchTerm.author : null,
-    };
-    console.log(filter);
-    return this.http.post<Article[]>(`${this.url.filter}`, filter).subscribe({
-      next: (data: Article[]) => {
-        this.articles.set(data);
-      },
-      error: (error: HttpErrorResponse) => {
-        this.errorService.handleError(error);
-      },
-    });
+    debugger;
+    return this.http
+      .post<Article[]>(`${this.url.filter}`, { q: searchTerm.q })
+      .subscribe({
+        next: (data: Article[]) => {
+          this.articles.set(data);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errorService.handleError(error);
+        },
+      });
   }
 
   /**

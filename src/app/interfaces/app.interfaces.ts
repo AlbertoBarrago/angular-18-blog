@@ -26,10 +26,7 @@ interface UserLoggedIn {
 }
 
 interface FilterArticles {
-  title?: boolean;
-  content?: boolean;
-  shortContent?: boolean;
-  author?: boolean;
+  q: string;
 }
 
 export { Article, User, UserLoggedIn, FilterArticles };

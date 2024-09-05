@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilService } from '../../../services/util.service';
+import { FilterComponent } from '../shared/filter/filter.component';
 
 @Component({
   selector: 'app-article-list',
@@ -26,6 +27,7 @@ import { UtilService } from '../../../services/util.service';
     NgClass,
     NgOptimizedImage,
     MatCardContent,
+    FilterComponent,
   ],
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.scss',
@@ -59,5 +61,9 @@ export class ArticleListComponent {
     this.router.navigate(['/article-create-edit']).then(() => {
       //console.log('Navigation successful:');
     });
+  }
+
+  printEvent($event: string) {
+    console.log($event);
   }
 }

@@ -1,5 +1,6 @@
 <div class="article-list-container">
   <div class="flex flex-1 mb-4 justify-end">
+    <app-filter (event)="printEvent($event)"></app-filter>
     <button class="animate-pulse" mat-raised-button (click)="openArticleCreate()">
       Add Article
       <mat-icon fontIcon="add"></mat-icon>
