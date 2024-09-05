@@ -30,8 +30,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## TODO
 
-- [ ] Add filter for user articles 
-- [ ] Add pagination for articles
+- [x] Add filter for user articles 
+- [x] Add pagination endpoint for paginate the articles
+- [ ] Add paginator on article-list
 - [ ] Add test for the app
 - [ ] Improve user session and model management
 - [ ] Add a better error handling
