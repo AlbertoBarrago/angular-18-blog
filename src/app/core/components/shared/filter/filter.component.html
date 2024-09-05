@@ -1,0 +1,6 @@
+<mat-form-field class="w-full" appearance="outline">
+  <mat-label>Filter</mat-label>
+  <input type="text" matInput
+         placeholder="{{placeholder ? placeholder : 'Search by title, content, shortContent'}}}"
+         (input)="onSearch($event)" />
+</mat-form-field>

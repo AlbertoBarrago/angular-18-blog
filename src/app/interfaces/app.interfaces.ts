@@ -25,4 +25,8 @@ interface UserLoggedIn {
   user: User;
 }
 
-export { Article, User, UserLoggedIn };
+interface FilterArticles {
+  q: string;
+}
+
+export { Article, User, UserLoggedIn, FilterArticles };

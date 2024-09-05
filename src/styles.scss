@@ -8,7 +8,6 @@
 $lightTheme: mat.define-theme((
   color: (
     theme-type: light,
-    use-system-variables: true
   ),
   typography: (
     brand-family: 'Orbitron',
@@ -18,7 +17,6 @@ $lightTheme: mat.define-theme((
     scale: -1
   )
 ));
-
 $darkTheme: mat.define-theme((
   color: (
     theme-type: dark,
@@ -32,24 +30,17 @@ $darkTheme: mat.define-theme((
   )
 ));
 
+.mdc-notched-outline__notch { border-right: none; }
 
-
-// Light Theme Styles
 html {
   @include mat.core-theme($lightTheme);
   @include mat.button-theme($lightTheme);
   @include mat.card-theme($lightTheme);
   @include mat.input-theme($lightTheme);
-  @include mat.dialog-theme($lightTheme);
 }
 
-// Dark Theme Styles
 html.dark {
-  @include mat.core-theme($darkTheme);
-  @include mat.button-theme($darkTheme);
-  @include mat.card-theme($darkTheme);
-  @include mat.input-theme($darkTheme);
-  @include mat.dialog-theme($darkTheme);
+  @include mat.all-component-colors($darkTheme);
 }
 
 

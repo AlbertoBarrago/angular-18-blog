@@ -4,7 +4,7 @@ import { DatePipe, NgIf } from '@angular/common';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { HttpService } from '../../../services/http.service';
+import { ArticleService } from '../../../services/article.service';
 import { MatIcon } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
@@ -32,7 +32,7 @@ import { UtilService } from '../../../services/util.service';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ArticleComponent {
-  appService = inject(HttpService);
+  appService = inject(ArticleService);
   utilService = inject(UtilService);
   article = this.appService.article;
   router = inject(Router);

@@ -3,18 +3,21 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { HttpService } from '../services/http.service';
+import { ArticleService } from '../services/article.service';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { Article } from '../interfaces/app.interfaces';
+import { ErrorService } from '../services/error.service';
 
 describe('ArticleService', () => {
-  let homeService: HttpService;
+  let homeService: ArticleService;
+  let errorService: ErrorService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()],
     });
 
-    homeService = TestBed.inject(HttpService);
+    homeService = TestBed.inject(ArticleService);
+    errorService = TestBed.inject(ErrorService);
     TestBed.inject(HttpTestingController);
     TestBed.inject(HttpTestingController);
   });
@@ -26,31 +29,31 @@ describe('ArticleService', () => {
   describe('handleError', () => {
     it('should return an Error object with message "Bad request" for status code 400', () => {
       const error = new HttpErrorResponse({ status: 400 });
-      const result = homeService.handleError(error);
+      const result = errorService.handleError(error);
       expect(result.message).toEqual('Bad request');
     });
 
     it('should return an Error object with message "Not found" for status code 404', () => {
       const error = new HttpErrorResponse({ status: 404 });
-      const result = homeService.handleError(error);
+      const result = errorService.handleError(error);
       expect(result.message).toEqual('Not found');
     });
 
     it('should return an Error object with message "Internal server error" for status code 500', () => {
       const error = new HttpErrorResponse({ status: 500 });
-      const result = homeService.handleError(error);
+      const result = errorService.handleError(error);
       expect(result.message).toEqual('Internal server error');
     });
 
     it('should return an Error object with message "Bad gateway" for status code 502', () => {
       const error = new HttpErrorResponse({ status: 502 });
-      const result = homeService.handleError(error);
+      const result = errorService.handleError(error);
       expect(result.message).toEqual('Bad gateway');
     });
 
     it('should return an Error object with message "Unauthorized" for status code 401', () => {
       const error = new HttpErrorResponse({ status: 401 });
-      const result = homeService.handleError(error);
+      const result = errorService.handleError(error);
       expect(result.message).toEqual('Unauthorized');
     });
 
@@ -60,7 +63,7 @@ describe('ArticleService', () => {
         status: 403,
         error: { message: errorMessage },
       });
-      const result = homeService.handleError(error);
+      const result = errorService.handleError(error);
       expect(result.message).toEqual(errorMessage);
     });
   });
@@ -88,12 +91,12 @@ describe('ArticleService', () => {
     it('should handle error properly', () => {
       const testError = new HttpErrorResponse({ status: 500 });
       spyOn(homeService, 'getAllArticles');
-      spyOn(homeService, 'handleError');
+      spyOn(errorService, 'handleError');
 
       homeService.getAllArticles();
-      homeService.handleError(testError);
+      errorService.handleError(testError);
 
-      expect(homeService.handleError).toHaveBeenCalledWith(testError);
+      expect(errorService.handleError).toHaveBeenCalledWith(testError);
     });
   });
 });

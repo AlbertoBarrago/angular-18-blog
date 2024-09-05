@@ -1,6 +1,7 @@
 <div class="article-list-container">
-  <div class="flex flex-1 mb-4 justify-end">
-    <button class="animate-pulse" mat-raised-button (click)="openArticleCreate()">
+  <div class="flex items-center justify-between gap-5 mb-3">
+    <app-filter class="flex-grow relative top-2.5" (event)="search($event)"></app-filter>
+    <button class="animate-pulse" mat-fab extended (click)="openArticleCreate()">
       Add Article
       <mat-icon fontIcon="add"></mat-icon>
     </button>
