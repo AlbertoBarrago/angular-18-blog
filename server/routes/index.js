@@ -29,6 +29,11 @@ router.delete('/delete/:id', async (req, res) => {
   await Controller.remove(req, res, req.params.id);
 });
 
+//Filter by query
+router.post('/filter', async (req, res) => {
+  await Controller.filterArticleByQuery(req, res);
+});
+
 //USERS CONTROLLER
 router.post('/createUser', async (req, res) => {
   await Controller.createUser(req, res);

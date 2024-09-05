@@ -77,6 +77,27 @@ async function remove(req, res, paramID) {
   }
 }
 
+async function filterArticleByQuery(req, res) {
+  try {
+    const data = await Articles.find({
+      $or: [
+        { title: { $regex: String(req.body.title), $options: 'i' } },
+        { content: { $regex: String(req.body.content), $options: 'i' } },
+        {
+          shortContent: {
+            $regex: String(req.body.shortContent),
+            $options: 'i',
+          },
+        },
+        { author: { $regex: String(req.body.author), $options: 'i' } },
+      ],
+    });
+    res.json(data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+}
+
 //USERS CONTROLLER
 async function getAllUsers(req, res) {
   try {
@@ -121,16 +142,6 @@ async function createUser(req, res) {
   }
 }
 
-async function logout(req, res) {
-  res.status(200).send(
-    {
-      auth: false,
-      token: null,
-    },
-    'Logged out successfully'
-  );
-}
-
 async function login(req, res) {
   const { username, password } = req.body;
   try {
@@ -161,10 +172,6 @@ async function login(req, res) {
   }
 }
 
-async function protectedRoute(req, res) {
-  res.status(200).send('You are authorized to access this route');
-}
-
 module.exports = {
   getAll,
   getOne,
@@ -175,6 +182,5 @@ module.exports = {
   getAllUsers,
   getOneUser,
   login,
-  logout,
-  protectedRoute,
+  filterArticleByQuery,
 };

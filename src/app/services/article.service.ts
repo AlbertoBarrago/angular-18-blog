@@ -1,18 +1,22 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Article } from '../interfaces/app.interfaces';
+import { Article, FilterArticles } from '../interfaces/app.interfaces';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from './snackbar.service';
+import { ErrorService } from './error.service';
+import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class HttpService {
-  http = inject(HttpClient);
-  router = inject(Router);
-  snackBarService = inject(SnackbarService);
+export class ArticleService {
+  readonly http = inject(HttpClient);
+  readonly router = inject(Router);
+  readonly snackBarService = inject(SnackbarService);
   readonly dialog = inject(MatDialog);
+  readonly errorService = inject(ErrorService);
+  readonly authService = inject(AuthService);
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
 
@@ -22,10 +26,13 @@ export class HttpService {
     delete: environment.apiUrl + '/api/delete',
     update: environment.apiUrl + '/api/update',
     create: environment.apiUrl + '/api/create',
+    filter: environment.apiUrl + '/api/filter',
   };
 
   constructor() {
-    this.getAllArticles();
+    this.filterArticles({
+      author: this.authService.getUser().username,
+    });
   }
 
   /**
@@ -38,7 +45,7 @@ export class HttpService {
         this.articles.set(data);
       },
       error: (error: HttpErrorResponse) => {
-        this.handleError(error);
+        this.errorService.handleError(error);
       },
     });
   }
@@ -57,7 +64,7 @@ export class HttpService {
         };
       },
       error: (error: HttpErrorResponse) => {
-        this.handleError(error);
+        this.errorService.handleError(error);
       },
     });
   }
@@ -73,7 +80,30 @@ export class HttpService {
         this.getAllArticles();
       },
       error: (error: HttpErrorResponse) => {
-        this.handleError(error);
+        this.errorService.handleError(error);
+      },
+    });
+  }
+
+  /**
+   * Filter articles by title, content, shortContent, author
+   * @param searchTerm
+   * @return The subscription object for the HTTP GET request
+   */
+  filterArticles(searchTerm: FilterArticles) {
+    const filter = {
+      title: searchTerm.title ? searchTerm.title : null,
+      content: searchTerm.content ? searchTerm.content : null,
+      shortContent: searchTerm.shortContent ? searchTerm.shortContent : null,
+      author: searchTerm.author ? searchTerm.author : null,
+    };
+    console.log(filter);
+    return this.http.post<Article[]>(`${this.url.filter}`, filter).subscribe({
+      next: (data: Article[]) => {
+        this.articles.set(data);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorService.handleError(error);
       },
     });
   }
@@ -93,7 +123,7 @@ export class HttpService {
           );
         },
         error: (error: HttpErrorResponse) => {
-          this.handleError(error);
+          this.errorService.handleError(error);
         },
       });
   }
@@ -112,40 +142,8 @@ export class HttpService {
         this.router.navigate(['/']).then(() => null);
       },
       error: (error: HttpErrorResponse) => {
-        this.handleError(error);
+        this.errorService.handleError(error);
       },
     });
-  }
-
-  /**
-   * Handles the error by converting the error status to a human-readable message.
-   * @param {any} error - The error object to handle.
-   * @returns {Error} The constructed Error object.
-   */
-  handleError(error: HttpErrorResponse): Error {
-    let message;
-    switch (error.status) {
-      case 400:
-        message = 'Bad request';
-        break;
-      case 403:
-        message = 'Forbidden';
-        break;
-      case 404:
-        message = 'Not found';
-        break;
-      case 500:
-        message = 'Internal server error';
-        break;
-      case 502:
-        message = 'Bad gateway';
-        break;
-      case 401:
-        message = 'Unauthorized';
-        break;
-      default:
-        message = error.message;
-    }
-    return new Error(message, error.error);
   }
 }

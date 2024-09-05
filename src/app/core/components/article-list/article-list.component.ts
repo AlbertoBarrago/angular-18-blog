@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { HttpService } from '../../../services/http.service';
+import { ArticleService } from '../../../services/article.service';
 import { JsonPipe, NgClass, NgOptimizedImage } from '@angular/common';
 import {
   MatCard,
@@ -32,7 +32,7 @@ import { UtilService } from '../../../services/util.service';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ArticleListComponent {
-  appService = inject(HttpService);
+  appService = inject(ArticleService);
   utilService = inject(UtilService);
   router = inject(Router);
   articles = this.appService.articles;

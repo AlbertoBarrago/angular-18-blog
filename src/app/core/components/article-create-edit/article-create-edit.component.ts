@@ -13,7 +13,7 @@ import {
 } from '@angular/forms';
 import { Article } from '../../../interfaces/app.interfaces';
 import { Router } from '@angular/router';
-import { HttpService } from '../../../services/http.service';
+import { ArticleService } from '../../../services/article.service';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -39,7 +39,7 @@ import { DatePipe, NgIf } from '@angular/common';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ArticleCreateEditComponent {
-  appService = inject(HttpService);
+  appService = inject(ArticleService);
   utilService = inject(UtilService);
   article!: WritableSignal<Article | null>;
   router = inject(Router);

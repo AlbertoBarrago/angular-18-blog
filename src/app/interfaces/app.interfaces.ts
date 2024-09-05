@@ -25,4 +25,11 @@ interface UserLoggedIn {
   user: User;
 }
 
-export { Article, User, UserLoggedIn };
+interface FilterArticles {
+  title?: boolean;
+  content?: boolean;
+  shortContent?: boolean;
+  author?: boolean;
+}
+
+export { Article, User, UserLoggedIn, FilterArticles };
