@@ -78,6 +78,11 @@ async function remove(req, res, paramID) {
 }
 
 async function filterArticleByQuery(req, res) {
+  const pagination = req.body.pagination || {};
+  const page = pagination.page ? pagination.page : 1;
+  const limit = pagination.limit ? pagination.limit : 6;
+  const skip = (page - 1) * limit;
+
   try {
     const data = await Articles.find({
       $or: [
@@ -91,7 +96,10 @@ async function filterArticleByQuery(req, res) {
         },
         { author: { $regex: String(req.body.q), $options: 'i' } },
       ],
-    });
+    })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
     res.json(data);
   } catch (err) {
     res.status(500).send(err);
