@@ -7,11 +7,12 @@ import { AuthService } from '../../../services/auth.service';
 import { UtilService } from '../../../services/util.service';
 import { ThemeService } from '../../../services/theme.service';
 import { MatIconButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIcon, MatToolbar, MatTooltip, NgIf, MatIconButton],
+  imports: [MatIcon, MatToolbar, MatTooltip, NgIf, MatIconButton, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

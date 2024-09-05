@@ -17,7 +17,6 @@ $lightTheme: mat.define-theme((
     scale: -1
   )
 ));
-
 $darkTheme: mat.define-theme((
   color: (
     theme-type: dark,
@@ -31,9 +30,6 @@ $darkTheme: mat.define-theme((
   )
 ));
 
-
-
-// Light Theme Styles
 html {
   @include mat.core-theme($lightTheme);
   @include mat.button-theme($lightTheme);
@@ -41,12 +37,8 @@ html {
   @include mat.input-theme($lightTheme);
 }
 
-// Dark Theme Styles
 html.dark {
-  @include mat.core-theme($darkTheme);
-  @include mat.button-theme($darkTheme);
-  @include mat.card-theme($darkTheme);
-  @include mat.dialog-theme($darkTheme);
+  @include mat.all-component-colors($darkTheme);
 }
 
 

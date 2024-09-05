@@ -1,7 +1,7 @@
 <mat-toolbar class="dark:bg-dark-background dark:text-dark-primary">
   <mat-icon fontIcon="info" class="hover:cursor-crosshair text-light-text-tertiary dark:text-dark-primary mr-2"
             matTooltip="Crud app for testing new feature about angular 18"></mat-icon>
-  <p class="mr-3">{{ title }}</p>
+  <p class="mr-3 hover:cursor-pointer" routerLink="article-list">{{ title }}</p>
   <button mat-icon-button (click)="toggleTheme()" class="dark:text-dark-neon-yellow">
     <mat-icon>{{ isDarkMode ? 'wb_sunny' : 'nights_stay' }}</mat-icon>
   </button>
