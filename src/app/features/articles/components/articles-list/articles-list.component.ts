@@ -1,4 +1,9 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { ArticleService } from '../../services/article.service';
 import {
   CommonModule,
@@ -23,6 +28,7 @@ import {
   MatPaginatorModule,
   PageEvent,
 } from '@angular/material/paginator';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-articles-list',
@@ -47,13 +53,20 @@ import {
   styleUrl: './articles-list.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ArticlesListComponent {
+export class ArticlesListComponent implements OnInit {
   articleService = inject(ArticleService);
   utilService = inject(UtilService);
+  authService = inject(AuthService);
   router = inject(Router);
   articles = this.articleService.articles;
   readonly dialog = inject(MatDialog);
   emptyListImagePath = './assets/images/empty_list.png';
+
+  ngOnInit() {
+    this.articleService.filterArticles({
+      q: this.authService.getUser().username,
+    });
+  }
 
   openArticle(articleId: string) {
     this.router
@@ -85,10 +98,6 @@ export class ArticlesListComponent {
   }
 
   performPagination($event: PageEvent) {
-    this.articleService.page.set($event.pageIndex + 1);
-    this.articleService.pageSize.set($event.pageSize);
-    this.articleService.filterArticles({
-      q: '',
-    });
+    this.articleService.performPagination($event);
   }
 }

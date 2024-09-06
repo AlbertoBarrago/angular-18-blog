@@ -83,7 +83,6 @@ async function filterArticleByQuery(req, res) {
   const limit = parseInt(reqParam.size, 10) || 6; // "size" instead of "limit"
   const skip = (page - 1) * limit;
   const searchQuery = String(req.body.q) || '';
-  console.log(searchQuery);
 
   try {
     const articles = await Articles.aggregate([

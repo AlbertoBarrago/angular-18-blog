@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { ErrorService } from '../../../shared/services/error.service';
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
@@ -35,12 +36,6 @@ export class ArticleService {
     create: environment.apiUrl + '/api/create',
     filter: environment.apiUrl + '/api/filter',
   };
-
-  constructor() {
-    this.filterArticles({
-      q: this.authService.getUser().username,
-    });
-  }
 
   /**
    * Get all articles
@@ -150,6 +145,14 @@ export class ArticleService {
       error: (error: HttpErrorResponse) => {
         this.errorService.handleError(error);
       },
+    });
+  }
+
+  performPagination($event: PageEvent) {
+    this.page.set($event.pageIndex + 1);
+    this.pageSize.set($event.pageSize);
+    this.filterArticles({
+      q: '',
     });
   }
 }

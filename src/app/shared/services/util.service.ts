@@ -5,7 +5,7 @@ import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-compon
 import { MatDialog } from '@angular/material/dialog';
 import { ArticleService } from '../../features/articles/services/article.service';
 import { UserDialogComponent } from '../dialogs/user/user-dialog-component';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../features/auth/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class UtilService {

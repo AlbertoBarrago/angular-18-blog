@@ -5,7 +5,9 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./core/auth/login/login.component').then(m => m.LoginComponent),
+      import('./features/auth/components/login/login.component').then(
+        m => m.LoginComponent
+      ),
   },
   {
     path: 'articles-list',
