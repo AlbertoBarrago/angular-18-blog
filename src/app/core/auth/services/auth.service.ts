@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { UserLoggedIn } from '../../interfaces/app.interfaces';
+import { environment } from '../../../../environments/environment';
+import { UserLoggedIn } from '../../interfaces/core.interfaces';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { SnackbarService } from './snackbar.service';
-import { ErrorService } from './error.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { ErrorService } from '../../../shared/services/error.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -35,7 +35,9 @@ export class AuthService {
         next: (resp: UserLoggedIn) => {
           localStorage.setItem('token', resp.token);
           localStorage.setItem('user', JSON.stringify(resp.user));
-          this.router.navigate(['/articles-list']).then(() => null);
+          this.router
+            .navigate(['/article/articles/articles-list'])
+            .then(() => null);
           this.snackBarService.openSnackBarWithTimer('Login successful');
         },
         error: (error: HttpErrorResponse) => {

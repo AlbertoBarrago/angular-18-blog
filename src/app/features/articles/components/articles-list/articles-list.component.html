@@ -1,7 +1,7 @@
 <div class="article-list-container">
   <div class="flex items-center justify-between gap-5 mb-3">
     <app-filter class="flex-grow relative top-2.5" (event)="search($event)"></app-filter>
-    <button class="animate-pulse" mat-fab extended (click)="openArticleCreate()">
+    <button class="animate-pulse" mat-fab extended (click)="editArticle(null)">
       Add Article
       <mat-icon fontIcon="add"></mat-icon>
     </button>
@@ -10,8 +10,18 @@
     @for (item of articles(); track item.title) {
       <div>
         <mat-card>
-          <mat-card-header>
-            <mat-card-title class="font-bold text-dark-background dark:text-light-text-tertiary">{{ item.title }}</mat-card-title>
+          <mat-card-header class="flex flex-col">
+            <mat-card-title class="font-bold text-dark-background dark:text-light-text-tertiary mb-2">{{ item.title }}</mat-card-title>
+            <mat-card-subtitle class="flex items-center flex-wrap text-sm text-dark-primary dark:text-dark-neon-magenta">
+              <div class="flex items-center mr-4 mb-2 ">
+                <mat-icon class="mr-1" fontIcon="attribution"></mat-icon>
+                <span>{{ item.author }}</span>
+              </div>
+              <div class="flex items-center mb-2">
+                <mat-icon class="mr-1" fontIcon="access_time"></mat-icon>
+                <span>{{ item.createdAt | date: 'medium' }}</span>
+              </div>
+            </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="text-dark-background dark:text-light-secondary mt-3">
             <p>{{ item.content.trimEnd().slice(0, 108) + "..." }}</p>
@@ -24,7 +34,7 @@
               </button>
             </div>
             <div class=" justify-end">
-              <button class="mat-mdc-button edit" (click)="editArticle(item._id)" mat-button>
+              <button class="mat-mdc-button edit" (click)="editArticle(item._id, true)" mat-button>
                 <mat-icon fontIcon="edit"></mat-icon>
                 Edit
               </button>
@@ -50,7 +60,7 @@
       <mat-paginator
         [length]="articleService.totalElement()"
         [pageSize]="articleService.pageSize()"
-        [pageSizeOptions]="[5, 10, 25, 100]"
+        [pageSizeOptions]="[6, 12, 36]"
         (page)="performPagination($event)"
       ></mat-paginator>
     </div>

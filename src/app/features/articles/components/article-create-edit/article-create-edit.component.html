@@ -13,28 +13,28 @@
     <div *ngIf="isEdit">
       <mat-icon class="relative top-1.5 dark:text-light-text-tertiary" fontIcon="access_time"></mat-icon>
       <span class="dark:text-light-text-tertiary">
-        {{articleForm.controls.publishedAt.value | date: 'medium' }}
+        {{ articleForm.controls.publishedAt.value | date: 'medium' }}
       </span>
     </div>
     <form [formGroup]="articleForm">
-      <div class="grid grid-cols-2 gap-2">
-        <mat-form-field class="w-full">
+      <div class="grid grid-cols-3 gap-2">
+        <mat-form-field class="w-full" appearance="outline">
           <mat-label>Author</mat-label>
           <input matInput type="text" formControlName="author" placeholder="Author" />
         </mat-form-field>
-        <mat-form-field class="w-full">
+        <mat-form-field class="w-full col-span-2" appearance="outline">
           <mat-label>Title</mat-label>
           <input matInput type="text" formControlName="title" placeholder="Title" />
         </mat-form-field>
       </div>
       <div class="grid grid-cols-1">
-        <mat-form-field class="w-full">
-          <mat-label>Content</mat-label>
-          <textarea matInput rows="5" formControlName="content" placeholder="Content"></textarea>
-        </mat-form-field>
-        <mat-form-field class="w-full">
+        <mat-form-field class="w-full" appearance="outline">
           <mat-label>Short Content</mat-label>
           <textarea matInput rows="2" formControlName="shortContent" placeholder="Short Content"></textarea>
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Content</mat-label>
+          <textarea matInput rows="5" formControlName="content" placeholder="Content"></textarea>
         </mat-form-field>
       </div>
     </form>
@@ -44,7 +44,8 @@
         <span *ngIf="!isEdit">Create</span>
         <mat-icon>save</mat-icon>
       </button>
-      <button *ngIf="isEdit" mat-raised-button color="warn" (click)="utilService.confirmDialogDelete(articleForm.controls._id.value)">
+      <button *ngIf="isEdit" mat-raised-button color="warn"
+              (click)="utilService.confirmDialogDelete(articleForm.controls._id.value)">
         Delete
         <mat-icon>delete</mat-icon>
       </button>

@@ -5,13 +5,14 @@ import {
   Article,
   FilterArticles,
   PaginatedResponse,
-} from '../../../interfaces/app.interfaces';
+} from '../../../core/interfaces/core.interfaces';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { ErrorService } from '../../../shared/services/error.service';
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthService } from '../../../core/auth/services/auth.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
@@ -24,7 +25,7 @@ export class ArticleService {
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
   page = signal<number>(1);
-  pageSize = signal<number>(5);
+  pageSize = signal<number>(6);
   totalElement = signal<number>(0);
 
   url = {
@@ -35,12 +36,6 @@ export class ArticleService {
     create: environment.apiUrl + '/api/create',
     filter: environment.apiUrl + '/api/filter',
   };
-
-  constructor() {
-    this.filterArticles({
-      q: this.authService.getUser().username,
-    });
-  }
 
   /**
    * Get all articles
@@ -77,14 +72,18 @@ export class ArticleService {
   }
 
   /**
-   * Delete article by id
-   * @param _id
-   * @return The subscription object for the HTTP DELETE request
+   * Creates a new article
+   * @param article
+   * @return The subscription object for the HTTP POST request
    */
-  deleteArticle(_id: string) {
-    this.http.delete(`${this.url.delete}/${_id}`).subscribe({
+  creteArticle(article: Article) {
+    this.http.post<Article>(`${this.url.create}`, article).subscribe({
       next: () => {
         this.getAllArticles();
+        this.snackBarService.openSnackBarWithTimer(
+          'Article created successfully'
+        );
+        this.router.navigate(['/']).then(() => null);
       },
       error: (error: HttpErrorResponse) => {
         this.errorService.handleError(error);
@@ -133,23 +132,57 @@ export class ArticleService {
         },
       });
   }
+
   /**
-   * Creates a new article
-   * @param article
-   * @return The subscription object for the HTTP POST request
+   * Delete article by id
+   * @param _id
+   * @return The subscription object for the HTTP DELETE request
    */
-  creteArticle(article: Article) {
-    this.http.post<Article>(`${this.url.create}`, article).subscribe({
+  deleteArticle(_id: string) {
+    this.http.delete(`${this.url.delete}/${_id}`).subscribe({
       next: () => {
         this.getAllArticles();
-        this.snackBarService.openSnackBarWithTimer(
-          'Article created successfully'
-        );
-        this.router.navigate(['/']).then(() => null);
       },
       error: (error: HttpErrorResponse) => {
         this.errorService.handleError(error);
       },
     });
+  }
+
+  /**
+   * Open edit or create article view
+   * @param articleId
+   * @param isEdit
+   */
+  openCreateOrEditArticleView(articleId: string | null, isEdit: boolean) {
+    if (isEdit) {
+      this.router.navigate(['/articles/article-edit'], {
+        state: { articleId: articleId },
+      });
+      return;
+    }
+
+    this.router.navigate(['/articles/article-edit']);
+  }
+
+  /**
+   * Perform pagination with page, pageSize, filter as q parameters
+   * @param $event
+   */
+  performPagination($event: PageEvent) {
+    this.page.set($event.pageIndex + 1);
+    this.pageSize.set($event.pageSize);
+    this.filterArticles({
+      q: '',
+    });
+  }
+
+  /**
+   * Clear articles
+   */
+  clearArticles() {
+    this.page.set(1);
+    this.pageSize.set(5);
+    this.articles.set([]);
   }
 }

@@ -1,36 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorsDialogComponent } from '../dialogs/errors/errors-dialog-component';
 
 @Injectable({ providedIn: 'root' })
 export class ErrorService {
+  modalService = inject(MatDialog);
+
+  openErrorsDialog(errorMessage: string, errorStatus: number) {
+    console.log(errorMessage);
+    this.modalService.open(ErrorsDialogComponent, {
+      data: {
+        title: 'Error',
+        message: errorMessage,
+        status: errorStatus,
+      },
+    });
+  }
+
   /**
    * Handles the error and displays a message to the user
-   * @param error
+   * @param httpError
    */
-  handleError(error: HttpErrorResponse): Error {
-    let message;
-    switch (error.status) {
-      case 400:
-        message = 'Bad request';
-        break;
-      case 403:
-        message = 'Forbidden';
-        break;
-      case 404:
-        message = 'Not found';
-        break;
-      case 500:
-        message = 'Internal server error';
-        break;
-      case 502:
-        message = 'Bad gateway';
-        break;
-      case 401:
-        message = 'Unauthorized';
-        break;
-      default:
-        message = error.message;
-    }
-    return new Error(message, error.error);
+  handleError(httpError: HttpErrorResponse) {
+    const errorMessage = httpError.error;
+    const errorStatus = httpError.status;
+    this.openErrorsDialog(errorMessage, errorStatus);
   }
 }

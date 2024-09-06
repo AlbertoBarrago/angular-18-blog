@@ -1,36 +1,22 @@
 import { Routes } from '@angular/router';
-import { RoleGuard } from './core/guards/auth.guard';
+import { RoleGuard } from './core/guards/core.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./core/auth/login/login.component').then(m => m.LoginComponent),
-  },
-  {
-    path: 'articles-list',
-    canActivate: [RoleGuard],
-    loadComponent: () =>
-      import(
-        './features/articles/components/articles-list/articles-list.component'
-      ).then(m => m.ArticlesListComponent),
-  },
-  {
-    path: 'article',
-    canActivate: [RoleGuard],
-    loadComponent: () =>
-      import('./features/articles/components/article/article.component').then(
-        m => m.ArticleComponent
+      import('./core/auth/components/login/login.component').then(
+        m => m.LoginComponent
       ),
   },
   {
-    path: 'article-create-edit',
+    path: 'articles',
     canActivate: [RoleGuard],
-    loadComponent: () =>
-      import(
-        './features/articles/components/article-create-edit/article-create-edit.component'
-      ).then(m => m.ArticleCreateEditComponent),
+    loadChildren: () =>
+      import('./features/articles/routes/article.route').then(
+        c => c.articlesRoutes
+      ),
   },
-  { path: '', redirectTo: '/articles-list', pathMatch: 'full' },
-  { path: '**', redirectTo: '/articles-list', pathMatch: 'full' },
+  { path: '', redirectTo: '/articles/articles-list', pathMatch: 'full' },
+  { path: '**', redirectTo: '/articles/articles-list', pathMatch: 'full' },
 ];

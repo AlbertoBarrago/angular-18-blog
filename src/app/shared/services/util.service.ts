@@ -1,11 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Article } from '../../interfaces/app.interfaces';
+import { Article } from '../../core/interfaces/core.interfaces';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-component';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticleService } from '../../features/articles/services/article.service';
 import { UserDialogComponent } from '../dialogs/user/user-dialog-component';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../core/auth/services/auth.service';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({ providedIn: 'root' })
 export class UtilService {
@@ -13,13 +14,14 @@ export class UtilService {
   readonly httpService = inject(ArticleService);
   readonly authService = inject(AuthService);
   readonly dialog = inject(MatDialog);
+  readonly snackBarService = inject(SnackbarService);
   article = signal<Article | null>(null);
 
   /**
    * Navigates back to the article view.
    */
   backToArticleView() {
-    this.router.navigate(['/articles-list']).then(() => {
+    this.router.navigate(['/articles/articles-list']).then(() => {
       //console.log('Navigation successful:', r);
     });
   }
@@ -40,6 +42,10 @@ export class UtilService {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.httpService.deleteArticle(_id);
+        this.snackBarService.openSnackBarWithTimer(
+          'Article deleted successfully'
+        );
+        this.backToArticleView();
       } else {
         console.log('The dialog was closed without confirmation');
       }

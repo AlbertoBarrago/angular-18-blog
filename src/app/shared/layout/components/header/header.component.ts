@@ -3,9 +3,9 @@ import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { NgIf } from '@angular/common';
-import { AuthService } from '../../../shared/services/auth.service';
-import { UtilService } from '../../../shared/services/util.service';
-import { ThemeService } from '../../../shared/services/theme.service';
+import { AuthService } from '../../../../core/auth/services/auth.service';
+import { UtilService } from '../../../services/util.service';
+import { ThemeService } from '../../../services/theme.service';
 import { MatIconButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 

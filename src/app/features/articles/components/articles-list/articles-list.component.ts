@@ -1,4 +1,10 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ArticleService } from '../../services/article.service';
 import {
   CommonModule,
@@ -23,6 +29,7 @@ import {
   MatPaginatorModule,
   PageEvent,
 } from '@angular/material/paginator';
+import { AuthService } from '../../../../core/auth/services/auth.service';
 
 @Component({
   selector: 'app-articles-list',
@@ -47,34 +54,29 @@ import {
   styleUrl: './articles-list.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ArticlesListComponent {
+export class ArticlesListComponent implements OnInit, OnDestroy {
   articleService = inject(ArticleService);
   utilService = inject(UtilService);
+  authService = inject(AuthService);
   router = inject(Router);
   articles = this.articleService.articles;
   readonly dialog = inject(MatDialog);
   emptyListImagePath = './assets/images/empty_list.png';
 
-  openArticle(articleId: string) {
-    this.router
-      .navigate(['/article'], { state: { articleId: articleId } })
-      .then(() => {
-        //console.log('Navigation successful:');
-      });
-  }
-
-  editArticle(articleId: string) {
-    this.router
-      .navigate(['/article-create-edit'], { state: { articleId: articleId } })
-      .then(() => {
-        //console.log('Navigation successful:');
-      });
-  }
-
-  openArticleCreate() {
-    this.router.navigate(['/article-create-edit']).then(() => {
-      //console.log('Navigation successful:');
+  ngOnInit() {
+    this.articleService.filterArticles({
+      q: this.authService.getUser().username,
     });
+  }
+
+  openArticle(articleId: string) {
+    this.router.navigate(['/articles/article-view'], {
+      state: { articleId: articleId },
+    });
+  }
+
+  editArticle(articleId: string | null, isEdit = false) {
+    this.articleService.openCreateOrEditArticleView(articleId, isEdit);
   }
 
   search($event: string) {
@@ -85,10 +87,10 @@ export class ArticlesListComponent {
   }
 
   performPagination($event: PageEvent) {
-    this.articleService.page.set($event.pageIndex + 1);
-    this.articleService.pageSize.set($event.pageSize);
-    this.articleService.filterArticles({
-      q: '',
-    });
+    this.articleService.performPagination($event);
+  }
+
+  ngOnDestroy() {
+    this.articleService.clearArticles();
   }
 }

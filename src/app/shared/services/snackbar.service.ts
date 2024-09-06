@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Article } from '../../interfaces/app.interfaces';
+import { Article } from '../../core/interfaces/core.interfaces';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,6 +18,8 @@ export class SnackbarService {
   openSnackBarWithTimer(message: string) {
     const snackBarRef = this._snackBar.open(message, 'Close', {
       duration: 1800,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
     snackBarRef.afterDismissed().subscribe(() => {
       console.log('Snackbar dismissed');

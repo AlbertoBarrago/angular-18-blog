@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HeaderComponent } from './core/layout/header/header.component';
-import { FooterComponent } from './core/layout/footer/footer.component';
+import { HeaderComponent } from './shared/layout/components/header/header.component';
+import { FooterComponent } from './shared/layout/components/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
