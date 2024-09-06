@@ -35,7 +35,7 @@ export class AuthService {
         next: (resp: UserLoggedIn) => {
           localStorage.setItem('token', resp.token);
           localStorage.setItem('user', JSON.stringify(resp.user));
-          this.router.navigate(['/article-list']).then(() => null);
+          this.router.navigate(['/articles-list']).then(() => null);
           this.snackBarService.openSnackBarWithTimer('Login successful');
         },
         error: (error: HttpErrorResponse) => {

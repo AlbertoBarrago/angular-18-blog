@@ -8,18 +8,18 @@ export const routes: Routes = [
       import('./core/auth/login/login.component').then(m => m.LoginComponent),
   },
   {
-    path: 'article-list',
+    path: 'articles-list',
     canActivate: [RoleGuard],
     loadComponent: () =>
-      import('./core/components/article-list/article-list.component').then(
-        m => m.ArticleListComponent
+      import('./features/articles/articles-list/articles-list.component').then(
+        m => m.ArticlesListComponent
       ),
   },
   {
     path: 'article',
     canActivate: [RoleGuard],
     loadComponent: () =>
-      import('./core/components/article/article.component').then(
+      import('./features/articles/article/article.component').then(
         m => m.ArticleComponent
       ),
   },
@@ -28,8 +28,9 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     loadComponent: () =>
       import(
-        './core/components/article-create-edit/article-create-edit.component'
+        './features/articles/article-create-edit/article-create-edit.component'
       ).then(m => m.ArticleCreateEditComponent),
   },
-  { path: '', redirectTo: '/article-list', pathMatch: 'full' },
+  { path: '', redirectTo: '/articles-list', pathMatch: 'full' },
+  { path: '**', redirectTo: '/articles-list', pathMatch: 'full' },
 ];

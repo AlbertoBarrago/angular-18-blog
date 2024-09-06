@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilService } from '../../../services/util.service';
-import { FilterComponent } from '../shared/filter/filter.component';
+import { FilterComponent } from '../../../shared/components/filter/filter.component';
 import {
   MatPaginator,
   MatPaginatorModule,
@@ -25,7 +25,7 @@ import {
 } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-article-list',
+  selector: 'app-articles-list',
   standalone: true,
   imports: [
     CommonModule,
@@ -43,11 +43,11 @@ import {
     MatPaginator,
     MatPaginatorModule,
   ],
-  templateUrl: './article-list.component.html',
-  styleUrl: './article-list.component.scss',
+  templateUrl: './articles-list.component.html',
+  styleUrl: './articles-list.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ArticleListComponent {
+export class ArticlesListComponent {
   articleService = inject(ArticleService);
   utilService = inject(UtilService);
   router = inject(Router);
