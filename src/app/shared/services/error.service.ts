@@ -13,6 +13,9 @@ export class ErrorService {
       case 400:
         message = 'Bad request';
         break;
+      case 401:
+        message = 'Unauthorized';
+        break;
       case 403:
         message = 'Forbidden';
         break;
@@ -24,9 +27,6 @@ export class ErrorService {
         break;
       case 502:
         message = 'Bad gateway';
-        break;
-      case 401:
-        message = 'Unauthorized';
         break;
       default:
         message = error.message;

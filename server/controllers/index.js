@@ -83,6 +83,7 @@ async function filterArticleByQuery(req, res) {
   const limit = parseInt(reqParam.size, 10) || 6; // "size" instead of "limit"
   const skip = (page - 1) * limit;
   const searchQuery = String(req.body.q) || '';
+  console.log(searchQuery);
 
   try {
     const articles = await Articles.aggregate([
@@ -123,12 +124,10 @@ async function filterArticleByQuery(req, res) {
 
     res.json({ metadata, data });
   } catch (err) {
-    res
-      .status(500)
-      .send({
-        error: 'An error occurred while fetching articles',
-        details: err,
-      });
+    res.status(500).send({
+      error: 'An error occurred while fetching articles',
+      details: err,
+    });
   }
 }
 
