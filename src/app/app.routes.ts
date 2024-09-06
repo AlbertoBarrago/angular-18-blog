@@ -11,15 +11,15 @@ export const routes: Routes = [
     path: 'articles-list',
     canActivate: [RoleGuard],
     loadComponent: () =>
-      import('./features/articles/articles-list/articles-list.component').then(
-        m => m.ArticlesListComponent
-      ),
+      import(
+        './features/articles/components/articles-list/articles-list.component'
+      ).then(m => m.ArticlesListComponent),
   },
   {
     path: 'article',
     canActivate: [RoleGuard],
     loadComponent: () =>
-      import('./features/articles/article/article.component').then(
+      import('./features/articles/components/article/article.component').then(
         m => m.ArticleComponent
       ),
   },
@@ -28,7 +28,7 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     loadComponent: () =>
       import(
-        './features/articles/article-create-edit/article-create-edit.component'
+        './features/articles/components/article-create-edit/article-create-edit.component'
       ).then(m => m.ArticleCreateEditComponent),
   },
   { path: '', redirectTo: '/articles-list', pathMatch: 'full' },

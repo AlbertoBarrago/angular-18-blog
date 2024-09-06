@@ -1,17 +1,17 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import {
   Article,
   FilterArticles,
   PaginatedResponse,
-} from '../interfaces/app.interfaces';
+} from '../../../interfaces/app.interfaces';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { SnackbarService } from './snackbar.service';
-import { ErrorService } from './error.service';
-import { AuthService } from './auth.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { ErrorService } from '../../../shared/services/error.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {

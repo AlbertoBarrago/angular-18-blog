@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { ArticleService } from '../../../services/article.service';
+import { ArticleService } from '../../services/article.service';
 import {
   CommonModule,
   JsonPipe,
@@ -16,8 +16,8 @@ import { MatButton, MatFabButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { UtilService } from '../../../services/util.service';
-import { FilterComponent } from '../../../shared/components/filter/filter.component';
+import { UtilService } from '../../../../shared/services/util.service';
+import { FilterComponent } from '../../../../shared/components/filter/filter.component';
 import {
   MatPaginator,
   MatPaginatorModule,
