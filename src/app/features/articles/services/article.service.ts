@@ -160,9 +160,9 @@ export class ArticleService {
         state: { articleId: articleId },
       });
       return;
-    } else {
-      this.router.navigate(['/articles/article-edit']);
     }
+
+    this.router.navigate(['/articles/article-edit']);
   }
 
   /**
@@ -179,7 +179,6 @@ export class ArticleService {
 
   /**
    * Clear articles
-   *
    */
   clearArticles() {
     this.page.set(1);
