@@ -6,6 +6,7 @@ const { Articles, Users } = require('../models');
 
 // Generate a random secret key
 const SECRET_KEY = process.env.SECRET_KEY;
+const HOURS_24_H = 24 * 60 * 60;
 
 //ARTICLES CONTROLLER
 async function getAll(req, res) {
@@ -180,6 +181,11 @@ async function login(req, res) {
     const user = await Users.findOne({ username: username });
     if (!user) {
       res.status(404).send('User not found');
+      return;
+    }
+    if (user && !user.password) {
+      res.status(500).send('Provide a password');
+      return;
     }
     bcrypt.compare(password, user.password, (err, isMatch) => {
       if (err) return res.status(500).send('Error while comparing passwords.');
@@ -187,7 +193,7 @@ async function login(req, res) {
 
       // Generate JWT
       const token = jwt.sign({ id: user._id, role: user.role }, SECRET_KEY, {
-        expiresIn: 86400, // 24 hours
+        expiresIn: HOURS_24_H,
       });
       const userLogged = {
         id: user._id,

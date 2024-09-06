@@ -7,10 +7,10 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { FormsModule, NgForm } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { NgIf } from '@angular/common';
-import { MatInput } from '@angular/material/input';
+import { MatInput, MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -27,6 +27,8 @@ import { AuthService } from '../../services/auth.service';
     MatInput,
     MatCardTitle,
     MatCardSubtitle,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -37,8 +39,6 @@ export class LoginComponent {
   onSubmit(form: NgForm) {
     if (form.valid) {
       this.loginService.login(form.value);
-    } else {
-      console.log('Form is invalid');
     }
   }
 }

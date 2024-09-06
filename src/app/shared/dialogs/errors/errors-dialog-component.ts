@@ -11,10 +11,11 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { ErrorMessagePipe } from '../../pipes/errors-message.pipe';
 
 @Component({
   selector: 'app-confirm-dialog',
-  templateUrl: 'confirm-dialog-component.html',
+  templateUrl: 'errors-dialog-component.html',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -25,24 +26,22 @@ import {
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    ErrorMessagePipe,
   ],
 })
-export class ConfirmDialogComponent {
-  readonly dialogRef = inject(MatDialogRef<ConfirmDialogComponent>);
+export class ErrorsDialogComponent {
+  readonly dialogRef = inject(MatDialogRef<ErrorsDialogComponent>);
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
       title: string;
       message: string;
+      status: number;
     }
   ) {}
 
-  confirm(): void {
-    this.dialogRef.close(true);
-  }
-
-  onNoClick(): void {
+  close(): void {
     this.dialogRef.close();
   }
 }

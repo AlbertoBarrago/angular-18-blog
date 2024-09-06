@@ -1,7 +1,7 @@
 <div class="article-list-container">
   <div class="flex items-center justify-between gap-5 mb-3">
     <app-filter class="flex-grow relative top-2.5" (event)="search($event)"></app-filter>
-    <button class="animate-pulse" mat-fab extended (click)="openArticleCreate()">
+    <button class="animate-pulse" mat-fab extended (click)="editArticle(null)">
       Add Article
       <mat-icon fontIcon="add"></mat-icon>
     </button>
@@ -24,7 +24,7 @@
               </button>
             </div>
             <div class=" justify-end">
-              <button class="mat-mdc-button edit" (click)="editArticle(item._id)" mat-button>
+              <button class="mat-mdc-button edit" (click)="editArticle(item._id, true)" mat-button>
                 <mat-icon fontIcon="edit"></mat-icon>
                 Edit
               </button>
