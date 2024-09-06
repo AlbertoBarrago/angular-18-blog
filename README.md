@@ -15,6 +15,9 @@ change any of the source files.
 
 ![img.png](img.png)
 
+Dark app theme (I know is terrible huauhahu UI)
+![img_1.png](img_1.png)
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use
@@ -33,9 +36,10 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 - [x] Add filter for user articles 
 - [x] Add pagination endpoint for paginate the articles
 - [x] Add paginator on article-list
+- [x] Add a better error handling
 - [ ] Add test for the app
 - [ ] Improve user session and model management
-- [x] Add a better error handling
+- [ ] Add admin section for handling users and articles
  
 
 ## Author
