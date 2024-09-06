@@ -18,6 +18,11 @@ import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilService } from '../../../services/util.service';
 import { FilterComponent } from '../shared/filter/filter.component';
+import {
+  MatPaginator,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-article-list',
@@ -35,6 +40,8 @@ import { FilterComponent } from '../shared/filter/filter.component';
     MatCardContent,
     FilterComponent,
     MatFabButton,
+    MatPaginator,
+    MatPaginatorModule,
   ],
   templateUrl: './article-list.component.html',
   styleUrl: './article-list.component.scss',
@@ -74,6 +81,14 @@ export class ArticleListComponent {
     const q = $event;
     this.articleService.filterArticles({
       q,
+    });
+  }
+
+  performPagination($event: PageEvent) {
+    this.articleService.page.set($event.pageIndex + 1);
+    this.articleService.pageSize.set($event.pageSize);
+    this.articleService.filterArticles({
+      q: '',
     });
   }
 }

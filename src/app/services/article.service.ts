@@ -1,7 +1,11 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Article, FilterArticles } from '../interfaces/app.interfaces';
+import {
+  Article,
+  FilterArticles,
+  PaginatedResponse,
+} from '../interfaces/app.interfaces';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,6 +23,9 @@ export class ArticleService {
   readonly authService = inject(AuthService);
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
+  page = signal<number>(1);
+  pageSize = signal<number>(5);
+  totalElement = signal<number>(0);
 
   url = {
     getAll: environment.apiUrl + '/api/getAll',
@@ -91,11 +98,15 @@ export class ArticleService {
    * @return The subscription object for the HTTP GET request
    */
   filterArticles(searchTerm: FilterArticles) {
+    const filterUrl = `${this.url.filter}/${this.page()}/${this.pageSize()}`;
     return this.http
-      .post<Article[]>(`${this.url.filter}`, { q: searchTerm.q })
+      .post<PaginatedResponse<Article>>(filterUrl, { q: searchTerm.q })
       .subscribe({
-        next: (data: Article[]) => {
-          this.articles.set(data);
+        next: (resp: PaginatedResponse<Article>) => {
+          this.page.set(resp.metadata.page);
+          this.pageSize.set(resp.metadata.pageSize);
+          this.totalElement.set(resp.metadata.totalCount);
+          this.articles.set(resp.data);
         },
         error: (error: HttpErrorResponse) => {
           this.errorService.handleError(error);

@@ -78,31 +78,57 @@ async function remove(req, res, paramID) {
 }
 
 async function filterArticleByQuery(req, res) {
-  const pagination = req.body.pagination || {};
-  const page = pagination.page ? pagination.page : 1;
-  const limit = pagination.limit ? pagination.limit : 6;
+  const reqParam = req.params;
+  const page = parseInt(reqParam.page, 10) || 1;
+  const limit = parseInt(reqParam.size, 10) || 6; // "size" instead of "limit"
   const skip = (page - 1) * limit;
+  const searchQuery = String(req.body.q) || '';
 
   try {
-    const data = await Articles.find({
-      $or: [
-        { title: { $regex: String(req.body.q), $options: 'i' } },
-        { content: { $regex: String(req.body.q), $options: 'i' } },
-        {
-          shortContent: {
-            $regex: String(req.body.q),
-            $options: 'i',
-          },
+    const articles = await Articles.aggregate([
+      {
+        $match: {
+          $or: [
+            { title: { $regex: searchQuery, $options: 'i' } },
+            { content: { $regex: searchQuery, $options: 'i' } },
+            { shortContent: { $regex: searchQuery, $options: 'i' } },
+            { author: { $regex: searchQuery, $options: 'i' } },
+          ],
         },
-        { author: { $regex: String(req.body.q), $options: 'i' } },
-      ],
-    })
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit);
-    res.json(data);
+      },
+      {
+        $facet: {
+          metadata: [{ $count: 'totalCount' }],
+          data: [
+            { $sort: { createdAt: -1 } },
+            { $skip: skip },
+            { $limit: limit },
+          ],
+        },
+      },
+      {
+        $addFields: {
+          'metadata.page': page,
+          'metadata.pageSize': limit,
+        },
+      },
+    ]);
+
+    const metadata = articles[0].metadata[0] || {
+      totalCount: 0,
+      page,
+      pageSize: limit,
+    };
+    const data = articles[0].data || [];
+
+    res.json({ metadata, data });
   } catch (err) {
-    res.status(500).send(err);
+    res
+      .status(500)
+      .send({
+        error: 'An error occurred while fetching articles',
+        details: err,
+      });
   }
 }
 

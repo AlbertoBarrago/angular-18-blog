@@ -37,12 +37,22 @@
         </mat-card>
       </div>
     } @empty {
-      <div class="flex flex-col justify-center items-center h-[70vh]">
+      <div class="flex flex-col justify-center items-center h-[60vh]">
         <img [ngSrc]="emptyListImagePath" alt="meme" height="180" width="327" priority="low" />
         <h1
           class="mt-4 text-4xl font-bold animate-gradient bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           Hey Dude, nothing founded here...</h1>
       </div>
     }
+  </div>
+  <div class="flex flex-col min-h-[10vh]" *ngIf="articles().length">
+    <div class="mt-auto flex justify-start w-full">
+      <mat-paginator
+        [length]="articleService.totalElement()"
+        [pageSize]="articleService.pageSize()"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="performPagination($event)"
+      ></mat-paginator>
+    </div>
   </div>
 </div>
