@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { RoleGuard } from '../../../core/guards/core.guard';
 
-export const articlesRoutes: Routes = [
+export const ArticlesRoutes: Routes = [
   {
     path: 'articles-list',
     canActivate: [RoleGuard],

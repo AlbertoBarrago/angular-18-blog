@@ -5,9 +5,11 @@
   <button mat-icon-button (click)="toggleTheme()" class="dark:text-dark-neon-yellow">
     <mat-icon>{{ isDarkMode ? 'wb_sunny' : 'nights_stay' }}</mat-icon>
   </button>
+  <!--  Add button for navigate if is admin on admin route-->
+  <button *ngIf="loginService.getUser().role === 'ADMIN'" mat-flat-button class="ml-5" routerLink="users/users-list">Admin</button>
   <span class="flex flex-1"></span>
   <span *ngIf="loginService.isLoggedIn()" class="flex">
-    <p class="relative top-[-2px] text-dark-primary dark:text-dark-neon-magenta">Hi, {{ loginService.getUser().username }}</p>
+    <p class="relative top-[-2px] text-dark-primary dark:text-dark-neon-magenta">Hi, {{ loginService.getUser().username === 'albz' ? 'Boss' :  loginService.getUser().username}}</p>
     <mat-icon (click)="utilService.userDialogInfo()"
               class="icon hover:cursor-pointer ml-2 mr-4 text-dark-primary dark:text-dark-neon-yellow" aria-hidden="false"
               aria-label="User verified icon" fontIcon="account_circle"></mat-icon>
