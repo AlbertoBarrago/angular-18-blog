@@ -43,8 +43,13 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 
 ## Docker commands
-Run `docker build -t my_angular_app:latest .` and then
-`docker run -d -p 4200:80 my_angular_app` you can access to the app on `http://localhost:4200`
+Run `docker build -t my_angular_app:latest .`
+
+and
+
+`docker run -d -p 4200:80 my_angular_app` 
+
+you can access to the app on `http://localhost:4200`
 
 ## License
 
