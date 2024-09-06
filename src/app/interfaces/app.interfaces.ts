@@ -8,6 +8,16 @@ interface Article {
   updatedAt: string;
 }
 
+interface PaginatedResponse<T> {
+  data: T[];
+  metadata: {
+    page: number;
+    pageSize: number;
+    totalPages: number;
+    totalCount: number;
+  };
+}
+
 interface User {
   _id: string;
   username: string;
@@ -29,4 +39,4 @@ interface FilterArticles {
   q: string;
 }
 
-export { Article, User, UserLoggedIn, FilterArticles };
+export { Article, User, UserLoggedIn, FilterArticles, PaginatedResponse };

@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { ArticleService } from '../../../services/article.service';
+import { ArticleService } from '../../services/article.service';
 import {
   CommonModule,
   JsonPipe,
@@ -16,11 +16,16 @@ import { MatButton, MatFabButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { UtilService } from '../../../services/util.service';
-import { FilterComponent } from '../shared/filter/filter.component';
+import { UtilService } from '../../../../shared/services/util.service';
+import { FilterComponent } from '../../../../shared/components/filter/filter.component';
+import {
+  MatPaginator,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-article-list',
+  selector: 'app-articles-list',
   standalone: true,
   imports: [
     CommonModule,
@@ -35,12 +40,14 @@ import { FilterComponent } from '../shared/filter/filter.component';
     MatCardContent,
     FilterComponent,
     MatFabButton,
+    MatPaginator,
+    MatPaginatorModule,
   ],
-  templateUrl: './article-list.component.html',
-  styleUrl: './article-list.component.scss',
+  templateUrl: './articles-list.component.html',
+  styleUrl: './articles-list.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ArticleListComponent {
+export class ArticlesListComponent {
   articleService = inject(ArticleService);
   utilService = inject(UtilService);
   router = inject(Router);
@@ -74,6 +81,14 @@ export class ArticleListComponent {
     const q = $event;
     this.articleService.filterArticles({
       q,
+    });
+  }
+
+  performPagination($event: PageEvent) {
+    this.articleService.page.set($event.pageIndex + 1);
+    this.articleService.pageSize.set($event.pageSize);
+    this.articleService.filterArticles({
+      q: '',
     });
   }
 }

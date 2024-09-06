@@ -30,7 +30,7 @@ router.delete('/delete/:id', async (req, res) => {
 });
 
 //Filter by query
-router.post('/filter', async (req, res) => {
+router.post('/filter/:page/:size', async (req, res) => {
   await Controller.filterArticleByQuery(req, res);
 });
 

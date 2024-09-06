@@ -1,10 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Article } from '../interfaces/app.interfaces';
+import { Article } from '../../interfaces/app.interfaces';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '../core/dialogs/confirm/confirm-dialog-component';
+import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-component';
 import { MatDialog } from '@angular/material/dialog';
-import { ArticleService } from './article.service';
-import { UserDialogComponent } from '../core/dialogs/user/user-dialog-component';
+import { ArticleService } from '../../features/articles/services/article.service';
+import { UserDialogComponent } from '../dialogs/user/user-dialog-component';
 import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
@@ -19,7 +19,7 @@ export class UtilService {
    * Navigates back to the article view.
    */
   backToArticleView() {
-    this.router.navigate(['/article-list']).then(() => {
+    this.router.navigate(['/articles-list']).then(() => {
       //console.log('Navigation successful:', r);
     });
   }
