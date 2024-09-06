@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     colors: {
       'dark-background': '#0a0a0f',
-      'dark-primary': '#d0bef8',
+      'dark-primary': '#6134cf',
       'dark-secondary': '#1f1f2c',
       'dark-text': '#f1f1f1',
       'dark-text-secondary': '#b4b4b4',
@@ -26,8 +26,6 @@ module.exports = {
       'light-text-secondary:': '#5a5a5a',
       'light-text-tertiary': '#838383',
       'light-text-quaternary': '#646464',
-      'light-neon-cyan': '#00ffff',
-      'light-neon-magenta': '#ff00ff',
     },
     extend: {
       boxShadow: {

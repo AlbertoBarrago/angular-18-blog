@@ -3,10 +3,10 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { ArticleService } from '../features/articles/services/article.service';
+import { ArticleService } from '../../features/articles/services/article.service';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
-import { Article } from '../core/interfaces/core.interfaces';
-import { ErrorService } from '../shared/services/error.service';
+import { Article } from '../../core/interfaces/core.interfaces';
+import { ErrorService } from '../../shared/services/error.service';
 
 describe('ArticleService', () => {
   let homeService: ArticleService;

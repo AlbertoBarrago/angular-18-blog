@@ -25,7 +25,7 @@ export class ArticleService {
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
   page = signal<number>(1);
-  pageSize = signal<number>(5);
+  pageSize = signal<number>(6);
   totalElement = signal<number>(0);
 
   url = {
