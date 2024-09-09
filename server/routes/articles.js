@@ -6,7 +6,7 @@ const articles = express.Router();
 
 /**
  * @swagger
- * /api/getAll:
+ * /api/articles:
  *   get:
  *     tags: [Articles]
  *     summary: Retrieve a list of articles
@@ -28,13 +28,13 @@ const articles = express.Router();
  *                    updatedAt: Date,
  *                  }]
  */
-articles.get('/getAll', async (req, res) => {
+articles.get('/articles', async (req, res) => {
   await Controller.getAll(req, res);
 });
 
 /**
  * @swagger
- * /api/getOne/{id}:
+ * /api/articles/{id}:
  *   get:
  *     tags: [Articles]
  *     summary: Retrieve one article by id
@@ -64,14 +64,14 @@ articles.get('/getAll', async (req, res) => {
  *                  }
  $ref: '#/components/schemas/models/Article'
  */
-articles.get('/getOne/:id', async (req, res) => {
+articles.get('/articles/:id', async (req, res) => {
   await Controller.getOne(req, res, req.params.id);
 });
 
 /**
  /**
  * @swagger
- * /api/filter/{page}/{size}/{filter}:
+ * /api/articles/{page}/{size}/{filter}:
  *   get:
  *     security:
  *       - bearerAuth: []
@@ -118,13 +118,13 @@ articles.get('/getOne/:id', async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-articles.get('/filter/:page/:size/:q', verifyToken, async (req, res) => {
+articles.get('/articles/:page/:size/:q', verifyToken, async (req, res) => {
   await Controller.filterArticleByQuery(req, res);
 });
 
 /**
  * @swagger
- * /api/create:
+ * /api/articles:
  *   post:
  *     tags: [Articles]
  *     summary: Create articles
@@ -171,13 +171,13 @@ articles.get('/filter/:page/:size/:q', verifyToken, async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-articles.post('/create', async (req, res) => {
+articles.post('/articles', async (req, res) => {
   await Controller.create(req, res);
 });
 
 /**
  * @swagger
- * /api/update/{id}:
+ * /api/articles/{id}:
  *   patch:
  *     tags: [Articles]
  *     summary: Update one article by id
@@ -218,13 +218,13 @@ articles.post('/create', async (req, res) => {
  *       404:
  *         description: Article not found
  */
-articles.patch('/update/:id', async (req, res) => {
+articles.patch('/articles/:id', async (req, res) => {
   await Controller.update(req, res, req.params.id);
 });
 
 /**
  * @swagger
- * /api/delete/{id}:
+ * /api/articles/{id}:
  *   delete:
  *     tags: [Articles]
  *     summary: Delete one article by id
@@ -242,7 +242,7 @@ articles.patch('/update/:id', async (req, res) => {
  *       404:
  *         description: Article not found
  */
-articles.delete('/delete/:id', async (req, res) => {
+articles.delete('/articles/:id', async (req, res) => {
   await Controller.remove(req, res, req.params.id);
 });
 
