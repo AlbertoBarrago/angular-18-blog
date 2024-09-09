@@ -13,10 +13,10 @@ change any of the source files.
 - Empty list if you don't run the server 🤡 
 `npm run server:start`
 
-![img.png](img.png)
+![img.png](public/assets/images/img.png)
 
 Dark app theme (I know is terrible huauhahu UI)
-![img_1.png](img_1.png)
+![img_1.png](public/assets/images/img_1.png)
 
 ## Code scaffolding
 

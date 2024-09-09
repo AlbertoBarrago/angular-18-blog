@@ -70,8 +70,12 @@ async function update(req, res, paramID) {
 
 async function remove(req, res, paramID) {
   try {
-    console.log(paramID);
-    await Articles.findByIdAndDelete({ _id: paramID });
+    let data = await Articles.findByIdAndDelete({ _id: paramID });
+    if (!data) {
+      res
+        .status(404)
+        .send({ message: `Article with id: ${paramID} not found` });
+    }
     res.json({ message: `Article deleted with id: ${paramID} successfully` });
   } catch (err) {
     res.status(500).send(err);
