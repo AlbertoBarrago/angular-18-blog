@@ -6,13 +6,21 @@ import { NgIf } from '@angular/common';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { UtilService } from '../../../services/util.service';
 import { ThemeService } from '../../../services/theme.service';
-import { MatIconButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIcon, MatToolbar, MatTooltip, NgIf, MatIconButton, RouterLink],
+  imports: [
+    MatIcon,
+    MatToolbar,
+    MatTooltip,
+    NgIf,
+    MatIconButton,
+    RouterLink,
+    MatButton,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

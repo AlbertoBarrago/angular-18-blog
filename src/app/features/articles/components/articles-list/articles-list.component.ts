@@ -64,9 +64,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   emptyListImagePath = './assets/images/empty_list.png';
 
   ngOnInit() {
-    this.articleService.filterArticles({
-      q: this.authService.getUser().username,
-    });
+    this.articleService.filterArticles();
   }
 
   openArticle(articleId: string) {

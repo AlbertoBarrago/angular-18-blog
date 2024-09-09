@@ -25,7 +25,7 @@ export class ArticleService {
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
   page = signal<number>(1);
-  pageSize = signal<number>(6);
+  pageSize = signal<number | null>(6);
   totalElement = signal<number>(0);
 
   url = {
@@ -96,21 +96,21 @@ export class ArticleService {
    * @param searchTerm
    * @return The subscription object for the HTTP GET request
    */
-  filterArticles(searchTerm: FilterArticles) {
-    const filterUrl = `${this.url.filter}/${this.page()}/${this.pageSize()}`;
-    return this.http
-      .post<PaginatedResponse<Article>>(filterUrl, { q: searchTerm.q })
-      .subscribe({
-        next: (resp: PaginatedResponse<Article>) => {
-          this.page.set(resp.metadata.page);
-          this.pageSize.set(resp.metadata.pageSize);
-          this.totalElement.set(resp.metadata.totalCount);
-          this.articles.set(resp.data);
-        },
-        error: (error: HttpErrorResponse) => {
-          this.errorService.handleError(error);
-        },
-      });
+  filterArticles(searchTerm?: FilterArticles) {
+    const queryFilter = searchTerm && searchTerm.q !== '' ? searchTerm.q : null;
+
+    const filterUrl = `${this.url.filter}/${this.page()}/${this.pageSize()}/${queryFilter}`;
+    return this.http.get<PaginatedResponse<Article>>(filterUrl).subscribe({
+      next: (resp: PaginatedResponse<Article>) => {
+        this.page.set(resp.metadata.page);
+        this.pageSize.set(resp.metadata.pageSize);
+        this.totalElement.set(resp.metadata.totalCount);
+        this.articles.set(resp.data);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorService.handleError(error);
+      },
+    });
   }
 
   /**
@@ -182,7 +182,7 @@ export class ArticleService {
    */
   clearArticles() {
     this.page.set(1);
-    this.pageSize.set(5);
+    this.pageSize.set(null);
     this.articles.set([]);
   }
 }

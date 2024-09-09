@@ -19,13 +19,19 @@ module.exports = {
       'dark-cyber-purple': '#8a2be2',
 
       //light theme colors
-      'light-background': '#f1f1f1',
-      'light-primary': '#ffffff',
-      'light-secondary': '#f1f1f1',
-      'light-text': '#0a0a0f',
-      'light-text-secondary:': '#5a5a5a',
-      'light-text-tertiary': '#838383',
-      'light-text-quaternary': '#646464',
+      'light-background': '#f5f5fa',
+      'light-primary': '#9e6bff',
+      'light-secondary': '#e0e0f3',
+      'light-text': '#0e0e0e',
+      'light-text-secondary': '#4b4b4b',
+      'light-text-tertiary': '#7c7c7c',
+      'light-text-quaternary': '#9b9b9b',
+      'light-pastel-cyan': '#a0ffff',
+      'light-pastel-magenta': '#ffa0ff',
+      'light-pastel-yellow': '#ffffa0',
+      'light-pastel-green': '#a0ffa0',
+      'light-sky-blue': '#87ceeb',
+      'light-lavender': '#e6e6fa',
     },
     extend: {
       boxShadow: {

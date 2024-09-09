@@ -1,7 +1,7 @@
 <div class="article-list-container">
   <div class="flex items-center justify-between gap-5 mb-3">
     <app-filter class="flex-grow relative top-2.5" (event)="search($event)"></app-filter>
-    <button class="animate-pulse" mat-fab extended (click)="editArticle(null)">
+    <button class="relative top-[-2px]" mat-fab extended (click)="editArticle(null)">
       Add Article
       <mat-icon fontIcon="add"></mat-icon>
     </button>
@@ -12,7 +12,7 @@
         <mat-card>
           <mat-card-header class="flex flex-col">
             <mat-card-title class="font-bold text-dark-background dark:text-light-text-tertiary mb-2">{{ item.title }}</mat-card-title>
-            <mat-card-subtitle class="flex items-center flex-wrap text-sm text-dark-primary dark:text-dark-neon-magenta">
+            <mat-card-subtitle class="flex items-center flex-wrap text-sm text-dark-primary dark:text-dark-cyber-purple mt-2">
               <div class="flex items-center mr-4 mb-2 ">
                 <mat-icon class="mr-1" fontIcon="attribution"></mat-icon>
                 <span>{{ item.author }}</span>
@@ -55,8 +55,8 @@
       </div>
     }
   </div>
-  <div class="flex flex-col min-h-[10vh]" *ngIf="articles().length">
-    <div class="mt-auto flex justify-start w-full">
+  <div class="flex flex-1 min-h-[10vh] justify-center" *ngIf="articles().length">
+    <div class="mt-auto w-full flex justify-center">
       <mat-paginator
         [length]="articleService.totalElement()"
         [pageSize]="articleService.pageSize()"

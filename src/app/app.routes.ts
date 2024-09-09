@@ -14,8 +14,14 @@ export const routes: Routes = [
     canActivate: [RoleGuard],
     loadChildren: () =>
       import('./features/articles/routes/article.route').then(
-        c => c.articlesRoutes
+        c => c.ArticlesRoutes
       ),
+  },
+  {
+    path: 'users',
+    canActivate: [RoleGuard],
+    loadChildren: () =>
+      import('./features/admin/routes/users.route').then(c => c.UserRoutes),
   },
   { path: '', redirectTo: '/articles/articles-list', pathMatch: 'full' },
   { path: '**', redirectTo: '/articles/articles-list', pathMatch: 'full' },
