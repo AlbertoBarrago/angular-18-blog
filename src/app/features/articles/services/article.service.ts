@@ -25,7 +25,7 @@ export class ArticleService {
   articles = signal<Article[]>([]);
   article = signal<Article | null>(null);
   page = signal<number>(1);
-  pageSize = signal<number>(6);
+  pageSize = signal<number | null>(6);
   totalElement = signal<number>(0);
 
   url = {
@@ -182,7 +182,7 @@ export class ArticleService {
    */
   clearArticles() {
     this.page.set(1);
-    this.pageSize.set(5);
+    this.pageSize.set(null);
     this.articles.set([]);
   }
 }

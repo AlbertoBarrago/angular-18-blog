@@ -55,8 +55,8 @@
       </div>
     }
   </div>
-  <div class="flex flex-col min-h-[10vh]" *ngIf="articles().length">
-    <div class="mt-auto flex justify-start w-full">
+  <div class="flex flex-1 min-h-[10vh] justify-center" *ngIf="articles().length">
+    <div class="mt-auto w-full flex justify-center">
       <mat-paginator
         [length]="articleService.totalElement()"
         [pageSize]="articleService.pageSize()"
