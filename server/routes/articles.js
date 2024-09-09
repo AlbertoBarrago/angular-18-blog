@@ -27,7 +27,6 @@ const articles = express.Router();
  *                    createdAt: Date,
  *                    updatedAt: Date,
  *                  }]
- * $ref: '#/components/schemas/models/Article'
  */
 articles.get('/getAll', async (req, res) => {
   await Controller.getAll(req, res);
@@ -72,33 +71,34 @@ articles.get('/getOne/:id', async (req, res) => {
 /**
  /**
  * @swagger
- * /api/filter/{page}/{size}:
- *   post:
+ * /api/filter/{page}/{size}/{filter}:
+ *   get:
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Articles]
- *     summary: Filter articles
+ *     summary: Filter articles by user token
  *     description: Filter articles from the database
  *     parameters:
- *       - in: path
- *         name: size
- *         schema:
- *           type: string
- *           required: true
- *         description: Size of the page
  *       - in: path
  *         name: page
  *         schema:
  *           type: string
  *           required: true
  *         description: Page number
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               q:
- *                 type: string
+ *
+ *       - in: path
+ *         name: size
+ *         schema:
+ *           type: string
+ *           required: true
+ *         description: Size of the page
+ *
+ *       - in: path
+ *         name: filter
+ *         schema:
+ *           type: string
+ *           required: false
+ *         description: title, content, author, or shortContent
  *     responses:
  *       200:
  *         description: Successfully filtered articles
@@ -118,7 +118,7 @@ articles.get('/getOne/:id', async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-articles.post('/filter/:page/:size', async (req, res) => {
+articles.get('/filter/:page/:size/:q', verifyToken, async (req, res) => {
   await Controller.filterArticleByQuery(req, res);
 });
 

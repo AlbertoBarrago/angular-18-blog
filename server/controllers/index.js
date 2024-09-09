@@ -87,7 +87,8 @@ async function filterArticleByQuery(req, res) {
   const page = parseInt(reqParam.page, 10) || 1;
   const limit = parseInt(reqParam.size, 10) || 6; // "size" instead of "limit"
   const skip = (page - 1) * limit;
-  const searchQuery = String(req.body.q) || '';
+  const author = req.body.author || '';
+  const searchQuery = String(reqParam.q) || '';
 
   try {
     const articles = await Articles.aggregate([
@@ -97,7 +98,7 @@ async function filterArticleByQuery(req, res) {
             { title: { $regex: searchQuery, $options: 'i' } },
             { content: { $regex: searchQuery, $options: 'i' } },
             { shortContent: { $regex: searchQuery, $options: 'i' } },
-            { author: { $regex: searchQuery, $options: 'i' } },
+            { author: { $regex: author, $options: 'i' } },
           ],
         },
       },

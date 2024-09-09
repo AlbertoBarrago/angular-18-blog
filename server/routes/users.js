@@ -4,7 +4,30 @@ const { verifyToken } = require('../middleware/middleware'); // Import your midd
 
 const users = express.Router();
 
-//USERS CONTROLLER
+/**
+ * @swagger
+ * /api/createUser:
+ *   get:
+ *     tags: [Users]
+ *     summary: Retrieve a list of articles
+ *     description: Retrieve a list of articles from the database without filter
+ *     responses:
+ *       200:
+ *         description: A list of articles
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               example:  [{
+ *                   _id: String,
+ *                    title: String,
+ *                    author: String,
+ *                    shortContent: String,
+ *                    content: String,
+ *                    createdAt: Date,
+ *                    updatedAt: Date,
+ *                  }]
+ */
 users.post('/createUser', verifyToken, async (req, res) => {
   await Controller.createUser(req, res);
 });

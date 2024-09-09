@@ -8,6 +8,20 @@ const swaggerDefinition = {
     version: '1.0.0',
     description: 'API for managing articles and users',
   },
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
+  security: [
+    {
+      bearerAuth: [],
+    },
+  ],
 };
 
 const options = {
@@ -20,6 +34,10 @@ const options = {
     {
       name: 'Users',
       description: 'User management endpoints',
+    },
+    {
+      name: 'Filters',
+      description: 'Filter management endpoints',
     },
   ],
   apis: ['./server/routes/*.js'],
