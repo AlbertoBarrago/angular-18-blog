@@ -1,47 +1,51 @@
 const express = require('express');
 const Controller = require('../controllers');
-const { verifyToken } = require('../middleware/middleware'); // Import your middleware
+const { verifyToken } = require('../middleware/middleware');
 
 const users = express.Router();
 
+users.get('/users', verifyToken, async (req, res) => {
+  await Controller.getAllUsers(req, res);
+});
+
+users.get('/users/:id', verifyToken, async (req, res) => {
+  await Controller.getOneUser(req, res, req.params.id);
+});
+
 /**
  * @swagger
- * /api/createUser:
+ * /api/users:
  *   get:
  *     tags: [Users]
- *     summary: Retrieve a list of articles
- *     description: Retrieve a list of articles from the database without filter
+ *     summary: Retrieve a list of users
+ *     description: Retrieve a list of users from the database without filter (token required)
  *     responses:
  *       200:
- *         description: A list of articles
+ *         description: A list of users
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               example:  [{
- *                   _id: String,
- *                    title: String,
- *                    author: String,
- *                    shortContent: String,
- *                    content: String,
- *                    createdAt: Date,
- *                    updatedAt: Date,
- *                  }]
+ *                  _id: String,
+ *                  username: String,
+ *                  password: String,
+ *                  email: String,
+ *                  role: String,
+ *                  createdAt: Date,
+ *                  updatedAt: Date,
+ *                }]
  */
-users.post('/createUser', verifyToken, async (req, res) => {
+users.post('/users', verifyToken, async (req, res) => {
   await Controller.createUser(req, res);
 });
 
-users.get('/getAllUsers', verifyToken, async (req, res) => {
-  await Controller.getAllUsers(req, res);
+users.put('/users/:id', verifyToken, async (req, res) => {
+  await Controller.updateUser(req, res, req.params.id);
 });
 
-users.get('/getOneUser/:id', verifyToken, async (req, res) => {
-  await Controller.getOneUser(req, res, req.params.id);
-});
-
-users.post('/login', async (req, res) => {
-  await Controller.login(req, res);
+users.delete('/users/:id', verifyToken, async (req, res) => {
+  await Controller.removeUser(req, res, req.params.id);
 });
 
 module.exports = users;

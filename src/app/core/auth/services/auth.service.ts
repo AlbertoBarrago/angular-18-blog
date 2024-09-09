@@ -16,9 +16,7 @@ export class AuthService {
   readonly snackBarService = inject(SnackbarService);
 
   url = {
-    fetchUsers: environment.apiUrl + '/api/fetchUsers',
-    createUser: environment.apiUrl + '/api/createUser',
-    login: environment.apiUrl + '/api/login',
+    auth: environment.apiUrl + '/api/auth',
   };
 
   /**
@@ -27,7 +25,7 @@ export class AuthService {
    */
   login(credential: UserLoggedIn) {
     this.http
-      .post<UserLoggedIn>(`${this.url.login}`, {
+      .post<UserLoggedIn>(`${this.url.auth}/login`, {
         username: credential.username,
         password: credential.password,
       })
