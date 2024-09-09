@@ -35,8 +35,8 @@ const options = {
       description: 'User management endpoints',
     },
     {
-      name: 'Filters',
-      description: 'Filter management endpoints',
+      name: 'Authentication',
+      description: 'Authentication endpoints',
     },
   ],
   apis: ['./server/routes/*.js'],

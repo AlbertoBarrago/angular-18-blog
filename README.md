@@ -9,15 +9,44 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 change any of the source files.
 
 
-## Screenshots 
-- Empty list if you don't run the server 🤡 
-`npm run server:start`
+## Screenshots
+<details>
+<summary>Screens and Swagger</summary>
 
-![img.png](public/assets/images/img.png)
+- 🤡 Empty list if you don't run the server, but before read the instructions.
+
+![empty.png](public/assets/images/empty_list_big.png)
 
 Dark app theme (I know is terrible huauhahu UI)
-![img_1.png](public/assets/images/img_1.png)
+![screen_dark.png](public/assets/images/screen_fe_dark.png)
 
+Swagger present on endpoint `api-docs`
+![swagger.png](public/assets/images/swagger.png)
+
+</details>
+
+## Mongo instructions
+
+If you want to use this server, you have look inside models: 
+
+👉🏻 `server/models/*.js`
+
+After creating models in your mongoDb instance.
+Set the correct name of db through the `.env` file.
+
+and the secret key for the jwt token.
+
+```dotenv
+DATABASE_URL=
+DATABASE_PORT=
+DATABASE_NAME=
+SECRET_KEY=
+```
+
+You can rename `.env_sample` to `.env` and set the correct values.
+
+Run `npm run server:start` to start the server.
+ 
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use
@@ -39,7 +68,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 - [x] Add a better error handling
 - [ ] Add test for the app
 - [ ] Improve user session and model management
-- [ ] Add admin section for handling users and articles
+- [x] Add admin section for handling users and articles
  
 
 ## Author

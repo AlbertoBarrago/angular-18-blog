@@ -29,12 +29,7 @@ export class ArticleService {
   totalElement = signal<number>(0);
 
   url = {
-    getAll: environment.apiUrl + '/api/getAll',
-    getOne: environment.apiUrl + '/api/getOne',
-    delete: environment.apiUrl + '/api/delete',
-    update: environment.apiUrl + '/api/update',
-    create: environment.apiUrl + '/api/create',
-    filter: environment.apiUrl + '/api/filter',
+    articleUrl: environment.apiUrl + '/api/articles',
   };
 
   /**
@@ -42,7 +37,7 @@ export class ArticleService {
    * @return The subscription object for the HTTP GET request
    */
   getAllArticles(): Subscription {
-    return this.http.get<Article[]>(this.url.getAll).subscribe({
+    return this.http.get<Article[]>(this.url.articleUrl).subscribe({
       next: (data: Article[]) => {
         this.articles.set(data);
       },
@@ -58,17 +53,19 @@ export class ArticleService {
    * @return The Article object
    */
   getArticleById(articleId: string) {
-    return this.http.get<Article>(`${this.url.getOne}/${articleId}`).subscribe({
-      next: (data: Article) => {
-        this.article.set(data);
-        return {
-          success: true,
-        };
-      },
-      error: (error: HttpErrorResponse) => {
-        this.errorService.handleError(error);
-      },
-    });
+    return this.http
+      .get<Article>(`${this.url.articleUrl}/${articleId}`)
+      .subscribe({
+        next: (data: Article) => {
+          this.article.set(data);
+          return {
+            success: true,
+          };
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errorService.handleError(error);
+        },
+      });
   }
 
   /**
@@ -77,7 +74,7 @@ export class ArticleService {
    * @return The subscription object for the HTTP POST request
    */
   creteArticle(article: Article) {
-    this.http.post<Article>(`${this.url.create}`, article).subscribe({
+    this.http.post<Article>(`${this.url.articleUrl}`, article).subscribe({
       next: () => {
         this.getAllArticles();
         this.snackBarService.openSnackBarWithTimer(
@@ -99,7 +96,7 @@ export class ArticleService {
   filterArticles(searchTerm?: FilterArticles) {
     const queryFilter = searchTerm && searchTerm.q !== '' ? searchTerm.q : null;
 
-    const filterUrl = `${this.url.filter}/${this.page()}/${this.pageSize()}/${queryFilter}`;
+    const filterUrl = `${this.url.articleUrl}/${this.page()}/${this.pageSize()}/${queryFilter}`;
     return this.http.get<PaginatedResponse<Article>>(filterUrl).subscribe({
       next: (resp: PaginatedResponse<Article>) => {
         this.page.set(resp.metadata.page);
@@ -119,7 +116,7 @@ export class ArticleService {
    */
   updateArticle(article: Article) {
     this.http
-      .patch<Article>(`${this.url.update}/${article._id}`, article)
+      .patch<Article>(`${this.url.articleUrl}/${article._id}`, article)
       .subscribe({
         next: () => {
           this.getAllArticles();
@@ -139,7 +136,7 @@ export class ArticleService {
    * @return The subscription object for the HTTP DELETE request
    */
   deleteArticle(_id: string) {
-    this.http.delete(`${this.url.delete}/${_id}`).subscribe({
+    this.http.delete(`${this.url.articleUrl}/${_id}`).subscribe({
       next: () => {
         this.getAllArticles();
       },
