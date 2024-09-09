@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const mongoString = process.env.DATABASE_URL;
 const port = process.env.DATABASE_PORT || 3000;
 const dbName = process.env.DATABASE_NAME || 'test';
-const routes = require('./routes');
+const articleRoutes = require('./routes/articles');
+const usersRoutes = require('./routes/users');
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
@@ -24,7 +25,10 @@ mongoose.connection.on('error', error => {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/api', routes);
+app.use('/api', articleRoutes);
+app.use('/api/users', usersRoutes);
+
+// Swagger documentation
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.listen(port, () => {

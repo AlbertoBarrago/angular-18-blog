@@ -4,7 +4,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'Article API',
+    title: 'sMuRt API',
     version: '1.0.0',
     description: 'API for managing articles and users',
   },
