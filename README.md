@@ -11,16 +11,16 @@ change any of the source files.
 
 ## Screenshots
 <details>
+<summary>Screens and Swagger</summary>
 
-- Empty list if you don't run the server 🤡 
-`npm run server:start`
+- 🤡 Empty list if you don't run the server, but before read the instructions.
 
 ![empty.png](public/assets/images/empty_list_big.png)
 
 Dark app theme (I know is terrible huauhahu UI)
 ![screen_dark.png](public/assets/images/screen_fe_dark.png)
 
-Swagger presente su `api-docs`
+Swagger present on endpoint `api-docs`
 ![swagger.png](public/assets/images/swagger.png)
 
 </details>
