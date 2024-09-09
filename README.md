@@ -13,10 +13,13 @@ change any of the source files.
 - Empty list if you don't run the server 🤡 
 `npm run server:start`
 
-![img.png](public/assets/images/img.png)
+![empty.png](public/assets/images/empty_list_big.png)
 
 Dark app theme (I know is terrible huauhahu UI)
-![img_1.png](public/assets/images/img_1.png)
+![screen_dark.png](public/assets/images/screen_fe_dark.png)
+
+Swagger presente su `api-docs`
+![swagger.png](public/assets/images/swagger.png)
 
 ## Code scaffolding
 
