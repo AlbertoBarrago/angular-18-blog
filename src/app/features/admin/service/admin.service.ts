@@ -59,6 +59,20 @@ export class AdminService {
     }
   }
 
+  editUser(user: Partial<User>) {
+    this.http
+      .patch<User>(`${this.url.users}/users/${user._id}`, user)
+      .subscribe({
+        next: () => {
+          this.getUserList();
+          this.snackBarService.openSnackBarWithTimer('User edited');
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errorService.handleError(error);
+        },
+      });
+  }
+
   removeUser(id: string) {
     this.http.delete<User>(`${this.url.users}/users/${id}`).subscribe({
       next: () => {

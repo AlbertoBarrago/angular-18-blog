@@ -120,7 +120,7 @@ users.post('/users', verifyToken, async (req, res) => {
 /**
  * @swagger
  * /api/users/{id}:
- *   put:
+ *   patch:
  *     tags: [Users]
  *     summary: Update a new user
  *     description: Update a new user in the database
@@ -172,7 +172,7 @@ users.post('/users', verifyToken, async (req, res) => {
  *                  updatedAt: Date,
  *                }]
  */
-users.put('/users/:id', verifyToken, async (req, res) => {
+users.patch('/users/:id', verifyToken, async (req, res) => {
   await Controller.updateUser(req, res, req.params.id);
 });
 

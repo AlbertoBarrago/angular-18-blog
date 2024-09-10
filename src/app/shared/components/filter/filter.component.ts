@@ -51,7 +51,6 @@ export class FilterComponent {
     this.searchTerms
       .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
       .subscribe(searchTerm => {
-        console.log('Searching for:', searchTerm);
         this.event.emit(searchTerm);
       });
   }

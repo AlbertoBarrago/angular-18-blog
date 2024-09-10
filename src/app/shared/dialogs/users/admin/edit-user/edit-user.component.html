@@ -1,0 +1,28 @@
+<h2 mat-dialog-title class="text-2xl font-bold mb-4">User Profile</h2>
+<mat-dialog-content class="flex flex-col space-y-3">
+  <form [formGroup]="userFormGroup">
+    <div class="flex items-center">
+      <span class="font-semibold w-24">Username:</span>
+      <input matInput formControlName="username" />
+    </div>
+    <div class="flex items-center">
+      <span class="font-semibold w-24">Email:</span>
+      <input matInput formControlName="email" />
+    </div>
+    <div class="flex items-center">
+      <span class="font-semibold w-24">Role:</span>
+      <mat-form-field class="w-full">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role.value">
+            {{ role.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="!justify-end mt-4">
+  <button mat-raised-button (click)="onNoClick()">Nope</button>
+  <button mat-raised-button color="primary" (click)="edit()">Confirm</button>
+</mat-dialog-actions>

@@ -37,10 +37,10 @@ import { User } from '../../../../../shared/interfaces/shared.interfaces';
     NgIf,
     DatePipe,
   ],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss',
+  templateUrl: './users-list.component.html',
+  styleUrl: './users-list.component.scss',
 })
-export class UserListComponent implements OnInit {
+export class UsersListComponent implements OnInit {
   adminService = inject(AdminService);
   userService = inject(UsersService);
   userList = this.adminService.userList;
@@ -50,11 +50,11 @@ export class UserListComponent implements OnInit {
     this.adminService.getUserList();
   }
 
-  onEdit(row: User) {
-    console.log('Editing row: ', row);
+  onEdit(user: User) {
+    this.userService.openEditUserDialog(user);
   }
 
-  onDelete(row: User) {
-    this.userService.confirmUserDelete(row._id, row.username);
+  onDelete(user: User) {
+    this.userService.confirmUserDelete(user._id, user.username);
   }
 }

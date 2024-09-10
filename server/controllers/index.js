@@ -217,16 +217,11 @@ async function login(req, res) {
 
 async function updateUser(req, res, id) {
   try {
-    const hashedPassword = await byCryptPass(req.body.password);
     const data = await Users.findByIdAndUpdate(
       id,
       {
-        _id: req.body._id,
         username: req.body.username,
-        password: hashedPassword,
         email: req.body.email,
-        role: req.body.role,
-        createdAt: req.body.createdAt,
         updatedAt: Date.now(),
       },
       {

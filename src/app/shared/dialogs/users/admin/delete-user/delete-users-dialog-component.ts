@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-confirm-dialog',
-  templateUrl: 'confirmDelete-dialog-component.html',
+  templateUrl: 'delete-users-dialog-component.html',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -29,8 +29,8 @@ import { DatePipe } from '@angular/common';
     DatePipe,
   ],
 })
-export class ConfirmDeleteDialogComponent {
-  readonly dialogRef = inject(MatDialogRef<ConfirmDeleteDialogComponent>);
+export class DeleteUsersDialogComponent {
+  readonly dialogRef = inject(MatDialogRef<DeleteUsersDialogComponent>);
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
