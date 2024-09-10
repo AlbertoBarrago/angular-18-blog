@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Article } from '../../core/interfaces/core.interfaces';
+import { Article } from '../interfaces/core.interfaces';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-component';
 import { MatDialog } from '@angular/material/dialog';
