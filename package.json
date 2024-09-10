@@ -8,8 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint",
-    "server:start": "nodemon server/index.js",
-    "prepare": "husky"
+    "server:start": "nodemon server/index.js"
   },
   "private": true,
   "dependencies": {
