@@ -55,6 +55,6 @@ export class UsersListComponent implements OnInit {
   }
 
   onDelete(user: User) {
-    this.userService.confirmUserDelete(user._id, user.username);
+    this.userService.confirmUserDelete(user);
   }
 }

@@ -14,27 +14,30 @@ export class UsersService {
 
   /**
    * Confirm user deletion.
-   * @param _id
-   * @param username
+   * @param user
    */
-  confirmUserDelete(_id: string, username: string): void {
+  confirmUserDelete(user: User): void {
     const dialogRef = this.dialog.open(DeleteUsersDialogComponent, {
       width: 'auto',
       data: {
         title: 'Confirm Deletion',
         message: `Are you sure you want to delete this user?`,
-        username,
+        user: user.username,
       },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.adminService.removeUser(_id);
+        this.adminService.removeUser(user._id);
         this.adminService.getUserList();
       }
     });
   }
 
+  /**
+   * Open dialog to edit user.
+   * @param user
+   */
   openEditUserDialog(user: User) {
     const dialogRef = this.dialog.open(EditUserComponent, {
       width: 'auto',
@@ -43,21 +46,25 @@ export class UsersService {
       },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const editedData = this.updateUser(user, result);
+    dialogRef.afterClosed().subscribe(userDataEdited => {
+      if (userDataEdited) {
+        const editedData = this.updateUser(user, userDataEdited);
         this.adminService.editUser(editedData as User);
         this.adminService.getUserList();
       }
     });
   }
 
+  /**
+   * Update user data.
+   * @param user
+   * @param newData
+   */
   updateUser(user: User, newData: Partial<User>) {
-    const updatedUser = {
+    return {
       _id: user._id,
       username: newData.username,
       email: newData.email,
     };
-    return updatedUser;
   }
 }
