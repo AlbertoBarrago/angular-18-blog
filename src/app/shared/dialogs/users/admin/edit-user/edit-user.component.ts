@@ -8,15 +8,22 @@ import {
 } from '@angular/material/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import {
+  MatFormField,
+  MatInput,
+  MatInputModule,
+  MatLabel,
+} from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
-import { NgForOf } from '@angular/common';
+import { CommonModule, NgForOf } from '@angular/common';
 import { User } from '../../../../interfaces/shared.interfaces';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-edit-user',
   standalone: true,
   imports: [
+    CommonModule,
     MatButton,
     MatDialogTitle,
     MatDialogContent,
@@ -28,6 +35,8 @@ import { User } from '../../../../interfaces/shared.interfaces';
     MatSelect,
     MatOption,
     NgForOf,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './edit-user.component.html',
 })
