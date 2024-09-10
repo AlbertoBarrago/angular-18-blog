@@ -4,6 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 @include mat.core();
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
 
 $lightTheme: mat.define-theme((
   color: (
@@ -33,7 +35,6 @@ $darkTheme: mat.define-theme((
 .mdc-notched-outline__notch { border-right: none; }
 
 html {
-  @include mat.core-theme($lightTheme);
   @include mat.button-theme($lightTheme);
   @include mat.card-theme($lightTheme);
   @include mat.input-theme($lightTheme);

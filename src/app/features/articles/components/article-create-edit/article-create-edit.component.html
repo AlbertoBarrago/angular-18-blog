@@ -45,7 +45,7 @@
         <mat-icon>save</mat-icon>
       </button>
       <button *ngIf="isEdit" mat-raised-button color="warn"
-              (click)="utilService.confirmDialogDelete(articleForm.controls._id.value)">
+              (click)="utilService.confirmArticleDelete(articleForm.controls._id.value)">
         Delete
         <mat-icon>delete</mat-icon>
       </button>

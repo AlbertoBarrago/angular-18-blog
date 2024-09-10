@@ -11,7 +11,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Article } from '../../../../shared/interfaces/core.interfaces';
+import { Article } from '../../../../shared/interfaces/shared.interfaces';
 import { Router } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';

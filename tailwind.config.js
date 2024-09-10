@@ -17,6 +17,7 @@ module.exports = {
       'dark-neon-green': '#39ff14',
       'dark-electric-blue': '#0892d0',
       'dark-cyber-purple': '#8a2be2',
+      'dark-neon-red': '#ff0000',
 
       //light theme colors
       'light-background': '#f5f5fa',
@@ -32,6 +33,7 @@ module.exports = {
       'light-pastel-green': '#a0ffa0',
       'light-sky-blue': '#87ceeb',
       'light-lavender': '#e6e6fa',
+      'light-red': '#ff6347',
     },
     extend: {
       boxShadow: {

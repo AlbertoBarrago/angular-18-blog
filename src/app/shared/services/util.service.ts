@@ -1,17 +1,17 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Article } from '../interfaces/core.interfaces';
+import { Article } from '../interfaces/shared.interfaces';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-component';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticleService } from '../../features/articles/services/article.service';
-import { UserDialogComponent } from '../dialogs/user/user-dialog-component';
+import { UserDialogComponent } from '../dialogs/users/info/user-dialog-component';
 import { AuthService } from '../../core/auth/services/auth.service';
 import { SnackbarService } from './snackbar.service';
 
 @Injectable({ providedIn: 'root' })
 export class UtilService {
   readonly router = inject(Router);
-  readonly httpService = inject(ArticleService);
+  readonly articleService = inject(ArticleService);
   readonly authService = inject(AuthService);
   readonly dialog = inject(MatDialog);
   readonly snackBarService = inject(SnackbarService);
@@ -30,7 +30,7 @@ export class UtilService {
    * Opens a confirmation dialog to delete an article.
    * @param _id
    */
-  confirmDialogDelete(_id: string): void {
+  confirmArticleDelete(_id: string): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
       data: {
@@ -41,7 +41,7 @@ export class UtilService {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.httpService.deleteArticle(_id);
+        this.articleService.deleteArticle(_id);
         this.snackBarService.openSnackBarWithTimer(
           'Article deleted successfully'
         );
