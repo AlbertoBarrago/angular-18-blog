@@ -39,4 +39,16 @@ interface FilterArticles {
   q: string;
 }
 
-export { Article, User, UserLoggedIn, FilterArticles, PaginatedResponse };
+interface DisplayedColumns {
+  key: string;
+  label: string;
+}
+
+export {
+  Article,
+  User,
+  UserLoggedIn,
+  FilterArticles,
+  PaginatedResponse,
+  DisplayedColumns,
+};

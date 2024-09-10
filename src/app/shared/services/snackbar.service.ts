@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Article } from '../../core/interfaces/core.interfaces';
+import { Article } from '../interfaces/shared.interfaces';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';

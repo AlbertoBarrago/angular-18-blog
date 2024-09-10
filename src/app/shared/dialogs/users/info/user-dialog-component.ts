@@ -40,9 +40,7 @@ export class UserDialogComponent {
       email: string;
       createdAt: string;
     }
-  ) {
-    console.log('data', data);
-  }
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();

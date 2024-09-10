@@ -1,0 +1,8 @@
+<h2 mat-dialog-title class="text-2xl font-bold mb-4">User Profile</h2>
+<mat-dialog-content class="flex flex-col space-y-3">
+  Are You Sure You Want To Delete {{data!.username}}?
+</mat-dialog-content>
+<mat-dialog-actions class="!justify-end mt-4">
+  <button mat-raised-button (click)="onNoClick()">Nope</button>
+  <button mat-raised-button color="primary" (click)="delete()">Yes, I'm sure</button>
+</mat-dialog-actions>

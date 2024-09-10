@@ -1,7 +1,7 @@
 <div class="article-list-container">
   <div class="flex items-center justify-between gap-5 mb-3">
     <app-filter class="flex-grow relative top-2.5" (event)="search($event)"></app-filter>
-    <button class="relative top-[-2px]" mat-fab extended (click)="editArticle(null)">
+    <button class="relative top-[-2px] !bg-light-primary !text-light-lavender dark:bg-dark-cyber-purple" mat-fab extended (click)="editArticle(null)">
       Add Article
       <mat-icon fontIcon="add"></mat-icon>
     </button>
@@ -12,7 +12,7 @@
         <mat-card>
           <mat-card-header class="flex flex-col">
             <mat-card-title class="font-bold text-dark-background dark:text-light-text-tertiary mb-2">{{ item.title }}</mat-card-title>
-            <mat-card-subtitle class="flex items-center flex-wrap text-sm text-dark-primary dark:text-dark-cyber-purple mt-2">
+            <mat-card-subtitle class="flex items-center flex-wrap text-sm text-dark-primary dark:text-light-pastel-cyan mt-2">
               <div class="flex items-center mr-4 mb-2 ">
                 <mat-icon class="mr-1" fontIcon="attribution"></mat-icon>
                 <span>{{ item.author }}</span>
@@ -33,12 +33,12 @@
                 Open
               </button>
             </div>
-            <div class=" justify-end">
-              <button class="mat-mdc-button edit" (click)="editArticle(item._id, true)" mat-button>
+            <div class="justify-end">
+              <button (click)="editArticle(item._id, true)" mat-button>
                 <mat-icon fontIcon="edit"></mat-icon>
                 Edit
               </button>
-              <button class="mat-mdc-button delete" (click)="utilService.confirmDialogDelete(item._id)" mat-button>
+              <button class="!text-light-red dark:text-dark-neon-red" (click)="utilService.confirmArticleDelete(item._id)" mat-button>
                 <mat-icon fontIcon="delete"></mat-icon>
                 Delete
               </button>
