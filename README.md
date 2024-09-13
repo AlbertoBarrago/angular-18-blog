@@ -66,6 +66,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 - [x] Add paginator on article-list
 - [x] Add a better error handling
 - [ ] Add test for the app 
+- [ ] Add CRUD for user (admin section)
 - [x] Improve user session and model management
 - [x] Add admin section for handling users and articles
  
