@@ -70,6 +70,22 @@ export class AdminService {
   }
 
   /**
+   * Create user
+   * @param user
+   */
+  crateUser(user: Partial<User>) {
+    this.http.post<User>(`${this.url.users}/users`, user).subscribe({
+      next: () => {
+        this.getUserList();
+        this.snackBarService.openSnackBarWithTimer('User created');
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorService.handleError(error);
+      },
+    });
+  }
+
+  /**
    * Edit user
    * @param user
    */

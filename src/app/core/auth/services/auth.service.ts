@@ -1,7 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { UserLoggedIn } from '../../../shared/interfaces/shared.interfaces';
+import {
+  UserLoggedIn,
+  Role,
+} from '../../../shared/interfaces/shared.interfaces';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
@@ -65,6 +68,13 @@ export class AuthService {
    */
   isLoggedIn() {
     return !!this.getToken();
+  }
+
+  /**
+   * Check if user is admin
+   */
+  isUserAdmin() {
+    return this.getUser().role === Role.Admin;
   }
 
   /**

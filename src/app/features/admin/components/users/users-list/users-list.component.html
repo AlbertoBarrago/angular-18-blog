@@ -1,8 +1,14 @@
 <div class="users-view-container dark:text-light-text-tertiary">
-  <div class="p-1 mb-3">
-    <h1 class="text-3xl">User List</h1>
-    <p>A list of users present in database</p>
+  <div class="p-1 mb-3 flex flex-1 items-center justify-between">
+    <div class="flex flex-col">
+      <h1 class="text-3xl">User's List</h1>
+      <p>A list of users, where you can edit, delete and create it</p>
+    </div>
+    <div class="mt-5">
+      <button mat-raised-button routerLink="user-add"> <mat-icon fontIcon="add"></mat-icon> Add user</button>
+    </div>
   </div>
+
   <table mat-table [dataSource]="userList()" class="mat-elevation-z8">
     <ng-container *ngFor="let column of displayedColumns()" [matColumnDef]="column.key">
 

@@ -10,4 +10,12 @@ export const UserRoutes: Routes = [
         m => m.UsersListComponent
       ),
   },
+  {
+    path: 'users-add',
+    canActivate: [RoleGuard],
+    loadComponent: () =>
+      import('../components/users/user-add/user-add.component').then(
+        m => m.UserAddComponent
+      ),
+  },
 ];

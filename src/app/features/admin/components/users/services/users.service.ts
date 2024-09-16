@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { DeleteUsersDialogComponent } from '../../../shared/dialogs/users/admin/delete-user/delete-users-dialog-component';
+import { DeleteUsersDialogComponent } from '../../../../../shared/dialogs/users/admin/delete-user/delete-users-dialog-component';
 import { MatDialog } from '@angular/material/dialog';
-import { AdminService } from './admin.service';
-import { AuthService } from '../../../core/auth/services/auth.service';
-import { User } from '../../../shared/interfaces/shared.interfaces';
-import { EditUserComponent } from '../../../shared/dialogs/users/admin/edit-user/edit-user.component';
+import { AdminService } from '../../../service/admin.service';
+import { AuthService } from '../../../../../core/auth/services/auth.service';
+import { User } from '../../../../../shared/interfaces/shared.interfaces';
+import { EditUserComponent } from '../../../../../shared/dialogs/users/admin/edit-user/edit-user.component';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {

@@ -14,8 +14,10 @@ import {
   MatTable,
 } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
-import { UsersService } from '../../../service/users.service';
+import { UsersService } from '../services/users.service';
 import { User } from '../../../../../shared/interfaces/shared.interfaces';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -36,6 +38,8 @@ import { User } from '../../../../../shared/interfaces/shared.interfaces';
     MatButton,
     NgIf,
     DatePipe,
+    MatIcon,
+    RouterLink,
   ],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.scss',
