@@ -5,12 +5,15 @@ import { AdminService } from '../../../service/admin.service';
 import { AuthService } from '../../../../../core/auth/services/auth.service';
 import { User } from '../../../../../shared/interfaces/shared.interfaces';
 import { EditUserComponent } from '../../../../../shared/dialogs/users/admin/edit-user/edit-user.component';
+import { FormGroup } from '@angular/forms';
+import { SnackbarService } from '../../../../../shared/services/snackbar.service';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
   dialog = inject(MatDialog);
   adminService = inject(AdminService);
   authService = inject(AuthService);
+  snackBarService = inject(SnackbarService);
 
   /**
    * Confirm user deletion.
@@ -66,5 +69,16 @@ export class UsersService {
       username: newData.username,
       email: newData.email,
     };
+  }
+
+  verifyUserBeforeCreate(userForm: FormGroup) {
+    if (!userForm.valid) {
+      userForm.markAllAsTouched();
+      this.snackBarService.openSnackBarWithTimer(
+        '👉🏻 Please fill in all required fields'
+      );
+      return;
+    }
+    this.adminService.crateUser(userForm.value as User);
   }
 }

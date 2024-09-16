@@ -78,6 +78,7 @@ export class AdminService {
       next: () => {
         this.getUserList();
         this.snackBarService.openSnackBarWithTimer('User created');
+        this.router.navigate(['/users/users-list']).then(() => null);
       },
       error: (error: HttpErrorResponse) => {
         this.errorService.handleError(error);

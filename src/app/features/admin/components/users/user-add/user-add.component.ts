@@ -18,6 +18,7 @@ import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { NgForOf } from '@angular/common';
 import { SnackbarService } from '../../../../../shared/services/snackbar.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-user-add',
@@ -41,6 +42,7 @@ import { SnackbarService } from '../../../../../shared/services/snackbar.service
 export class UserAddComponent {
   utilService = inject(UtilService);
   snackBarService = inject(SnackbarService);
+  userService = inject(UsersService);
   userForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -58,14 +60,10 @@ export class UserAddComponent {
     },
   ];
 
+  /**
+   * Adds a new user to the database but only if the form is valid
+   */
   addUser() {
-    if (!this.userForm.valid) {
-      this.userForm.markAllAsTouched();
-      this.snackBarService.openSnackBarWithTimer(
-        '👉🏻 Please fill in all required fields'
-      );
-      return;
-    }
-    console.log('add user', this.userForm.value);
+    this.userService.verifyUserBeforeCreate(this.userForm);
   }
 }
