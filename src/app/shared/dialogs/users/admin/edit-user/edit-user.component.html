@@ -13,7 +13,7 @@
 
     <mat-form-field appearance="outline" class="w-full mb-2">
       <mat-label>Role</mat-label>
-      <mat-select formControlName="role" class="p-2 border border-indigo-300 rounded">
+      <mat-select formControlName="role">
         <mat-option *ngFor="let role of roles" [value]="role.value" class="hover:bg-indigo-100">
           {{ role.viewValue }}
         </mat-option>

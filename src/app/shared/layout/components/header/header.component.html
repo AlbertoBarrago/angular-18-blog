@@ -6,7 +6,7 @@
   <button mat-icon-button (click)="toggleTheme()" class="dark:text-dark-neon-yellow">
     <mat-icon>{{ isDarkMode ? 'wb_sunny' : 'nights_stay' }}</mat-icon>
   </button>
-  <button *ngIf="loginService.isUserAdmin()" mat-raised-button class="ml-5" routerLink="users/users-list">
+  <button *ngIf="loginService.isUserAdmin()" mat-raised-button class="ml-5" routerLink="users/users-list" routerLinkActive="active">
     <mat-icon fontIcon="accessibility"></mat-icon>Admin
   </button>
   <span class="flex flex-1"></span>

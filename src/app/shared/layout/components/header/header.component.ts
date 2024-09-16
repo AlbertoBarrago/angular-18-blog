@@ -7,7 +7,7 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
 import { UtilService } from '../../../services/util.service';
 import { ThemeService } from '../../../services/theme.service';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +20,7 @@ import { RouterLink } from '@angular/router';
     MatIconButton,
     RouterLink,
     MatButton,
+    RouterLinkActive,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

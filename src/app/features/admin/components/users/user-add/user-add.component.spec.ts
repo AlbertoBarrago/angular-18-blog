@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserAddComponent } from './user-add.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('UserAddComponent', () => {
   let component: UserAddComponent;
@@ -11,7 +12,11 @@ describe('UserAddComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [UserAddComponent],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideAnimations(),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserAddComponent);
