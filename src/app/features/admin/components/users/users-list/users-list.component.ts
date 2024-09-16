@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, ViewChild } from '@angular/core';
 import { AdminService } from '../../../service/admin.service';
 import { DatePipe, JsonPipe, NgForOf, NgIf } from '@angular/common';
 import {
@@ -12,6 +12,7 @@ import {
   MatRow,
   MatRowDef,
   MatTable,
+  MatTableDataSource,
   MatTableModule,
 } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
@@ -42,7 +43,6 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
     DatePipe,
     MatIcon,
     RouterLink,
-    MatSort,
     MatTableModule,
     MatSortModule,
   ],
@@ -54,6 +54,15 @@ export class UsersListComponent implements OnInit {
   userService = inject(UsersService);
   userList = this.adminService.userList;
   displayedColumns = this.adminService.displayedColumns;
+  dataSource = new MatTableDataSource();
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor() {
+    effect(() => {
+      this.dataSource.data = this.userList();
+      this.dataSource.sort = this.sort;
+    });
+  }
 
   ngOnInit(): void {
     this.adminService.getUserList();
