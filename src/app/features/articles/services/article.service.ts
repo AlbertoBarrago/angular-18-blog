@@ -35,6 +35,7 @@ export class ArticleService {
   /**
    * Get all articles
    * @return The subscription object for the HTTP GET request
+   * @deprecated Use filterArticles() instead
    */
   getAllArticles(): Subscription {
     return this.http.get<Article[]>(this.url.articleUrl).subscribe({
@@ -76,7 +77,7 @@ export class ArticleService {
   creteArticle(article: Article) {
     this.http.post<Article>(`${this.url.articleUrl}`, article).subscribe({
       next: () => {
-        this.getAllArticles();
+        this.filterArticles();
         this.snackBarService.openSnackBarWithTimer(
           'Article created successfully'
         );
@@ -138,7 +139,7 @@ export class ArticleService {
   deleteArticle(_id: string) {
     this.http.delete(`${this.url.articleUrl}/${_id}`).subscribe({
       next: () => {
-        this.getAllArticles();
+        this.filterArticles();
       },
       error: (error: HttpErrorResponse) => {
         this.errorService.handleError(error);

@@ -77,7 +77,6 @@ export class ArticleCreateEditComponent {
     if (this.articleId) {
       this.articleService.getArticleById(this.articleId);
       effect(() => {
-        //effect to update the form when the article cha nges
         const article = this.articleService.article();
         if (article) {
           this.initForm(article);

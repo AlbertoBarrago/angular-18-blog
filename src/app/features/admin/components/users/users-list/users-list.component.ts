@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, ViewChild } from '@angular/core';
 import { AdminService } from '../../../service/admin.service';
 import { DatePipe, JsonPipe, NgForOf, NgIf } from '@angular/common';
 import {
@@ -12,10 +12,15 @@ import {
   MatRow,
   MatRowDef,
   MatTable,
+  MatTableDataSource,
+  MatTableModule,
 } from '@angular/material/table';
 import { MatButton } from '@angular/material/button';
-import { UsersService } from '../../../service/users.service';
+import { UsersService } from '../services/users.service';
 import { User } from '../../../../../shared/interfaces/shared.interfaces';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-user-list',
@@ -36,25 +41,38 @@ import { User } from '../../../../../shared/interfaces/shared.interfaces';
     MatButton,
     NgIf,
     DatePipe,
+    MatIcon,
+    RouterLink,
+    MatTableModule,
+    MatSortModule,
   ],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss',
+  templateUrl: './users-list.component.html',
+  styleUrl: './users-list.component.scss',
 })
-export class UserListComponent implements OnInit {
+export class UsersListComponent implements OnInit {
   adminService = inject(AdminService);
   userService = inject(UsersService);
   userList = this.adminService.userList;
   displayedColumns = this.adminService.displayedColumns;
+  dataSource = new MatTableDataSource();
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor() {
+    effect(() => {
+      this.dataSource.data = this.userList();
+      this.dataSource.sort = this.sort;
+    });
+  }
 
   ngOnInit(): void {
     this.adminService.getUserList();
   }
 
-  onEdit(row: User) {
-    console.log('Editing row: ', row);
+  onEdit(user: User) {
+    this.userService.openEditUserDialog(user);
   }
 
-  onDelete(row: User) {
-    this.userService.confirmUserDelete(row._id, row.username);
+  onDelete(user: User) {
+    this.userService.confirmUserDelete(user);
   }
 }

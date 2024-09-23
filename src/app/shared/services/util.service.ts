@@ -27,6 +27,15 @@ export class UtilService {
   }
 
   /**
+   * Navigates back to the article view.
+   */
+  backToUserView() {
+    this.router.navigate(['/users/users-list']).then(() => {
+      //console.log('Navigation successful:', r);
+    });
+  }
+
+  /**
    * Opens a confirmation dialog to delete an article.
    * @param _id
    */

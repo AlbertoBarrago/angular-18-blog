@@ -1,20 +1,25 @@
 <mat-toolbar class="!bg-light-background dark:!bg-dark-background">
-  <mat-icon fontIcon="info" class="hover:animate-spin hover:cursor-crosshair text-dark-primary dark:text-dark-primary mr-2"
+  <mat-icon fontIcon="info"
+            class="hover:animate-spin hover:cursor-crosshair text-dark-primary dark:text-dark-primary mr-2"
             matTooltip="Crud app for testing new feature about angular 18"></mat-icon>
   <p class="mr-3 hover:cursor-pointer" routerLink="article-list">{{ title }}</p>
   <button mat-icon-button (click)="toggleTheme()" class="dark:text-dark-neon-yellow">
     <mat-icon>{{ isDarkMode ? 'wb_sunny' : 'nights_stay' }}</mat-icon>
   </button>
-  <!--  Add button for navigate if is admin on admin route-->
-  <button *ngIf="loginService.getUser().role === 'ADMIN'" mat-flat-button class="ml-5" routerLink="users/users-list">Admin</button>
+  <button *ngIf="loginService.isUserAdmin()" mat-raised-button class="ml-5" routerLink="users/users-list" routerLinkActive="active">
+    <mat-icon fontIcon="accessibility"></mat-icon>Admin
+  </button>
   <span class="flex flex-1"></span>
   <span *ngIf="loginService.isLoggedIn()" class="flex">
-    <p class="relative top-[-2px] text-dark-primary dark:text-dark-cyber-purple">Hi, {{ loginService.getUser().username === 'albz' ? 'Boss' :  loginService.getUser().username}}</p>
+    <p
+      class="relative top-[-2px]">Hi, {{ loginService.getUser().username === 'albz' ? 'Boss' : loginService.getUser().username }}</p>
     <mat-icon (click)="utilService.userDialogInfo()"
-              class="icon hover:cursor-pointer ml-2 mr-4 text-dark-primary dark:text-dark-neon-yellow" aria-hidden="false"
+              class="icon hover:cursor-pointer ml-2 mr-4 text-dark-primary dark:text-dark-neon-yellow"
+              aria-hidden="false"
               aria-label="User verified icon" fontIcon="account_circle"></mat-icon>
     <mat-icon (click)="loginService.logout()"
-              class="icon hover:cursor-pointer text-dark-primary dark:text-dark-cyber-purple" aria-hidden="false" aria-label="Example user verified icon"
+              class="icon hover:cursor-pointer text-dark-primary dark:text-dark-cyber-purple" aria-hidden="false"
+              aria-label="Example user verified icon"
               fontIcon="logout"></mat-icon>
   </span>
 </mat-toolbar>

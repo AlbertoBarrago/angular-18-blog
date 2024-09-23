@@ -1,0 +1,48 @@
+<div class="user-add-container p-5">
+  <div class="flex mb-5">
+    <button class="float-start" mat-raised-button (click)="utilService.backToUserView()">
+      <mat-icon fontIcon="arrow_back"></mat-icon>
+      Back
+    </button>
+  </div>
+  <div class="flex flex-col mb-5">
+    <h2 class="text-2xl mb-3">Add New User</h2>
+      <form [formGroup]="userForm">
+        <div class="grid grid-cols-2 gap-3">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" formControlName="username" placeholder="Username" />
+          </mat-form-field>
+          <div class="grid grid-cols-1">
+            <mat-form-field class="w-full" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput type="text" formControlName="password" placeholder="Password" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email" placeholder="Email" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role">
+              <mat-option *ngFor="let role of roles" [value]="role.value" class="hover:bg-indigo-100">
+                {{ role.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </form>
+    <div class="flex justify-end">
+      <button mat-raised-button color="primary" (click)="addUser()">
+        ADD USER
+        <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
+  </div>
+</div>

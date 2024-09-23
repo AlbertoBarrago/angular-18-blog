@@ -1,0 +1,39 @@
+<div class="users-view-container dark:text-light-text-tertiary">
+  <div class="p-1 mb-3 flex flex-1 items-center justify-between">
+    <div class="flex flex-col">
+      <h1 class="text-3xl">User's List</h1>
+      <p>A list of users, where you can edit, delete and create it</p>
+    </div>
+    <div class="mt-5">
+      <button mat-raised-button routerLink="/users/users-add"> <mat-icon fontIcon="add"></mat-icon> Add user</button>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="createAt" matSortDisableClear matSortDirection="asc">
+    <ng-container *ngFor="let column of displayedColumns()" [matColumnDef]="column.key">
+
+      <ng-container *ngIf="column.key !== 'actions' && column.key !== 'createdAt' && column.key !== 'updatedAt'">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.label }}</th>
+        <td mat-cell *matCellDef="let element"> {{ element[column.key] }}</td>
+      </ng-container>
+
+      <ng-container *ngIf="column.key === 'createdAt' || column.key === 'updatedAt'">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.label }}</th>
+        <td mat-cell *matCellDef="let element"> {{ element[column.key] | date: 'dd-MM-yyyy - hh:MM' }}</td>
+      </ng-container>
+
+
+      <ng-container *ngIf="column.key === 'actions'">
+        <th mat-header-cell *matHeaderCellDef> {{ column.label }}</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button (click)="onEdit(element)">Edit</button>
+          <button mat-button color="warn" (click)="onDelete(element)">Delete</button>
+        </td>
+      </ng-container>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="adminService.columnKeys"></tr>
+    <tr mat-row *matRowDef="let row; columns: adminService.columnKeys;"></tr>
+  </table>
+</div>

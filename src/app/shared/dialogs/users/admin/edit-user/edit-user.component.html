@@ -1,0 +1,27 @@
+<h2 mat-dialog-title class="text-2xl font-bold mb-4">Edit User Profile</h2>
+<mat-dialog-content class="flex flex-col space-y-3">
+  <form [formGroup]="userFormGroup" class="bg-gray-100 p-6 rounded-lg shadow-md">
+    <mat-form-field appearance="outline" class="w-full mb-2">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full mb-2">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full mb-2">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let role of roles" [value]="role.value" class="hover:bg-indigo-100">
+          {{ role.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="!justify-end mt-4">
+  <button mat-raised-button (click)="onNoClick()">Nope</button>
+  <button mat-raised-button color="primary" (click)="edit()">Confirm</button>
+</mat-dialog-actions>

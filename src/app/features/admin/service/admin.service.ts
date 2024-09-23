@@ -20,10 +20,17 @@ export class AdminService {
   userList = signal<User[]>([]);
   displayedColumns = signal<DisplayedColumns[]>([]);
 
+  get columnKeys() {
+    return this.displayedColumns().map(col => col.key);
+  }
+
   url = {
     users: environment.apiUrl + '/api/',
   };
 
+  /**
+   * Get user list from server
+   */
   getUserList() {
     return this.http.get<[User]>(`${this.url.users}/users`).subscribe({
       next: (data: [User]) => {
@@ -36,6 +43,9 @@ export class AdminService {
     });
   }
 
+  /**
+   * Prepare displayed columns for user list
+   */
   prepareDisplayedColumns() {
     if (this.userList().length > 0) {
       const columns = Object.keys(this.userList()[0]).filter(
@@ -59,8 +69,47 @@ export class AdminService {
     }
   }
 
-  removeUser(id: string) {
-    this.http.delete<User>(`${this.url.users}/users/${id}`).subscribe({
+  /**
+   * Create user
+   * @param user
+   */
+  crateUser(user: Partial<User>) {
+    this.http.post<User>(`${this.url.users}/users`, user).subscribe({
+      next: () => {
+        this.getUserList();
+        this.snackBarService.openSnackBarWithTimer('User created');
+        this.router.navigate(['/users/users-list']).then(() => null);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorService.handleError(error);
+      },
+    });
+  }
+
+  /**
+   * Edit user
+   * @param user
+   */
+  editUser(user: Partial<User>) {
+    this.http
+      .patch<User>(`${this.url.users}/users/${user._id}`, user)
+      .subscribe({
+        next: () => {
+          this.getUserList();
+          this.snackBarService.openSnackBarWithTimer('User edited');
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errorService.handleError(error);
+        },
+      });
+  }
+
+  /**
+   * Delete user
+   * @param _id
+   */
+  removeUser(_id: string) {
+    this.http.delete<User>(`${this.url.users}/users/${_id}`).subscribe({
       next: () => {
         this.getUserList();
         this.snackBarService.openSnackBarWithTimer('User removed');
@@ -69,9 +118,5 @@ export class AdminService {
         this.errorService.handleError(error);
       },
     });
-  }
-
-  get columnKeys() {
-    return this.displayedColumns().map(col => col.key);
   }
 }
