@@ -4,7 +4,19 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ThemeService {
-  private darkMode = false;
+  private darkMode = true;
+
+  readSystemTheme() {
+    const htmlElement = document.documentElement;
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      htmlElement.classList.add('dark');
+    } else {
+      htmlElement.classList.remove('dark');
+    }
+  }
 
   isDarkMode() {
     return this.darkMode;

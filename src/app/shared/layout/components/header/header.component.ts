@@ -33,6 +33,7 @@ export class HeaderComponent {
   themeService = inject(ThemeService);
 
   constructor() {
+    this.themeService.readSystemTheme();
     this.isDarkMode = this.themeService.isDarkMode();
   }
 
