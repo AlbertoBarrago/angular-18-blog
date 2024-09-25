@@ -8,44 +8,45 @@
   </div>
   <div class="grid" [ngClass]="articles().length ? 'grid-cols-3 gap-3' : 'grid-cols-1'">
     @for (item of articles(); track item.title) {
-      <div>
-        <mat-card>
-          <mat-card-header class="flex flex-col">
-            <mat-card-title class="font-bold text-dark-background dark:text-light-text-tertiary mb-2">{{ item.title }}</mat-card-title>
-            <mat-card-subtitle class="flex items-center flex-wrap text-sm text-dark-primary dark:text-light-pastel-cyan mt-2">
-              <div class="flex items-center mr-4 mb-2 ">
-                <mat-icon class="mr-1" fontIcon="attribution"></mat-icon>
-                <span>{{ item.author }}</span>
-              </div>
-              <div class="flex items-center mb-2">
-                <mat-icon class="mr-1" fontIcon="access_time"></mat-icon>
-                <span>{{ item.createdAt | date: 'medium' }}</span>
-              </div>
-            </mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content class="text-dark-background dark:text-light-secondary mt-3">
-            <p>{{ item.content.trimEnd().slice(0, 108) + "..." }}</p>
-          </mat-card-content>
-          <mat-card-actions class="flex justify-between">
-            <div class="justify-start">
-              <button (click)="openArticle(item._id)" mat-button>
-                <mat-icon class="mat-icon" fontIcon="visibility"></mat-icon>
-                Open
-              </button>
+      <mat-card>
+        <mat-card-header class="flex flex-col">
+          <mat-card-title class="font-bold text-dark-background dark:text-light-text-tertiary mb-2">{{ item.title }}
+          </mat-card-title>
+          <mat-card-subtitle
+            class="flex items-center flex-wrap text-sm text-dark-primary dark:text-light-pastel-cyan mt-2">
+            <div class="flex items-center mr-4 mb-2 ">
+              <mat-icon class="mr-1" fontIcon="attribution"></mat-icon>
+              <span>{{ item.author }}</span>
             </div>
-            <div class="justify-end">
-              <button (click)="editArticle(item._id, true)" mat-button>
-                <mat-icon fontIcon="edit"></mat-icon>
-                Edit
-              </button>
-              <button class="!text-light-red dark:text-dark-neon-red" (click)="utilService.confirmArticleDelete(item._id)" mat-button>
-                <mat-icon fontIcon="delete"></mat-icon>
-                Delete
-              </button>
+            <div class="flex items-center mb-2">
+              <mat-icon class="mr-1" fontIcon="access_time"></mat-icon>
+              <span>{{ item.createdAt | date: 'medium' }}</span>
             </div>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="text-dark-background dark:text-light-secondary mt-3">
+          <p>{{ item.content.trimEnd().slice(0, 108) + "..." }}</p>
+        </mat-card-content>
+        <mat-card-actions class="flex justify-between">
+          <div class="justify-start">
+            <button (click)="openArticle(item._id)" mat-button>
+              <mat-icon class="mat-icon" fontIcon="visibility"></mat-icon>
+              Open
+            </button>
+          </div>
+          <div class="justify-end">
+            <button (click)="editArticle(item._id, true)" mat-button>
+              <mat-icon fontIcon="edit"></mat-icon>
+              Edit
+            </button>
+            <button class="!text-light-red dark:text-dark-neon-red" (click)="utilService.confirmArticleDelete(item._id)"
+                    mat-button>
+              <mat-icon fontIcon="delete"></mat-icon>
+              Delete
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
     } @empty {
       <div class="flex flex-col justify-center items-center h-[60vh]">
         <img [ngSrc]="emptyListImagePath" alt="meme" height="180" width="327" priority="low" />
@@ -55,7 +56,7 @@
       </div>
     }
   </div>
-  <div class="flex flex-1 min-h-[10vh] justify-center" *ngIf="articles().length">
+  <div class="flex flex-1 min-h-[10vh] mb-20 justify-center" *ngIf="articles().length">
     <div class="mt-auto w-full flex justify-center">
       <mat-paginator
         [length]="articleService.totalElement()"
