@@ -16,7 +16,7 @@ import {
 } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { CommonModule, NgForOf } from '@angular/common';
-import { User } from '../../../../../models/shared.interfaces';
+import { User } from '../../../../../models/global.models';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({

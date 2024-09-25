@@ -5,13 +5,13 @@ import {
   Article,
   FilterArticles,
   PaginatedResponse,
-} from '../../../models/shared.interfaces';
+} from '../../../models/global.models';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { ErrorService } from '../../../shared/services/error.service';
-import { AuthService } from '../../../core/features/auth/services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({ providedIn: 'root' })

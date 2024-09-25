@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../../../../environments/environment';
-import { UserLoggedIn, RoleEnum } from '../../../../models/shared.interfaces';
+import { environment } from '../../../../environments/environment';
+import { UserLoggedIn, RoleEnum } from '../../../models/global.models';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
-import { ErrorService } from '../../../../shared/services/error.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { ErrorService } from '../../../shared/services/error.service';
 import { map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

@@ -1,11 +1,11 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { SnackbarService } from '../../../../shared/services/snackbar.service';
-import { ErrorService } from '../../../../shared/services/error.service';
-import { DisplayedColumns, User } from '../../../../models/shared.interfaces';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { ErrorService } from '../../../shared/services/error.service';
+import { DisplayedColumns, User } from '../../../models/global.models';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
@@ -22,14 +22,14 @@ export class AdminService {
   }
 
   url = {
-    users: environment.apiUrl + '/api/',
+    users: environment.apiUrl + '/api/users',
   };
 
   /**
    * Get user list from server
    */
   getUserList() {
-    return this.http.get<[User]>(`${this.url.users}/users`).subscribe({
+    return this.http.get<[User]>(`${this.url.users}`).subscribe({
       next: (data: [User]) => {
         this.userList.set(data);
         this.prepareDisplayedColumns();
@@ -71,7 +71,7 @@ export class AdminService {
    * @param user
    */
   crateUser(user: Partial<User>) {
-    this.http.post<User>(`${this.url.users}/users`, user).subscribe({
+    this.http.post<User>(`${this.url.users}`, user).subscribe({
       next: () => {
         this.getUserList();
         this.snackBarService.openSnackBarWithTimer('User created');
@@ -88,17 +88,16 @@ export class AdminService {
    * @param user
    */
   editUser(user: Partial<User>) {
-    this.http
-      .patch<User>(`${this.url.users}/users/${user._id}`, user)
-      .subscribe({
-        next: () => {
-          this.getUserList();
-          this.snackBarService.openSnackBarWithTimer('User edited');
-        },
-        error: (error: HttpErrorResponse) => {
-          this.errorService.handleError(error);
-        },
-      });
+    this.http.patch<User>(`${this.url.users}/${user._id}`, user).subscribe({
+      next: () => {
+        this.getUserList();
+        this.snackBarService.openSnackBarWithTimer('User edited');
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+        this.errorService.handleError(error);
+      },
+    });
   }
 
   /**
@@ -106,7 +105,7 @@ export class AdminService {
    * @param _id
    */
   removeUser(_id: string) {
-    this.http.delete<User>(`${this.url.users}/users/${_id}`).subscribe({
+    this.http.delete<User>(`${this.url.users}/${_id}`).subscribe({
       next: () => {
         this.getUserList();
         this.snackBarService.openSnackBarWithTimer('User removed');
