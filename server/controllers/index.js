@@ -215,6 +215,26 @@ async function login(req, res) {
   }
 }
 
+async function refreshToken(req, res) {
+  const token = req.headers['x-access-token'];
+  if (!token) {
+    return res.status(403).send('No token provided.');
+  }
+  jwt.verify(token, SECRET_KEY, (err, decoded) => {
+    if (err) {
+      return res.status(401).send('Unauthorized!');
+    }
+    const newToken = jwt.sign(
+      { id: decoded.id, role: decoded.role },
+      SECRET_KEY,
+      {
+        expiresIn: HOURS_24_H,
+      }
+    );
+    res.status(200).send({ auth: true, token: newToken });
+  });
+}
+
 async function updateUser(req, res, id) {
   try {
     const data = await Users.findByIdAndUpdate(
@@ -256,6 +276,7 @@ module.exports = {
   getAllUsers,
   getOneUser,
   login,
+  refreshToken,
   filterArticleByQuery,
   updateUser,
   removeUser,

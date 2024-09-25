@@ -18,16 +18,18 @@ interface PaginatedResponse<T> {
   };
 }
 
-enum Role {
-  Admin = 'ADMIN',
-  User = 'USER',
+enum RoleEnum {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
 }
+
+type UserRole = 'ADMIN' | 'USER';
 
 interface User {
   _id: string;
   username: string;
   email: string;
-  role: Role;
+  role: RoleEnum;
   password: string;
   createdAt: string;
   updatedAt: string;
@@ -56,5 +58,6 @@ export {
   FilterArticles,
   PaginatedResponse,
   DisplayedColumns,
-  Role,
+  UserRole,
+  RoleEnum,
 };

@@ -20,7 +20,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { UtilService } from '../../../../shared/services/util.service';
 import { CommonModule, DatePipe, NgIf } from '@angular/common';
-import { AuthService } from '../../../../core/auth/services/auth.service';
+import { AuthService } from '../../../../core/features/auth/services/auth.service';
 
 @Component({
   selector: 'app-article-create-edit',
