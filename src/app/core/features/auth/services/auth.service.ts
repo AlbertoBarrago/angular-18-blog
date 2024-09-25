@@ -21,6 +21,7 @@ export class AuthService {
 
   url = {
     auth: environment.apiUrl + '/api/auth',
+    refreshToken: environment.apiUrl + '/api/auth/refresh-token',
   };
 
   /**
@@ -86,6 +87,7 @@ export class AuthService {
     if (!token) return true;
     const payload = JSON.parse(atob(token.split('.')[1]));
     const expirationDate = new Date(payload.exp * 1000);
+    console.log('isExpired', expirationDate);
     return expirationDate <= new Date();
   }
 
@@ -100,11 +102,13 @@ export class AuthService {
    * Refresh token and return new token
    */
   refreshToken(): Observable<string> {
-    return this.http.post<{ token: string }>('/api/refresh-token', {}).pipe(
-      map(response => {
-        localStorage.setItem('token', response.token);
-        return response.token;
-      })
-    );
+    return this.http
+      .get<{ token: string }>(`${this.url.refreshToken}`, {})
+      .pipe(
+        map(response => {
+          localStorage.setItem('token', response.token);
+          return response.token;
+        })
+      );
   }
 }
