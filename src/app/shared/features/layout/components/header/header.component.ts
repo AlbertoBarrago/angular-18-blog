@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatTooltip } from '@angular/material/tooltip';
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { AuthService } from '../../../../../features/auth/services/auth.service';
 import { UtilService } from '../../../../services/util.service';
 import { ThemeService } from '../../../../services/theme.service';
@@ -21,6 +21,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     RouterLink,
     MatButton,
     RouterLinkActive,
+    NgClass,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -28,7 +29,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   loginService = inject(AuthService);
   utilService = inject(UtilService);
-  title = 'SmurtApp';
+  title = 'CRUD Angular';
   isDarkMode!: boolean;
   themeService = inject(ThemeService);
 
