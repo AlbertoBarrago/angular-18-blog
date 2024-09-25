@@ -51,6 +51,14 @@ interface DisplayedColumns {
   label: string;
 }
 
+interface JwtPayload {
+  sub: string;
+  email: string;
+  iat: number;
+  exp: number;
+  role: UserRole;
+}
+
 export {
   Article,
   User,
@@ -60,4 +68,5 @@ export {
   DisplayedColumns,
   UserRole,
   RoleEnum,
+  JwtPayload,
 };
