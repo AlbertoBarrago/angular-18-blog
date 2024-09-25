@@ -5,10 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
 import { ErrorService } from '../../../../shared/services/error.service';
-import {
-  DisplayedColumns,
-  User,
-} from '../../../../shared/interfaces/shared.interfaces';
+import { DisplayedColumns, User } from '../../../../models/shared.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {

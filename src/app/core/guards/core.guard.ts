@@ -1,10 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../features/auth/services/auth.service';
-import {
-  JwtPayload,
-  UserRole,
-} from '../../shared/interfaces/shared.interfaces';
+import { JwtPayload, UserRole } from '../../models/shared.interfaces';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
