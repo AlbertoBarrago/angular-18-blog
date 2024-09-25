@@ -1,14 +1,14 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { SnackbarService } from '../../../shared/services/snackbar.service';
-import { ErrorService } from '../../../shared/services/error.service';
+import { SnackbarService } from '../../../../shared/services/snackbar.service';
+import { ErrorService } from '../../../../shared/services/error.service';
 import {
   DisplayedColumns,
   User,
-} from '../../../shared/interfaces/shared.interfaces';
+} from '../../../../shared/interfaces/shared.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {

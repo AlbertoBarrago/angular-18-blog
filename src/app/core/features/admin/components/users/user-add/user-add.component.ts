@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { UtilService } from '../../../../../shared/services/util.service';
+import { UtilService } from '../../../../../../shared/services/util.service';
 import {
   FormControl,
   FormGroup,
@@ -17,7 +17,7 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { NgForOf } from '@angular/common';
-import { SnackbarService } from '../../../../../shared/services/snackbar.service';
+import { SnackbarService } from '../../../../../../shared/services/snackbar.service';
 import { UsersService } from '../services/users.service';
 
 @Component({

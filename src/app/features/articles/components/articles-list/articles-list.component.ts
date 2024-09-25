@@ -29,7 +29,7 @@ import {
   MatPaginatorModule,
   PageEvent,
 } from '@angular/material/paginator';
-import { AuthService } from '../../../../core/auth/services/auth.service';
+import { AuthService } from '../../../../core/features/auth/services/auth.service';
 
 @Component({
   selector: 'app-articles-list',

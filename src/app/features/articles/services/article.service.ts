@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { ErrorService } from '../../../shared/services/error.service';
-import { AuthService } from '../../../core/auth/services/auth.service';
+import { AuthService } from '../../../core/features/auth/services/auth.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Injectable({ providedIn: 'root' })
