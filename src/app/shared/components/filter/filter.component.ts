@@ -29,9 +29,14 @@ import { CommonModule } from '@angular/common';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FilterComponent {
-  @Input() placeholder = '';
-  @Input() label = '';
-  @Output() event = new EventEmitter<string>();
+  @Input()
+  placeholder = '';
+
+  @Input()
+  label = '';
+
+  @Output()
+  event = new EventEmitter<string>();
 
   public searchTerms = new Subject<string>();
   private destroy$ = new Subject<void>();

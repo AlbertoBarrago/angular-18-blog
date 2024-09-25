@@ -2,8 +2,8 @@ import {
   Component,
   computed,
   CUSTOM_ELEMENTS_SCHEMA,
-  effect,
   inject,
+  OnDestroy,
 } from '@angular/core';
 import { ArticleService } from '../../services/article.service';
 import {
@@ -23,7 +23,7 @@ import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilService } from '../../../../shared/services/util.service';
-import { FilterComponent } from '../../../../shared/features/filter/filter.component';
+import { FilterComponent } from '../../../../shared/components/filter/filter.component';
 import {
   MatPaginator,
   MatPaginatorModule,
@@ -54,7 +54,7 @@ import { AuthService } from '../../../auth/services/auth.service';
   styleUrl: './articles-list.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ArticlesListComponent {
+export class ArticlesListComponent implements OnDestroy {
   articleService = inject(ArticleService);
   utilService = inject(UtilService);
   authService = inject(AuthService);
@@ -67,11 +67,6 @@ export class ArticlesListComponent {
 
   constructor() {
     this.articleService.filterArticles();
-    effect(onCleanup => {
-      onCleanup(() => {
-        this.articleService.clearArticles();
-      });
-    });
   }
 
   openArticle(articleId: string) {
@@ -93,5 +88,9 @@ export class ArticlesListComponent {
 
   performPagination($event: PageEvent) {
     this.articleService.performPagination($event);
+  }
+
+  ngOnDestroy() {
+    this.articleService.clearArticles();
   }
 }
