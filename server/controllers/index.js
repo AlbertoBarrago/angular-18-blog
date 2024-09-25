@@ -3,7 +3,6 @@ const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { Articles, Users } = require('../models');
-const sea = require('node:sea');
 
 // Generate a random secret key
 const SECRET_KEY = process.env.SECRET_KEY;
