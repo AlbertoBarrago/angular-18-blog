@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { Articles, Users } = require('../models');
+const sea = require('node:sea');
 
 // Generate a random secret key
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -85,10 +86,9 @@ async function remove(req, res, paramID) {
 async function filterArticleByQuery(req, res) {
   const reqParam = req.params;
   const page = parseInt(reqParam.page, 10) || 1;
-  const limit = parseInt(reqParam.size, 10) || 6; // "size" instead of "limit"
+  const limit = parseInt(reqParam.size, 10) || 6;
   const skip = (page - 1) * limit;
-  const author = req.body.author || '';
-  const searchQuery = String(reqParam.q) || '';
+  let searchQuery = reqParam.q !== 'null' ? String(reqParam.q) : '';
 
   try {
     const articles = await Articles.aggregate([
@@ -98,7 +98,7 @@ async function filterArticleByQuery(req, res) {
             { title: { $regex: searchQuery, $options: 'i' } },
             { content: { $regex: searchQuery, $options: 'i' } },
             { shortContent: { $regex: searchQuery, $options: 'i' } },
-            { author: { $regex: author, $options: 'i' } },
+            { author: { $regex: searchQuery, $options: 'i' } },
           ],
         },
       },
@@ -126,7 +126,6 @@ async function filterArticleByQuery(req, res) {
       pageSize: limit,
     };
     const data = articles[0].data || [];
-
     res.json({ metadata, data });
   } catch (err) {
     res.status(500).send({

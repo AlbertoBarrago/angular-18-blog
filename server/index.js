@@ -25,7 +25,10 @@ mongoose.connection.on('error', error => {
 
 app.use(
   cors({
-    origin: '*',
+    origin: [
+      'http://localhost:4200',
+      'https://angular-18-blog-server.onrender.com',
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
