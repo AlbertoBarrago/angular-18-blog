@@ -3,12 +3,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import {
   UserLoggedIn,
-  Role,
+  RoleEnum,
 } from '../../../shared/interfaces/shared.interfaces';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { ErrorService } from '../../../shared/services/error.service';
+import { map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -74,7 +75,18 @@ export class AuthService {
    * Check if user is admin
    */
   isUserAdmin() {
-    return this.getUser().role === Role.Admin;
+    return this.getUser().role === RoleEnum.ADMIN;
+  }
+
+  /**
+   * Check if token is expired
+   */
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const expirationDate = new Date(payload.exp * 1000);
+    return expirationDate <= new Date();
   }
 
   /**
@@ -82,5 +94,17 @@ export class AuthService {
    */
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  /**
+   * Refresh token and return new token
+   */
+  refreshToken(): Observable<string> {
+    return this.http.post<{ token: string }>('/api/refresh-token', {}).pipe(
+      map(response => {
+        localStorage.setItem('token', response.token);
+        return response.token;
+      })
+    );
   }
 }

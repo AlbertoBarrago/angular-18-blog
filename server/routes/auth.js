@@ -35,4 +35,27 @@ auth.post('/login', async (req, res) => {
   await Controller.login(req, res);
 });
 
+/**
+ * @swagger
+ * /api/auth/refresh-token:
+ *   get:
+ *     tags: [Authentication]
+ *     summary: Refresh Token
+ *     description: Refresh Token
+ *     responses:
+ *       200:
+ *         description: Refresh Token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               example:  {
+ *                 auth: boolean,
+ *                 token: String,
+ *               }
+ */
+auth.get('/refresh-token', verifyToken, async (req, res) => {
+  await Controller.refreshToken(req, res);
+});
+
 module.exports = auth;
