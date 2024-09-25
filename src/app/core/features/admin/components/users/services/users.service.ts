@@ -3,7 +3,7 @@ import { DeleteUsersDialogComponent } from '../../../../../../shared/dialogs/use
 import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from '../../../service/admin.service';
 import { AuthService } from '../../../../auth/services/auth.service';
-import { User } from '../../../../../../shared/interfaces/shared.interfaces';
+import { User } from '../../../../../../models/shared.interfaces';
 import { EditUserComponent } from '../../../../../../shared/dialogs/users/admin/edit-user/edit-user.component';
 import { FormGroup } from '@angular/forms';
 import { SnackbarService } from '../../../../../../shared/services/snackbar.service';

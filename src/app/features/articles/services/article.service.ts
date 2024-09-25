@@ -5,7 +5,7 @@ import {
   Article,
   FilterArticles,
   PaginatedResponse,
-} from '../../../shared/interfaces/shared.interfaces';
+} from '../../../models/shared.interfaces';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';

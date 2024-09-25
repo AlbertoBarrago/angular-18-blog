@@ -1,10 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
-import {
-  UserLoggedIn,
-  RoleEnum,
-} from '../../../../shared/interfaces/shared.interfaces';
+import { UserLoggedIn, RoleEnum } from '../../../../models/shared.interfaces';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from '../../../../shared/services/snackbar.service';
