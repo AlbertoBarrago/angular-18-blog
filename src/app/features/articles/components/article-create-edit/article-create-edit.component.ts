@@ -46,8 +46,8 @@ export class ArticleCreateEditComponent {
   articleService = inject(ArticleService);
   utilService = inject(UtilService);
   authService = inject(AuthService);
-  article!: WritableSignal<Article | null>;
   router = inject(Router);
+  article!: WritableSignal<Article | null>;
   articleId!: string;
   articleForm = new FormGroup({
     _id: new FormControl(),
