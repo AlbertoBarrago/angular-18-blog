@@ -1,9 +1,9 @@
 import {
   Component,
+  computed,
   CUSTOM_ELEMENTS_SCHEMA,
+  effect,
   inject,
-  OnDestroy,
-  OnInit,
 } from '@angular/core';
 import { ArticleService } from '../../services/article.service';
 import {
@@ -54,17 +54,24 @@ import { AuthService } from '../../../auth/services/auth.service';
   styleUrl: './articles-list.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ArticlesListComponent implements OnInit, OnDestroy {
+export class ArticlesListComponent {
   articleService = inject(ArticleService);
   utilService = inject(UtilService);
   authService = inject(AuthService);
   router = inject(Router);
+  dialog = inject(MatDialog);
+
+  articleLength = computed(() => this.articleService.totalElement());
   articles = this.articleService.articles;
-  readonly dialog = inject(MatDialog);
   emptyListImagePath = './assets/images/empty_list.png';
 
-  ngOnInit() {
+  constructor() {
     this.articleService.filterArticles();
+    effect(onCleanup => {
+      onCleanup(() => {
+        this.articleService.clearArticles();
+      });
+    });
   }
 
   openArticle(articleId: string) {
@@ -86,9 +93,5 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
 
   performPagination($event: PageEvent) {
     this.articleService.performPagination($event);
-  }
-
-  ngOnDestroy() {
-    this.articleService.clearArticles();
   }
 }

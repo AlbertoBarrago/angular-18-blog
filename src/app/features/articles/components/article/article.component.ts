@@ -34,8 +34,8 @@ import { UtilService } from '../../../../shared/services/util.service';
 export class ArticleComponent {
   appService = inject(ArticleService);
   utilService = inject(UtilService);
-  article = this.appService.article;
   router = inject(Router);
+  article = this.appService.article;
 
   constructor() {
     const articleId =
