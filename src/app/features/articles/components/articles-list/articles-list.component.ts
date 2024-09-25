@@ -23,7 +23,7 @@ import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilService } from '../../../../shared/services/util.service';
-import { FilterComponent } from '../../../../shared/components/filter/filter.component';
+import { FilterComponent } from '../../../../shared/features/filter/filter.component';
 import {
   MatPaginator,
   MatPaginatorModule,
