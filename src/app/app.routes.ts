@@ -5,7 +5,7 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./core/features/auth/components/login/login.component').then(
+      import('./features/auth/components/login/login.component').then(
         m => m.LoginComponent
       ),
   },
@@ -21,9 +21,7 @@ export const routes: Routes = [
     path: 'users',
     canActivate: [RoleGuard],
     loadChildren: () =>
-      import('./core/features/admin/routes/users.route').then(
-        c => c.UserRoutes
-      ),
+      import('./features/admin/routes/users.route').then(c => c.UserRoutes),
   },
   { path: '', redirectTo: '/articles/articles-list', pathMatch: 'full' },
   { path: '**', redirectTo: '/articles/articles-list', pathMatch: 'full' },

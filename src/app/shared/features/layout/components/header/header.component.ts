@@ -3,7 +3,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { NgIf } from '@angular/common';
-import { AuthService } from '../../../../../core/features/auth/services/auth.service';
+import { AuthService } from '../../../../../features/auth/services/auth.service';
 import { UtilService } from '../../../../services/util.service';
 import { ThemeService } from '../../../../services/theme.service';
 import { MatButton, MatIconButton } from '@angular/material/button';

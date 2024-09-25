@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { ArticleService } from '../../../../features/articles/services/article.service';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
-import { Article } from '../../../../models/shared.interfaces';
+import { Article } from '../../../../models/global.models';
 import { ErrorService } from '../../error.service';
 
 describe('ArticleService', () => {

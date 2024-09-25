@@ -11,7 +11,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Article } from '../../../../models/shared.interfaces';
+import { Article } from '../../../../models/global.models';
 import { Router } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
@@ -20,7 +20,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { UtilService } from '../../../../shared/services/util.service';
 import { CommonModule, DatePipe, NgIf } from '@angular/common';
-import { AuthService } from '../../../../core/features/auth/services/auth.service';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-article-create-edit',

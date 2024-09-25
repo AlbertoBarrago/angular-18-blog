@@ -180,6 +180,38 @@ async function createUser(req, res) {
   }
 }
 
+async function updateUser(req, res, id) {
+  try {
+    const data = await Users.findByIdAndUpdate(
+      id,
+      {
+        username: req.body.username,
+        email: req.body.email,
+        updatedAt: Date.now(),
+      },
+      {
+        new: true,
+      }
+    );
+    res.send(data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+}
+
+async function removeUser(req, res, id) {
+  try {
+    let data = await Users.findByIdAndDelete({ _id: id });
+    if (!data) {
+      res.status(404).send({ message: `User with id: ${id} not found` });
+    }
+    res.json({ message: `User deleted with id: ${id} successfully` });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+}
+
+// AUTH CONTROLLER
 async function login(req, res) {
   const { username, password } = req.body;
   try {
@@ -233,37 +265,6 @@ async function refreshToken(req, res) {
     );
     res.status(200).send({ auth: true, token: newToken });
   });
-}
-
-async function updateUser(req, res, id) {
-  try {
-    const data = await Users.findByIdAndUpdate(
-      id,
-      {
-        username: req.body.username,
-        email: req.body.email,
-        updatedAt: Date.now(),
-      },
-      {
-        new: true,
-      }
-    );
-    res.send(data);
-  } catch (err) {
-    res.status(500).send(err);
-  }
-}
-
-async function removeUser(req, res, id) {
-  try {
-    let data = await Users.findByIdAndDelete({ _id: id });
-    if (!data) {
-      res.status(404).send({ message: `User with id: ${id} not found` });
-    }
-    res.json({ message: `User deleted with id: ${id} successfully` });
-  } catch (err) {
-    res.status(500).send(err);
-  }
 }
 
 module.exports = {

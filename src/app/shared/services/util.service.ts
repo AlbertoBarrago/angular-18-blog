@@ -1,11 +1,11 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Article } from '../../models/shared.interfaces';
+import { Article } from '../../models/global.models';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '../dialogs/confirm/confirm-dialog-component';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticleService } from '../../features/articles/services/article.service';
 import { UserDialogComponent } from '../dialogs/users/info/user-dialog-component';
-import { AuthService } from '../../core/features/auth/services/auth.service';
+import { AuthService } from '../../features/auth/services/auth.service';
 import { SnackbarService } from './snackbar.service';
 
 @Injectable({ providedIn: 'root' })
