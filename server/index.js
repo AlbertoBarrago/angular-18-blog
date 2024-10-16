@@ -27,7 +27,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:4200',
-      'https://angular-18-blog-server.onrender.com',
+      'https://angular-18-blog.onrender.com/',
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
